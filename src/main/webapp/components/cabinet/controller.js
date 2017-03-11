@@ -5,12 +5,12 @@ var crapsApp = angular.module("crapsApp");
 crapsApp.controller("cabinetController",['$scope', '$location', 'userService', control]);
 
 function control($scope, $location, userService) {
-    var promiseObj=userService.getInfo();
+    /*var promiseObj=userService.getInfo();
     promiseObj.then(function(value) {
         $scope.userInfo=value;
         $scope.messages = $scope.userInfo.inMessages;
         $scope.sortParam = "date";
-    });
+    });*/
 
     $scope.showOutMessages = function () {
         $scope.messages = $scope.userInfo.outMessages;

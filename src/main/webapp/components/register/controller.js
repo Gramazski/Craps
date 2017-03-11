@@ -11,13 +11,12 @@ function control($scope, $rootScope, $location, registerService) {
         promiseObj.then(function(value) {
             if (value.id < 0){
                 console.dir(value);
-                $scope.username = "";
-                $scope.password = "";
+                registerService.performScope($scope, value);
             }
             else {
                 $rootScope.loggedInUser = true;
-                $rootScope.user = registerService.createUser(value);
-                console.dir($rootScope.user);
+                $rootScope.userInfo = registerService.createUser(value);
+                console.dir($rootScope.userInfo);
                 $location.path("#/");
             }
         });

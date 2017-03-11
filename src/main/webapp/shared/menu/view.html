@@ -8,7 +8,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li ng-show="!loggedInUser"><a href="#/login"><span class="glyphicon glyphicon-user"></span> {{translateModel.menu.login}}</a> </li>
-            <li class="dropdown" ng-show="loggedInUser"><a class="dropdown-toggle" data-toggle="dropdown">{{user.username}}<span class="caret"></span></a>
+            <li class="dropdown" ng-show="loggedInUser"><a class="dropdown-toggle" data-toggle="dropdown">{{userInfo.username}}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a ng-click="logout()">{{translateModel.menu.logout}}</a></li>
                     <li><a href="#/cabinet">{{translateModel.menu.cabinet}}</a></li>

@@ -29,6 +29,7 @@ public class RegisterCommand implements ICommand {
 
             if (registerService.tryAddUser(user)){
                 HttpSession session = request.getSession();
+                user = registerService.getUser();
                 session.setAttribute("user", user);
             }
 

@@ -122,7 +122,13 @@
     },
     "message" : {
       "error" : {
-        "name" : "Incorrect user name!"
+        "name" : "Incorrect user name!",
+        "password" : "Incorrect password",
+        "repeat" : "Incorrect repeat",
+        "username" : "Incorrect username",
+        "surname" : "Incorrect surname",
+        "birthday" : "Incorrect date",
+        "email" : "Incorrect email"
       }
     }
   }

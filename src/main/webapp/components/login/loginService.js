@@ -32,11 +32,11 @@ function login($http, $q) {
             user.username = value.userName;
             user.email = value.email;
             user.amount = value.amount;
-            user.win_amount = value.win_amount;
+            user.win_amount = value.winAmount;
             user.avatar = value.avatar;
             user.name = value.name;
             user.surname = value.surname;
-            user.create_time = value.create_time;
+            user.createDate = value.createTime;
 
             return user;
         }

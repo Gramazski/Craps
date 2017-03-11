@@ -9,53 +9,61 @@
                         <a class="close" data-dismiss="alert" aria-label="close">×</a>
                         <strong>{{translateModel.register.info}}</strong> {{translateModel.register.infoMes}}
                     </div>
-                    <form name="registerForm" ng-submit="register()">
+                    <form name="Register" ng-submit="register()">
                     <div class="row">
                         <div class="form-group col-sm-6">
                             <label for="name">{{translateModel.label.name}}</label>
-                            <input type="text" class="form-control" id="name" name="name" required ng-model="name" placeholder="{{translateModel.input.name}}">
-                            <!--<label class="control-label">Incorrect email</label>-->
+                            <input type="text" class="form-control" id="name" name="name" required pattern="[a-zA-Z]{3,20}" ng-model="name" placeholder="{{translateModel.input.name}}">
+                            <span class="help-block" ng-show="!Register.name.$valid && Register.name.$dirty" style="color: red">{{translateModel.message.error.name}}</span>
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="surname">{{translateModel.label.surname}}</label>
-                            <input type="text" class="form-control" id="surname" name="surname" required ng-model="surname" placeholder="{{translateModel.input.surname}}">
+                            <input type="text" class="form-control" id="surname" name="surname" required pattern="[a-zA-Z]{3,20}" ng-model="surname" placeholder="{{translateModel.input.surname}}">
+                            <span class="help-block" ng-show="Register.surname.$invalid && Register.surname.$dirty" style="color: red">{{translateModel.message.error.surname}}</span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-sm-3">
+                        <div class="col-sm-12">
                             <label for="calendar">{{translateModel.label.birthday}}</label>
+                        </div>
+                        <div class="form-group col-sm-3">
                             <input type="date" class="form-control" id="calendar" name="birthday" required ng-model="birthday" placeholder="yyyy-MM-dd"
                                    value="1997-06-01" min="1940-01-01" max="1998-01-01">
+                        </div>
+                        <div class="form-group col-sm-9">
+                            <span class="help-block" ng-show="!Register.birthday.$valid && Register.birthday.$dirty" style="color: red">{{translateModel.message.error.birthday}}</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
                             <label class="required">{{translateModel.label.sex.sex}}</label>
                             <div>
-                                <label class="radio-inline"><input type="radio" name="sex" value="male" checked="">{{translateModel.label.sex.male}}</label>
-                                <label class="radio-inline"><input type="radio" name="sex" value="female">{{translateModel.label.sex.female}}</label>
+                                <label class="radio-inline"><input type="radio" name="sex" ng-model="sex" value="male" checked="">{{translateModel.label.sex.male}}</label>
+                                <label class="radio-inline"><input type="radio" name="sex" ng-model="sex" value="female">{{translateModel.label.sex.female}}</label>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="login">{{translateModel.label.username}}</label>
-                        <input type="text" class="form-control" id="login" name="login" required ng-model="username" placeholder="{{translateModel.input.username}}">
-                        <!--<label class="control-label">Incorrect email</label>-->
+                        <label for="username">{{translateModel.label.username}}</label>
+                        <input type="text" class="form-control" id="username" name="username" required pattern="[a-zA-Z0-9]{3,20}" ng-model="username" placeholder="{{translateModel.input.username}}">
+                        <span class="help-block" ng-show="Register.username.$invalid && Register.username.$dirty" style="color: red">{{translateModel.message.error.username}}</span>
                     </div>
                     <div class="form-group">
                         <label for="email">{{translateModel.label.email}}</label>
                         <input type="email" class="form-control" id="email" name="email" required ng-model="email" placeholder="{{translateModel.input.email}}">
-                        <!--<label class="control-label">Incorrect email</label>-->
+                        <span class="help-block" ng-show="Register.email.$invalid && Register.email.$dirty" style="color: red">{{translateModel.message.error.email}}</span>
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
                             <label for="pwd">{{translateModel.label.password}}</label>
-                            <input type="password" class="form-control" id="pwd" name="password" required ng-model="password" placeholder="{{translateModel.input.password}}">
+                            <input type="password" class="form-control" id="pwd" name="password" required pattern="[a-zA-Z0-9]{3,20}" ng-model="password" placeholder="{{translateModel.input.password}}">
+                            <span class="help-block" ng-show="Register.password.$invalid && Register.password.$dirty" style="color: red">{{translateModel.message.error.password}}</span>
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="repeatPassword">{{translateModel.label.repeat}}</label>
-                            <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required ng-model="repeatPassword" placeholder="{{translateModel.input.repeat}}">
+                            <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required pattern="[a-zA-Z0-9]{3,20}" ng-model="repeatPassword" placeholder="{{translateModel.input.repeat}}">
+                            <span class="help-block" ng-show="Register.repeatPassword.$invalid && Register.repeatPassword.$dirty" style="color: red">{{translateModel.message.error.repeat}}</span>
                         </div>
                     </div>
 

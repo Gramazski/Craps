@@ -15,8 +15,8 @@ function control($scope, $rootScope, $location, loginService) {
             }
             else {
                 $rootScope.loggedInUser = true;
-                $rootScope.user = loginService.createUser(value);
-                console.dir($rootScope.user);
+                $rootScope.userInfo = loginService.createUser(value);
+                console.dir($rootScope.userInfo);
                 $location.path("#/");
             }
         });

@@ -39,6 +39,14 @@ function register($http, $q, loginService) {
         },
         createUser: function (value) {
             return loginService.createUser(value);
+        },
+        performScope: function ($scope, value) {
+            $scope.username = value.username;
+            $scope.password = "";
+            $scope.repeatPassword = "";
+            $scope.name = value.name;
+            $scope.surname = value.name;
+            $scope.email = value.email;
         }
     }
 }
