@@ -4,8 +4,10 @@ import com.gramazski.craps.exception.ResourceManagerException;
 import com.gramazski.craps.manager.ResourceManager;
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -96,12 +98,19 @@ public class ConnectionPool {
                 try {
                     Connection connection = connections.take();
                     connection.close();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException | SQLException e) {
                     //logging
                 }
-                catch (SQLException e){
-                    //logging
+            }
+
+            try {
+                Enumeration<Driver> drivers = DriverManager.getDrivers();
+                while (drivers.hasMoreElements()) {
+                    Driver driver = drivers.nextElement();
+                    DriverManager.deregisterDriver(driver);
                 }
+            } catch (SQLException e) {
+                //LOGGER.log(Level.ERROR, e + " DriverManager wasn't found.");
             }
         }
     }

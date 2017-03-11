@@ -22,6 +22,7 @@ public class CommandManager {
         commandMap.put("UPLOAD", new FileLoaderCommand());
         commandMap.put("LOGIN", new LoginCommand());
         commandMap.put("LOGOUT", new LogoutCommand());
+        commandMap.put("REGISTER", new RegisterCommand());
     }
 
     public static CommandManager getInstance(){

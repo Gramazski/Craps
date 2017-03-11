@@ -6,20 +6,18 @@ crapsApp.controller('registerController', ['$scope', '$rootScope', '$location', 
 
 function control($scope, $rootScope, $location, registerService) {
     $scope.register = function () {
-        var user = {};
-        user.name = $scope.name;
-        user.surname = $scope.surname;
-        user.birthday = $scope.birthday;
-        user.login = $scope.login;
-        user.password = $scope.password;
+        var user = registerService.createRegisterInf($scope);
         var promiseObj=registerService.doRegister(user);
         promiseObj.then(function(value) {
-            if (value === null){
-
+            if (value.id < 0){
+                console.dir(value);
+                $scope.username = "";
+                $scope.password = "";
             }
             else {
                 $rootScope.loggedInUser = true;
-                $rootScope.user = value;
+                $rootScope.user = registerService.createUser(value);
+                console.dir($rootScope.user);
                 $location.path("#/");
             }
         });

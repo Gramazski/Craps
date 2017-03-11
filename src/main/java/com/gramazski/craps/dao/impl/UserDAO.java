@@ -17,9 +17,12 @@ import java.util.List;
  */
 public class UserDAO extends AbstractDAO<User> {
     private WrapperConnection connection;
-    private static final String SQL_SELECT_ALL_USERS = "SELECT id, name FROM user";
-    private static final String SQL_INSERT_USER = "INSERT INTO user(id, name) VALUES(?,?)";
-    private static final String SQL_SELECT_USER_BY_NAME = "SELECT id, name, password FROM user WHERE name = ?";
+    private static final String SQL_SELECT_ALL_USERS = "SELECT id, username, email, password, create_time," +
+            "amount, win_amount, avatar, is_admin, name, surname FROM user";
+    private static final String SQL_INSERT_USER = "INSERT INTO user(id, username, email, password, create_time," +
+            "amount, win_amount, avatar, is_admin, name, surname) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_SELECT_USER_BY_NAME = "SELECT id, username, email, password, create_time," +
+            "amount, win_amount, avatar, is_admin, name, surname FROM user WHERE username = ?";
 
     public UserDAO(){
         connection = new WrapperConnection();
@@ -32,9 +35,18 @@ public class UserDAO extends AbstractDAO<User> {
             st.setString(1, name);
             ResultSet resultSet = st.executeQuery();
             if (resultSet.next()){
-                User user = new User(/*resultSet.getInt("id")*/);
+                User user = new User();
                 user.setPassword(resultSet.getString("password"));
                 user.setUserName(resultSet.getString("name"));
+                user.setId(resultSet.getInt("id"));
+                user.setEmail(resultSet.getString("email"));
+                user.setName(resultSet.getString("name"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setAdmin(resultSet.getBoolean("is_admin"));
+                user.setAmount(resultSet.getInt("amount"));
+                user.setAvatar(resultSet.getString("avatar"));
+                user.setCreateTime(resultSet.getString("create_time"));
+                user.setWinAmount(resultSet.getInt("win_amount"));
 
                 return user;
             }
@@ -55,8 +67,18 @@ public class UserDAO extends AbstractDAO<User> {
             st = connection.createStatement();
             ResultSet resultSet = st.executeQuery(SQL_SELECT_ALL_USERS);
             while (resultSet.next()) {
-                User user = new User(/*resultSet.getInt("id")*/);
+                User user = new User();
+                user.setPassword(resultSet.getString("password"));
                 user.setUserName(resultSet.getString("name"));
+                user.setId(resultSet.getInt("id"));
+                user.setEmail(resultSet.getString("email"));
+                user.setName(resultSet.getString("name"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setAdmin(resultSet.getBoolean("is_admin"));
+                user.setAmount(resultSet.getInt("amount"));
+                user.setAvatar(resultSet.getString("avatar"));
+                user.setCreateTime(resultSet.getString("create_time"));
+                user.setWinAmount(resultSet.getInt("win_amount"));
                 users.add(user);
             }
         }catch (SQLException e) {
@@ -86,6 +108,15 @@ public class UserDAO extends AbstractDAO<User> {
             st = connection.createPreparedStatement(SQL_INSERT_USER);
             st.setString(1, null);
             st.setString(2, entity.getUserName());
+            st.setString(3, entity.getEmail());
+            st.setString(4, entity.getPassword());
+            st.setString(5, entity.getCreateTime());
+            st.setInt(6, entity.getAmount());
+            st.setInt(7, entity.getWinAmount());
+            st.setString(8, entity.getAvatar());
+            st.setBoolean(9, entity.isAdmin());
+            st.setString(10, entity.getName());
+            st.setString(11, entity.getSurname());
             st.executeUpdate();
         }catch (SQLException e) {
             throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);

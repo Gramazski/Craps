@@ -30,6 +30,13 @@ function login($http, $q) {
             user.id = value.id;
             user.password = value.password;
             user.username = value.userName;
+            user.email = value.email;
+            user.amount = value.amount;
+            user.win_amount = value.win_amount;
+            user.avatar = value.avatar;
+            user.name = value.name;
+            user.surname = value.surname;
+            user.create_time = value.create_time;
 
             return user;
         }
