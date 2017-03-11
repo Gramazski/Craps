@@ -1,0 +1,40 @@
+<div class="container" style="background-color: white">
+    <h2 style="text-align: center">{{translateModel.label.quickEnter}}</h2>
+    <div class="row">
+        <div class="col-sm-4">
+            <a href="#" style="width: 100%" class="btn btn-large btn-primary"><img src="assets/img/social/vkontakte.png" width="30" height="30" style="padding-bottom: 5px"> {{translateModel.label.vkontakte}}</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="#" style="width: 100%" class="btn btn-large btn-primary"><img src="assets/img/social/facebook.png" width="30" height="30" style="padding-bottom: 5px"> {{translateModel.label.facebook}}</a>
+        </div>
+        <div class="col-sm-4">
+            <a href="#" style="width: 100%" class="btn btn-large btn-primary"><img src="assets/img/social/twitter.jpg" width="30" height="30" style="padding-bottom: 5px"> {{translateModel.label.twitter}}</a>
+        </div>
+    </div>
+
+    <h2 style="text-align: center; margin-top: 10%">{{translateModel.label.enter}}</h2>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <form role="form" ng-submit="login()" name="Auth">
+                <div class="form-group">
+                    <label for="username"><span class="glyphicon glyphicon-user"></span> {{translateModel.label.username}}</label>
+                    <input type="text" class="form-control input-lg" required pattern="[a-zA-z0-9]{3,9}" id="username" name="login" ng-model="username" placeholder="{{translateModel.input.username}}">
+                    <span id="error_first_name" class="help-block" ng-show="!Auth.login.$valid && Auth.login.$dirty">{{translateModel.message.error.name}}</span>
+                </div>
+                <div class="form-group">
+                    <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> {{translateModel.label.password}}</label>
+                    <input type="password" class="form-control input-lg" required pattern="[a-zA-Z0-9]{6,9}" id="psw" name="password" ng-model="password" placeholder="{{translateModel.input.password}}">
+                    <span id="error" class="help-block" ng-show="!Auth.password.$valid && Auth.password.$dirty">{{translateModel.message.error.name}}</span>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" value="" checked>{{translateModel.label.remember}}</label>
+                </div>
+                <button type="submit" class="btn btn-large btn-success btn-block"><span class="glyphicon glyphicon-off"></span> {{translateModel.button.login}}</button>
+            </form>
+        </div>
+    </div>
+    <hr style="margin-top: 2%; margin-bottom: 2%">
+    <h3 style="text-align: center; margin-top: 2%"><p>{{translateModel.label.member}} <a href="#/register">{{translateModel.label.signup}}</a></p>
+        <p><a href="#">{{translateModel.label.fPass}}</a></p></h3>
+</div>

@@ -1,0 +1,129 @@
+{
+  "translateModel": {
+    "menu" : {
+      "brandName" : "Бранд",
+      "login" : "Авторизация",
+      "lang" : {
+        "lang" : "Язык",
+        "ru" : "Русский",
+        "en" : "Английский"
+      },
+      "result" : "Тест",
+      "rules" : "Правила",
+      "rates" : "Тарифы",
+      "help" : "Помощь",
+      "logout" : "Выйти",
+      "cabinet" : "Кабинет",
+      "messages" : "Сообщения",
+      "games" : "Игры",
+      "transfers" : "Переводы",
+      "incoming" : "Входящие",
+      "outgoing" : "Исходящие"
+    },
+    "button" : {
+      "login" : "Войти",
+      "register" : "Зарегистрироваться",
+      "edit" : "Редактировать",
+      "submit" : "Подтвердить",
+      "send" : "Отправить",
+      "answer" : "Ответить"
+    },
+    "input" : {
+      "username" : "Введите имя пользователя",
+      "password" : "Введите пароль",
+      "name" : "Введите имя",
+      "surname" : "Введите фамилию",
+      "email" : "Введите email",
+      "repeat" : "Повторите пароль",
+      "title" : "Введите заголовок",
+      "search" : "Поиск"
+    },
+    "home" : {
+      "header" : "Craps Games",
+      "titles" : ["", "Основы", "Пример"],
+      "paragraphs" : ["We've all seen the crowds around the Craps table causing a commotion and want to join in, but let's face it. We're not Demi Moore, and some millionaire isn't begging us to blow on his dice. So, until we hit the gym for eight hours a day and make an appointment with the plastic surgeon, we'll just have to learn the basic bets for Craps for those of us just starting out.",
+        "What have we learned is the first thing to do when playing a casino table game? Place a bet. With Craps, the only Player who must place a bet prior to the first roll of the game is the Shooter (or person who wants to roll the dice). To become eligible to become a Shooter, place a bet on the Pass Line or Don't Pass Bar. The dice are passed to Players in a clockwise direction so you might have to wait a while for your turn as a Shooter. If you want to play, but don't want to be a Shooter, you also may place this bet, but are not required to do so and may wait to place a bet after the Come Out roll. The Stickman (the guy with the stick who assists the Dealers) will push about five dice toward you. With only one hand, pick up two. Next, roll the dice hard enough so that they hit the wall of the opposite end of the table. The object of this Come Out roll is to establish a Point, which needs to be something other than a 2, 3, 7, 11 or 12. On the Come Out roll, if a 7 or 11 is rolled prior to establishing a Point, any Player who bet on the Pass Line wins. If, however, a 2, 3 or 12 is rolled, the Pass Line bet loses. The opposite is true with the Don't Pass bet, in which case, the 7 and 11 loses, and the 2, 3 and 12 wins, if rolled prior to a Point being established. Once you have established a Point, which will be a 4, 5, 6, 8, 9 or 10, the Dealer places a plastic disc (white side up) on the corresponding box on the Craps table. At this time, all Players are either betting that you will either roll that Point again before you roll a 7 or vice versa.",
+        "Your Come Out roll is a 4. Players who had placed a wager on the Pass Line will leave their wager and will win if you roll another 4 before you roll a 7. However, Players who initially placed a wager on the Don't Pass bar will win if you roll a 7 before you roll a 4. Any Players who didn't place a wager prior to the Come Out roll, either by choice or because they showed up at the table afterward, are no longer eligible to place a Pass Line or Don't Pass bet. Instead, they may place a Come or Don't Come bet. If a Player places a Come bet, the rules of the initial Pass Line apply. If the next roll is a 7 or 11, the Player wins. If the next roll is a 2, 3 or 12, he loses. However, if a 4,5,6,8,9, or 10 is rolled, that will be the Point for that Player, which could be different than the point for the original Players. Once the Point is established for the new Player, he is betting that his Point will be rolled before a 7. If a Player places a Don't Come bet, the rules of the Don't Pass bet apply with one exception. If the next roll is a 7 or 11, the Player loses. If the next roll is a 2 or 3, the Player wins. The exception is that if the Shooter rolls a 12, the bet on the Don't Come is a tie. Any other roll becomes the Point for that Player who is betting that a 7 will be rolled before that Point. As stated before, these are the absolute basic bets for Craps, which is enough to get you in the game. Our best advice is to observe the habits of other more experienced Players, particularly the ones winning!"]
+    },
+    "register" : {
+      "header" : "Регистрация в игре",
+      "info" : "Инфо!",
+      "infoMes" : "Вы не сможете изменить свой игровой ник и email после регистрации."
+    },
+    "cabinet" : {
+      "header" : "Личное",
+      "modelheader" : "Редактирование данных",
+      "table" : {
+        "date" : "Дата регистрации",
+        "amount" : "Максимальный счет",
+        "win" : "Максимальный выйгрыш",
+        "lose" : "Максимальный проигрыш"
+      }
+    },
+    "messages" : {
+      "header" : "Сообщения",
+      "modelheader" : "Новое сообщение"
+    },
+    "games" : {
+      "header" : "Игры",
+      "id" : "ID игры",
+      "lobby" : "Игровое лобби",
+      "date" : "Дата игры",
+      "type" : "Тип игры",
+      "bet" : "Ставка в игре",
+      "betType" : "Тип ставки"
+    },
+    "transfers" : {
+      "header" : "Переводы"
+    },
+    "label" : {
+      "quickEnter" : "Быстрый вход",
+      "vkontakte" : "Вконтакте",
+      "facebook" : "Facebook",
+      "twitter" : "Twitter",
+      "enter" : "Вход",
+      "username" : "Игровой ник",
+      "password" : "Пароль",
+      "remember" : "Запомнить",
+      "member" : "Не зарегистрированы?",
+      "signup" : "Регистрация",
+      "fPass" : "Забыли пароль?",
+      "name" : "Имя",
+      "surname" : "Фамилия",
+      "birthday" : "День рождения",
+      "sex" : {
+        "sex" : "Пол",
+        "male" : "Мужской",
+        "female" : "Женский"
+      },
+      "email" : "Email",
+      "repeat" : "Повторите пароль",
+      "serAgr" : "Регистрируясь в сервисе вы принимаете",
+      "agreement" : "Пользовательское соглашение",
+      "added" : "Присоединяйтесь к нам!",
+      "statistic" : "Статистика",
+      "general" : "Главное",
+      "picture" : "Картинка",
+      "sender" : "Отправитель",
+      "title" : "Заголовок",
+      "date" : "Дата",
+      "from" : "От",
+      "message" : "Сообщение",
+      "amount" : "Сумма",
+      "change" : "Изменение",
+      "lobby" : "Лобби",
+      "number" : "Номер",
+      "bill" : "Счет",
+      "transfer" : {
+        "type" : "Transfer type",
+        "incoming" : "Входящий",
+        "outgoing" : "Исходяший"
+      }
+    },
+    "message" : {
+      "error" : {
+        "name" : "Некорректное имя пользователя!"
+      }
+    }
+  }
+}

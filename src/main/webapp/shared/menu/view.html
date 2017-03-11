@@ -1,0 +1,25 @@
+<nav class="navbar navbar-inverse" ng-controller="mainController">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/">{{translateModel.menu.brandName}}</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li ng-show="loggedInUser"><a href="#/">{{translateModel.menu.result}}</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li ng-show="!loggedInUser"><a href="#/login"><span class="glyphicon glyphicon-user"></span> {{translateModel.menu.login}}</a> </li>
+            <li class="dropdown" ng-show="loggedInUser"><a class="dropdown-toggle" data-toggle="dropdown">{{user.username}}<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a ng-click="logout()">{{translateModel.menu.logout}}</a></li>
+                    <li><a href="#/cabinet">{{translateModel.menu.cabinet}}</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" id="Language">{{translateModel.menu.lang.lang}}<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a ng-click="translate('lang_ru.json')"  id="Lang_ru">{{translateModel.menu.lang.ru}}</a></li>
+                    <li><a ng-click="translate('lang_en.json')"  id="Lang_en">{{translateModel.menu.lang.en}}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

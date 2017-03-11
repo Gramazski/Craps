@@ -1,0 +1,116 @@
+<div class="container">
+    <h2>{{translateModel.cabinet.header}}</h2>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div ng-include="'components/cabinet/menuView.html'"></div>
+        </div>
+        <div class="panel-body">
+            <div class="media">
+                <div class="media-left">
+                    <img src="{{userInfo.avatar}}" class="media-object" style="width:100px">
+                </div>
+                <div class="media-body">
+                    <div class="row">
+                        <div class="col-sm-6" style="border-right: 1px solid">
+                            <h4 class="media-heading">{{userInfo.name}} {{userInfo.surname}}</h4>
+                            <p>{{userInfo.birthday}}</p>
+                            <p>{{userInfo.sex}}</p>
+                            <p>{{userInfo.username}}</p>
+                            <p>{{userInfo.amount}}</p>
+                            <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#contactData">{{translateModel.button.edit}}</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4 class="media-heading">{{translateModel.label.statistic}}</h4>
+                            <p>20/204</p>
+                            <p>19%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-top: 2%; margin-bottom: 2%">
+            <div class="row" style="margin-left: 2%">
+                <h3 style="text-align: center">{{translateModel.label.general}}</h3>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <td>{{translateModel.cabinet.table.date}}</td>
+                            <td>{{userInfo.createDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{translateModel.cabinet.table.amount}}</td>
+                            <td>10000$</td>
+                        </tr>
+                        <tr>
+                            <td>{{translateModel.cabinet.table.win}}</td>
+                            <td>1000$</td>
+                        </tr>
+                        <tr>
+                            <td>{{translateModel.cabinet.table.lose}}</td>
+                            <td>200$</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="contactData" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{translateModel.cabinet.modelheader}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{translateModel.label.picture}}</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="file_to_upload" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">{{translateModel.label.name}}</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="{{translateModel.input.name}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="surName">{{translateModel.label.surname}}</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="surName" name="surname" placeholder="{{translateModel.input.surname}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="calendar">{{translateModel.label.birthday}}</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="calendar" name="birthday" value="1997-06-01"
+                                   min="1940-01-01" max="1998-01-01">
+                            <span id="error_birthday" class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{translateModel.label.sex.sex}}</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline"><input type="radio" name="sex" value="male" checked="">{{translateModel.label.sex.male}}</label>
+                            <label class="radio-inline"><input type="radio" name="sex" value="female">{{translateModel.label.sex.female}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default pull-right">{{translateModel.button.submit}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

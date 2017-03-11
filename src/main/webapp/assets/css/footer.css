@@ -1,0 +1,21 @@
+footer{
+  margin-top: 1%;
+  background-color: transparent;
+  color: rgb(102, 102, 102);
+  display: block;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  padding-top: 30px;
+}
+
+footer #owner{
+  border-top-color: rgb(255, 255, 255);
+  border-top-style: solid;
+  border-top-width: 1px;
+  color: #191970;
+  width: 60%;
+  margin: auto;
+  text-align: center;
+  padding: 5px;
+}

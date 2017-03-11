@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h2>{{translateModel.register.header}}</h2></div>
+                <div class="panel-body">
+                    <div class="alert alert-info alert-dismissable">
+                        <a class="close" data-dismiss="alert" aria-label="close">×</a>
+                        <strong>{{translateModel.register.info}}</strong> {{translateModel.register.infoMes}}
+                    </div>
+                    <form name="registerForm" ng-submit="register()">
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="name">{{translateModel.label.name}}</label>
+                            <input type="text" class="form-control" id="name" name="name" required ng-model="name" placeholder="{{translateModel.input.name}}">
+                            <!--<label class="control-label">Incorrect email</label>-->
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="surname">{{translateModel.label.surname}}</label>
+                            <input type="text" class="form-control" id="surname" name="surname" required ng-model="surname" placeholder="{{translateModel.input.surname}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-3">
+                            <label for="calendar">{{translateModel.label.birthday}}</label>
+                            <input type="date" class="form-control" id="calendar" name="birthday" required ng-model="birthday" placeholder="yyyy-MM-dd"
+                                   value="1997-06-01" min="1940-01-01" max="1998-01-01">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label class="required">{{translateModel.label.sex.sex}}</label>
+                            <div>
+                                <label class="radio-inline"><input type="radio" name="sex" value="male" checked="">{{translateModel.label.sex.male}}</label>
+                                <label class="radio-inline"><input type="radio" name="sex" value="female">{{translateModel.label.sex.female}}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login">{{translateModel.label.username}}</label>
+                        <input type="text" class="form-control" id="login" name="login" required ng-model="login" placeholder="{{translateModel.input.username}}">
+                        <!--<label class="control-label">Incorrect email</label>-->
+                    </div>
+                    <div class="form-group">
+                        <label for="email">{{translateModel.label.email}}</label>
+                        <input type="email" class="form-control" id="email" name="email" required ng-model="email" placeholder="{{translateModel.input.email}}">
+                        <!--<label class="control-label">Incorrect email</label>-->
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="pwd">{{translateModel.label.password}}</label>
+                            <input type="password" class="form-control" id="pwd" name="password" required ng-model="password" placeholder="{{translateModel.input.password}}">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="repeatPassword">{{translateModel.label.repeat}}</label>
+                            <input type="password" class="form-control" id="repeatPassword" name="repeatPassword" required ng-model="repeatPassword" placeholder="{{translateModel.input.repeat}}">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block-xs submit" ng-disabled="registerForm.$invalid">{{translateModel.button.register}}</button>
+                    <hr style="margin-top: 2%; margin-bottom: 2%">
+                    <div class="footnote">
+                        {{translateModel.label.serAgr}} <a href="#">{{translateModel.label.agreement}}</a>.
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
