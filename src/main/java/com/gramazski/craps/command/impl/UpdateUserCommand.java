@@ -4,7 +4,7 @@ import com.gramazski.craps.command.ICommand;
 import com.gramazski.craps.entity.impl.User;
 import com.gramazski.craps.handler.JSONReader;
 import com.gramazski.craps.mapper.ObjectMapperWrapper;
-import com.gramazski.craps.service.RegisterService;
+import com.gramazski.craps.service.UpdateUserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,9 +12,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
- * Created by gs on 27.02.2017.
+ * Created by gs on 12.03.2017.
  */
-public class RegisterCommand implements ICommand {
+public class UpdateUserCommand implements ICommand {
+    @Override
     public String handleRequest(HttpServletRequest request) {
         return null;
     }
@@ -24,13 +25,14 @@ public class RegisterCommand implements ICommand {
         try {
             String params = JSONReader.readJsonString(request);
             User user = ObjectMapperWrapper.readValue(params, User.class);
-            user.setId(-1);
-            RegisterService registerService = new RegisterService();
+            UpdateUserService updateUserService = new UpdateUserService();
+            HttpSession session = request.getSession();
 
-            if (registerService.tryAddUser(user)){
-                HttpSession session = request.getSession();
-                user = registerService.getUser();
+            if (updateUserService.tryUpdateUser(user)){
                 session.setAttribute("user", user);
+            }
+            else {
+                user = (User) session.getAttribute("user");
             }
 
             response.setContentType("application/json");

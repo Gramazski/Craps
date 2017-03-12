@@ -16,6 +16,6 @@ public abstract class AbstractDAO<T extends Entity> implements AutoCloseable {
     public abstract boolean delete(int id);
     public abstract boolean delete(T entity);
     public abstract void create(T entity) throws DAOException;
-    public abstract T update(T entity);
+    public abstract T update(T entity) throws DAOException;
     public abstract void close();
 }

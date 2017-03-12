@@ -23,6 +23,8 @@ public class UserDAO extends AbstractDAO<User> {
             "amount, win_amount, avatar, is_admin, name, surname) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_SELECT_USER_BY_NAME = "SELECT id, username, email, password, create_time," +
             "amount, win_amount, avatar, is_admin, name, surname FROM user WHERE username = ?";
+    private static final String SQL_UPDATE_USER = "UPDATE user SET id=?, username=?, email=?, password=?," +
+            " create_time=?, amount=?, win_amount=?, avatar=?, is_admin=?, name=?, surname=? WHERE id=?";
 
     public UserDAO(){
         connection = new WrapperConnection();
@@ -126,8 +128,30 @@ public class UserDAO extends AbstractDAO<User> {
 
     }
 
-    public User update(User entity) {
-        return null;
+    public User update(User entity) throws DAOException {
+        PreparedStatement st = null;
+        try {
+            st = connection.createPreparedStatement(SQL_UPDATE_USER);
+            st.setString(1, null);
+            st.setString(2, entity.getUserName());
+            st.setString(3, entity.getEmail());
+            st.setString(4, entity.getPassword());
+            st.setString(5, entity.getCreateTime());
+            st.setInt(6, entity.getAmount());
+            st.setInt(7, entity.getWinAmount());
+            st.setString(8, entity.getAvatar());
+            st.setBoolean(9, entity.isAdmin());
+            st.setString(10, entity.getName());
+            st.setString(11, entity.getSurname());
+            st.setInt(12, entity.getId());
+            st.executeUpdate();
+        }catch (SQLException e) {
+            throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
+        } finally {
+            connection.closeStatement(st);
+        }
+
+        return entity;
     }
 
     public void close() {

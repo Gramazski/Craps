@@ -1,4 +1,4 @@
-package com.gramazski.craps.uploader;
+package com.gramazski.craps.service;
 
 import com.gramazski.craps.exception.HandlerException;
 import org.apache.commons.fileupload.FileItem;
@@ -13,7 +13,7 @@ import java.util.Iterator;
 /**
  * Created by gs on 21.02.2017.
  */
-public class FileUploader {
+public class FileUploaderService {
 
     public String uploadFileFromRequest(HttpServletRequest request, String rootPath) throws HandlerException{
         return processMultipartRequest(request, rootPath);

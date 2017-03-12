@@ -2,7 +2,7 @@ package com.gramazski.craps.command.impl;
 
 import com.gramazski.craps.command.ICommand;
 import com.gramazski.craps.exception.HandlerException;
-import com.gramazski.craps.uploader.FileUploader;
+import com.gramazski.craps.service.FileUploaderService;
 import org.apache.logging.log4j.Level;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by gs on 22.02.2017.
  */
-//Build without uploader
 public class FileLoaderCommand implements ICommand {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
@@ -20,13 +19,13 @@ public class FileLoaderCommand implements ICommand {
     }
 
     public String handleRequest(HttpServletRequest request) {
-        FileUploader fileUploader = new FileUploader();
+        FileUploaderService fileUploaderService = new FileUploaderService();
         HttpSession session = request.getSession();
         String rootPath = session.getAttribute("rootPath").toString();
         String filePath = "";
 
         try {
-            filePath = fileUploader.uploadFileFromRequest(request, rootPath);
+            filePath = fileUploaderService.uploadFileFromRequest(request, rootPath);
             session.setAttribute("filePath", filePath);
             return "/";
         } catch (HandlerException e) {

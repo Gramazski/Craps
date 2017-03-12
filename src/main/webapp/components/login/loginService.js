@@ -37,6 +37,8 @@ function login($http, $q) {
             user.name = value.name;
             user.surname = value.surname;
             user.createDate = value.createTime;
+            user.inMessages = [];//value.inMessages;
+            user.outMessages = [];//value.outMessages;
 
             return user;
         }
