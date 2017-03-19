@@ -18,13 +18,19 @@ import java.util.List;
 public class UserDAO extends AbstractDAO<User> {
     private WrapperConnection connection;
     private static final String SQL_SELECT_ALL_USERS = "SELECT id, username, email, password, create_time," +
-            "amount, win_amount, avatar, is_admin, name, surname FROM user";
+            "amount, win_amount, avatar, is_admin, name, surname, is_banned, sex, birthday FROM user";
     private static final String SQL_INSERT_USER = "INSERT INTO user(id, username, email, password, create_time," +
-            "amount, win_amount, avatar, is_admin, name, surname) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            "amount, win_amount, avatar, is_admin, name, surname, is_banned, sex, birthday)" +
+            " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_SELECT_USER_BY_NAME = "SELECT id, username, email, password, create_time," +
-            "amount, win_amount, avatar, is_admin, name, surname FROM user WHERE username = ?";
+            "amount, win_amount, avatar, is_admin, name, surname, is_banned, sex, birthday FROM user " +
+            "WHERE username = ?";
     private static final String SQL_UPDATE_USER = "UPDATE user SET id=?, username=?, email=?, password=?," +
-            " create_time=?, amount=?, win_amount=?, avatar=?, is_admin=?, name=?, surname=? WHERE id=?";
+            "create_time=?, amount=?, win_amount=?, avatar=?, is_admin=?, name=?, surname=?, is_banned=?," +
+            "sex=?, birthday=? WHERE id=?";
+    private static final String SQL_GET_ID_BY_USERNAME = "SELECT id FROM user WHERE username=?";
+    private static final String SQL_GET_USERNAME_BY_ID = "SELECT username FROM user WHERE id=?";
+    private static final String SQL_GET_ID_BY_EMAIL = "SELECT id FROM user WHERE email=?";
 
     public UserDAO(){
         connection = new WrapperConnection();
@@ -39,7 +45,7 @@ public class UserDAO extends AbstractDAO<User> {
             if (resultSet.next()){
                 User user = new User();
                 user.setPassword(resultSet.getString("password"));
-                user.setUserName(resultSet.getString("name"));
+                user.setUserName(resultSet.getString("username"));
                 user.setId(resultSet.getInt("id"));
                 user.setEmail(resultSet.getString("email"));
                 user.setName(resultSet.getString("name"));
@@ -49,6 +55,9 @@ public class UserDAO extends AbstractDAO<User> {
                 user.setAvatar(resultSet.getString("avatar"));
                 user.setCreateTime(resultSet.getString("create_time"));
                 user.setWinAmount(resultSet.getInt("win_amount"));
+                user.setBanned(resultSet.getBoolean("is_banned"));
+                user.setSex(User.Sex.valueOf(resultSet.getString("sex")));
+                user.setBirthday(resultSet.getString("birthday"));
 
                 return user;
             }
@@ -81,6 +90,9 @@ public class UserDAO extends AbstractDAO<User> {
                 user.setAvatar(resultSet.getString("avatar"));
                 user.setCreateTime(resultSet.getString("create_time"));
                 user.setWinAmount(resultSet.getInt("win_amount"));
+                user.setBanned(resultSet.getBoolean("is_banned"));
+                user.setSex(User.Sex.valueOf(resultSet.getString("sex")));
+                user.setBirthday(resultSet.getString("birthday"));
                 users.add(user);
             }
         }catch (SQLException e) {
@@ -119,20 +131,23 @@ public class UserDAO extends AbstractDAO<User> {
             st.setBoolean(9, entity.isAdmin());
             st.setString(10, entity.getName());
             st.setString(11, entity.getSurname());
+            st.setBoolean(12, entity.isBanned());
+            st.setString(13, entity.getSex().toString());
+            st.setString(14, entity.getBirthday());
             st.executeUpdate();
+            entity.setId(getUserIdByName(entity.getUserName()));
         }catch (SQLException e) {
             throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
         } finally {
             connection.closeStatement(st);
         }
-
     }
 
     public User update(User entity) throws DAOException {
         PreparedStatement st = null;
         try {
             st = connection.createPreparedStatement(SQL_UPDATE_USER);
-            st.setString(1, null);
+            st.setInt(1, entity.getId());
             st.setString(2, entity.getUserName());
             st.setString(3, entity.getEmail());
             st.setString(4, entity.getPassword());
@@ -143,7 +158,10 @@ public class UserDAO extends AbstractDAO<User> {
             st.setBoolean(9, entity.isAdmin());
             st.setString(10, entity.getName());
             st.setString(11, entity.getSurname());
-            st.setInt(12, entity.getId());
+            st.setBoolean(12, entity.isBanned());
+            st.setString(13, entity.getSex().toString());
+            st.setString(14, entity.getBirthday());
+            st.setInt(15, entity.getId());
             st.executeUpdate();
         }catch (SQLException e) {
             throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
@@ -152,6 +170,74 @@ public class UserDAO extends AbstractDAO<User> {
         }
 
         return entity;
+    }
+
+    public int getUserIdByName(String username) throws DAOException{
+        PreparedStatement st = null;
+        try {
+            st = connection.createPreparedStatement(SQL_GET_ID_BY_USERNAME);
+            st.setString(1, username);
+            ResultSet resultSet = st.executeQuery();
+            if (resultSet.next()){
+                return resultSet.getInt("id");
+            }
+            else {
+                return -1;
+            }
+        }catch (SQLException e) {
+            throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
+        } finally {
+            connection.closeStatement(st);
+        }
+    }
+
+    public String getUserNameById(int id) throws DAOException{
+        PreparedStatement st = null;
+        try {
+            st = connection.createPreparedStatement(SQL_GET_USERNAME_BY_ID);
+            st.setInt(1, id);
+            ResultSet resultSet = st.executeQuery();
+            if (resultSet.next()){
+                return resultSet.getString("username");
+            }
+            else {
+                return "";
+            }
+        }catch (SQLException e) {
+            throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
+        } finally {
+            connection.closeStatement(st);
+        }
+    }
+
+    public boolean isEmailExists(String email) throws DAOException{
+        PreparedStatement st = null;
+        try {
+            st = connection.createPreparedStatement(SQL_GET_ID_BY_EMAIL);
+            st.setString(1, email);
+            ResultSet resultSet = st.executeQuery();
+
+            return resultSet.next();
+        }catch (SQLException e) {
+            throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
+        } finally {
+            connection.closeStatement(st);
+        }
+    }
+
+    public boolean isUserNameExists(String userName) throws DAOException{
+        PreparedStatement st = null;
+        try {
+            st = connection.createPreparedStatement(SQL_GET_ID_BY_USERNAME);
+            st.setString(1, userName);
+            ResultSet resultSet = st.executeQuery();
+
+            return resultSet.next();
+        }catch (SQLException e) {
+            throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
+        } finally {
+            connection.closeStatement(st);
+        }
     }
 
     public void close() {

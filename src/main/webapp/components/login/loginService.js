@@ -24,23 +24,6 @@ function login($http, $q) {
                 });
 
             return deferred.promise;
-        },
-        createUser : function (value) {
-            var user = {};
-            user.id = value.id;
-            user.password = value.password;
-            user.username = value.userName;
-            user.email = value.email;
-            user.amount = value.amount;
-            user.win_amount = value.winAmount;
-            user.avatar = value.avatar;
-            user.name = value.name;
-            user.surname = value.surname;
-            user.createDate = value.createTime;
-            user.inMessages = [];//value.inMessages;
-            user.outMessages = [];//value.outMessages;
-
-            return user;
         }
     }
 }

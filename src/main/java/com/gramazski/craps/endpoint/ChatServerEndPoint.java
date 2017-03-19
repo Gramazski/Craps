@@ -3,6 +3,7 @@ package com.gramazski.craps.endpoint;
 import com.gramazski.craps.configurator.ChatServerEndPointConfigurator;
 import com.gramazski.craps.entity.impl.Message;
 import com.gramazski.craps.mapper.ObjectMapperWrapper;
+import com.gramazski.craps.service.MessageService;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -10,17 +11,16 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by gs on 07.03.2017.
  */
 @ServerEndpoint(value="/chat", configurator=ChatServerEndPointConfigurator.class)
 public class ChatServerEndPoint {
-    private Map<String, Session> userSessions = Collections.synchronizedMap(new HashMap<String, Session>());
+    private Map<String, Session> userSessions = new ConcurrentHashMap<>();
 
     /**
      * Callback hook for Connection open events. This method will be invoked when a
@@ -59,11 +59,11 @@ public class ChatServerEndPoint {
     public void onMessage(String message, Session userSession) {
         System.out.println("Message Received: " + message);
         try {
-            Message message1 = ObjectMapperWrapper.readValue(message, Message.class);
-            System.out.println("Message Received: " + message1.toString());
-            System.out.println("Message Received: " + userSessions.toString());
-            if (userSessions.containsKey(message1.getReceiver())){
-                Session session = userSessions.get(message1.getReceiver());
+            Message inMessage = ObjectMapperWrapper.readValue(message, Message.class);
+            MessageService messageService = new MessageService();
+            messageService.saveMessage(inMessage);
+            if (userSessions.containsKey(inMessage.getReceiver())){
+                Session session = userSessions.get(inMessage.getReceiver());
                 session.getAsyncRemote().sendText(message);
             }
         } catch (IOException e) {

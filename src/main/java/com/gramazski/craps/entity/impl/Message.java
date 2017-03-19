@@ -9,8 +9,17 @@ public class Message extends Entity{
     private String title;
     private String body;
     private String createDate;
+    private Status status;
     private String sender;
     private String receiver;
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public String getSender() {
         return sender;
@@ -50,5 +59,9 @@ public class Message extends Entity{
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
+    }
+
+    public enum Status{
+        GET, READ, DELETED
     }
 }

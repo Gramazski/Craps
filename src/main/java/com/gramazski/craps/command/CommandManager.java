@@ -19,7 +19,6 @@ public class CommandManager {
 
     private CommandManager(){
         commandMap = new HashMap<String, ICommand>();
-        commandMap.put("UPLOAD", new FileLoaderCommand());
         commandMap.put("LOGIN", new LoginCommand());
         commandMap.put("LOGOUT", new LogoutCommand());
         commandMap.put("REGISTER", new RegisterCommand());

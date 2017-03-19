@@ -2,6 +2,8 @@ package com.gramazski.craps.entity.impl;
 
 import com.gramazski.craps.entity.Entity;
 
+import java.util.List;
+
 /**
  * Created by gs on 19.02.2017.
  */
@@ -16,6 +18,43 @@ public class User extends Entity {
     private int winAmount;
     private String avatar;
     private boolean isAdmin;
+    private boolean isBanned;
+    private String birthday;
+    private Sex sex;
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    private List<Message> messages;
+
+    public boolean isBanned() {
+        return isBanned;
+    }
+
+    public void setBanned(boolean banned) {
+        isBanned = banned;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public String getCreateTime() {
         return createTime;
@@ -95,5 +134,9 @@ public class User extends Entity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public enum Sex{
+        MALE, FEMALE
     }
 }

@@ -25,26 +25,32 @@
                 </div>
                 <div class="col-sm-9">
                     <div class="row" style="text-align: center">
-                        <div class="col-sm-4" ng-click="changeSort('sender')">
+                        <div class="col-sm-4 col-xs-4" ng-click="changeSort('sender')" ng-show="showing.sender==''">
                             {{translateModel.label.sender}}
                         </div>
-                        <div class="col-sm-5" ng-click="changeSort('title')">
+                        <div class="col-sm-4 col-xs-4" ng-click="changeSort('sender')" ng-show="showing.sender!=''">
+                            {{translateModel.label.receiver}}
+                        </div>
+                        <div class="col-sm-5 col-xs-5" ng-click="changeSort('title')">
                             {{translateModel.label.title}}
                         </div>
-                        <div class="col-sm-3" ng-click="changeSort('date')">
+                        <div class="col-sm-3 col-xs-3" ng-click="changeSort('date')">
                             {{translateModel.label.date}}
                         </div>
                     </div>
                     <hr style="margin-top: 2%; margin-bottom: 2%">
-                    <div ng-repeat="x in messages | orderBy : sortParam | filter : searchMessage">
+                    <div ng-repeat="x in userInfo.messages | filter : showing : strict | orderBy : sortParam | filter : searchMessage">
                         <div class="row" style="text-align: center; margin-bottom: 2%" data-toggle="modal" data-target="#message" ng-click="showMessage(x)">
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 col-xs-4" ng-show="showing.sender==''">
                                 {{x.sender}}
                             </div>
-                            <div class="col-sm-5">
+                            <div class="col-sm-4 col-xs-4" ng-show="showing.sender!=''">
+                                {{x.receiver}}
+                            </div>
+                            <div class="col-sm-5 col-xs-5">
                                 {{x.title}}
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 col-xs-3">
                                 {{x.createDate}}
                             </div>
                         </div>

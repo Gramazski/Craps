@@ -26,6 +26,7 @@
                     <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> {{translateModel.label.password}}</label>
                     <input type="password" class="form-control input-lg" required pattern="[a-zA-Z0-9]{6,9}" id="psw" name="password" ng-model="password" placeholder="{{translateModel.input.password}}">
                     <span id="error" class="help-block" ng-show="!Auth.password.$valid && Auth.password.$dirty" style="color: red">{{translateModel.message.error.password}}</span>
+                    <span id="error" class="help-block" ng-show="!Auth.password.$valid && Auth.password.$dirty" style="color: red">{{translateModel.message.error.login}}</span>
                 </div>
                 <div class="checkbox">
                     <label><input type="checkbox" value="" checked>{{translateModel.label.remember}}</label>

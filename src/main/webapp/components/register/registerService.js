@@ -2,9 +2,9 @@
  * Created by gs on 07.03.2017.
  */
 var crapsApp = angular.module('crapsApp');
-crapsApp.factory('registerService',['$http', '$q', 'loginService', register]);
+crapsApp.factory('registerService',['$http', '$q', '$filter', register]);
 
-function register($http, $q, loginService) {
+function register($http, $q, $filter) {
     return{
         doRegister: function (regInf) {
             var deferred = $q.defer();
@@ -32,13 +32,10 @@ function register($http, $q, loginService) {
             regInf.name = $scope.name;
             regInf.surname = $scope.surname;
             regInf.email = $scope.email;
-            //regInf.sex = $scope.sex;
-            //regInf.birthday = $scope.birthday;
+            regInf.sex = $scope.sex;
+            regInf.birthday = $filter('date')($scope.birthday, "yyyy-MM-dd");
 
             return regInf;
-        },
-        createUser: function (value) {
-            return loginService.createUser(value);
         },
         performScope: function ($scope, value) {
             $scope.username = value.username;

@@ -118,7 +118,8 @@
         "type" : "Transfer type",
         "incoming" : "Incoming",
         "outgoing" : "Outgoing"
-      }
+      },
+      "receiver" : "Receiver"
     },
     "message" : {
       "error" : {
@@ -128,7 +129,8 @@
         "username" : "Incorrect username",
         "surname" : "Incorrect surname",
         "birthday" : "Incorrect date",
-        "email" : "Incorrect email"
+        "email" : "Incorrect email",
+        "login" : "Invalid login or password"
       }
     }
   }

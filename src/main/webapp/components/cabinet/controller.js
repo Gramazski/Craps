@@ -5,21 +5,21 @@ var crapsApp = angular.module("crapsApp");
 crapsApp.controller("cabinetController",['$scope', '$rootScope', 'messagesService', 'userService', control]);
 
 function control($scope, $rootScope, messagesService, userService) {
-    /*var promiseObj=userService.getInfo();
-    promiseObj.then(function(value) {
-        $scope.userInfo=value;
-        $scope.messages = $scope.userInfo.inMessages;
-        $scope.sortParam = "date";
-    });*/
-
-    $rootScope.messages = $scope.userInfo.inMessages;
+    $scope.showing = {};
+    $scope.showing.receiver = $rootScope.userInfo.userName;
+    $scope.showing.sender = "";
 
     $scope.showOutMessages = function () {
-        $rootScope.messages = $scope.userInfo.outMessages;
+        console.dir($rootScope.userInfo);
+        $scope.showing.receiver = "";
+        $scope.showing.sender = $rootScope.userInfo.userName;
     };
 
     $scope.showInMessages = function () {
-        $rootScope.messages = $scope.userInfo.inMessages;
+        console.dir($rootScope.userInfo);
+        console.dir($scope.showing);
+        $scope.showing.receiver = $rootScope.userInfo.userName;
+        $scope.showing.sender = "";
     };
 
     $scope.changeSort = function (newParam) {
@@ -39,7 +39,7 @@ function control($scope, $rootScope, messagesService, userService) {
         message.title = $scope.title;
         message.body = $scope.body;
         message.receiver = $scope.username;
-        message.sender = $rootScope.userInfo.username;
+        message.sender = $rootScope.userInfo.userName;
         message.createDate = "2012-12-12";
 
         messagesService.send(message);
