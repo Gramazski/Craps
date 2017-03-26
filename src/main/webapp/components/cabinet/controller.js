@@ -2,24 +2,23 @@
  * Created by gs on 10.03.2017.
  */
 var crapsApp = angular.module("crapsApp");
-crapsApp.controller("cabinetController",['$scope', '$rootScope', 'messagesService', 'userService', control]);
+crapsApp.controller("cabinetController",['$scope', '$rootScope', 'messagesService', control]);
 
-function control($scope, $rootScope, messagesService, userService) {
+function control($scope, $rootScope, messagesService) {
     $scope.showing = {};
     $scope.showing.receiver = $rootScope.userInfo.userName;
     $scope.showing.sender = "";
 
     $scope.showOutMessages = function () {
-        console.dir($rootScope.userInfo);
         $scope.showing.receiver = "";
         $scope.showing.sender = $rootScope.userInfo.userName;
+        commonModule.setActiveOutMessageList();
     };
 
     $scope.showInMessages = function () {
-        console.dir($rootScope.userInfo);
-        console.dir($scope.showing);
         $scope.showing.receiver = $rootScope.userInfo.userName;
         $scope.showing.sender = "";
+        commonModule.setActiveInMessageList();
     };
 
     $scope.changeSort = function (newParam) {
@@ -40,7 +39,6 @@ function control($scope, $rootScope, messagesService, userService) {
         message.body = $scope.body;
         message.receiver = $scope.username;
         message.sender = $rootScope.userInfo.userName;
-        message.createDate = "2012-12-12";
 
         messagesService.send(message);
 

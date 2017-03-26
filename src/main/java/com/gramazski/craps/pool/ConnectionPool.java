@@ -2,6 +2,9 @@ package com.gramazski.craps.pool;
 
 import com.gramazski.craps.exception.ResourceManagerException;
 import com.gramazski.craps.manager.ResourceManager;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -25,6 +28,7 @@ public class ConnectionPool {
     private BlockingQueue<Connection> connections;
     private final int CON_COUNT;
     private static AtomicInteger instanceFlag = new AtomicInteger(0);
+    private final static Logger logger = LogManager.getLogger(ConnectionPool.class);
 
     private ConnectionPool() {
         try {
@@ -37,19 +41,19 @@ public class ConnectionPool {
             }
         }
         catch (InterruptedException ex){
-            //logging
+            logger.log(Level.FATAL, "Can't put connection in Blocking queue. Course: " + ex.getMessage());
             throw new RuntimeException("Can't put connection in Blocking queue. Course: " + ex.getMessage(), ex);
         }
         catch (ClassNotFoundException ex){
-            //logging
+            logger.log(Level.FATAL, "Can't register jdbc Driver class. Course: " + ex.getMessage());
             throw new RuntimeException("Can't register jdbc Driver class. Course: " + ex.getMessage(), ex);
         }
         catch (NumberFormatException ex){
-            //logging
+            logger.log(Level.FATAL, "Can't get connections count. Course: " + ex.getMessage());
             throw new RuntimeException("Can't get connections count. Course: " + ex.getMessage(), ex);
         }
         catch (ResourceManagerException ex){
-            //logging
+            logger.log(Level.FATAL, "Can't find config file. Course: " + ex.getMessage());
             throw new RuntimeException("Can't find config file. Course: " + ex.getMessage(), ex);
         }
     }
@@ -76,8 +80,10 @@ public class ConnectionPool {
         Connection connection = null;
         try {
             connection = connections.take();
+            logger.log(Level.DEBUG, "Take connection: -1");
         } catch (InterruptedException e) {
-            //logging ??
+            logger.log(Level.FATAL, "Can't find config file. Course: " + e.getMessage());
+            throw new RuntimeException("Can't find config file. Course: " + e.getMessage(), e);
         }
         return connection;
     }
@@ -86,9 +92,11 @@ public class ConnectionPool {
         try {
             if (connection != null){
                 connections.put(connection);
+                logger.log(Level.DEBUG, "Put connection: +1");
             }
         } catch (InterruptedException e) {
-            //logging ??
+            logger.log(Level.FATAL, "Can't find config file. Course: " + e.getMessage());
+            throw new RuntimeException("Can't find config file. Course: " + e.getMessage(), e);
         }
     }
 
@@ -99,7 +107,7 @@ public class ConnectionPool {
                     Connection connection = connections.take();
                     connection.close();
                 } catch (InterruptedException | SQLException e) {
-                    //logging
+                    logger.log(Level.ERROR, "Can't close pool: " + e.getMessage());
                 }
             }
 
@@ -110,7 +118,7 @@ public class ConnectionPool {
                     DriverManager.deregisterDriver(driver);
                 }
             } catch (SQLException e) {
-                //LOGGER.log(Level.ERROR, e + " DriverManager wasn't found.");
+                logger.log(Level.ERROR, "Can't deregister driver: " + e.getMessage());
             }
         }
     }
@@ -121,7 +129,7 @@ public class ConnectionPool {
         try {
             connection = DriverManager.getConnection(databaseUrl, properties);
         } catch (SQLException e) {
-            //logging
+            logger.log(Level.FATAL, "Creating connection failed. Course: " + e.getMessage());
             throw new RuntimeException("Creating connection failed. Course: " + e.getMessage(), e);
         }
 

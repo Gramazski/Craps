@@ -4,6 +4,9 @@ import com.gramazski.craps.configurator.ChatServerEndPointConfigurator;
 import com.gramazski.craps.entity.impl.Message;
 import com.gramazski.craps.mapper.ObjectMapperWrapper;
 import com.gramazski.craps.service.MessageService;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -21,6 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint(value="/chat", configurator=ChatServerEndPointConfigurator.class)
 public class ChatServerEndPoint {
     private Map<String, Session> userSessions = new ConcurrentHashMap<>();
+    private final static Logger logger = LogManager.getLogger(ChatServerEndPoint.class);
 
     /**
      * Callback hook for Connection open events. This method will be invoked when a
@@ -31,7 +35,7 @@ public class ChatServerEndPoint {
     public void onOpen(Session userSession) {
         Map<String, List<String>> requestMap = userSession.getRequestParameterMap();
         if (requestMap.containsKey("login")){
-            System.out.println("+1: : " + requestMap.get("login").get(0));
+            logger.log(Level.DEBUG, "+1: : " + requestMap.get("login").get(0));
             userSessions.put(requestMap.get("login").get(0), userSession);
         }
 
@@ -61,13 +65,17 @@ public class ChatServerEndPoint {
         try {
             Message inMessage = ObjectMapperWrapper.readValue(message, Message.class);
             MessageService messageService = new MessageService();
-            messageService.saveMessage(inMessage);
-            if (userSessions.containsKey(inMessage.getReceiver())){
-                Session session = userSessions.get(inMessage.getReceiver());
-                session.getAsyncRemote().sendText(message);
+            if (messageService.trySaveMessage(inMessage)){
+                Session session = userSessions.get(inMessage.getSender());
+                session.getAsyncRemote().sendText(ObjectMapperWrapper.writeValueAsString(inMessage));
+
+                if (userSessions.containsKey(inMessage.getReceiver())){
+                    session = userSessions.get(inMessage.getReceiver());
+                    session.getAsyncRemote().sendText(ObjectMapperWrapper.writeValueAsString(inMessage));
+                }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
         }
 
     }

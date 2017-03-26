@@ -1,4 +1,8 @@
-package com.gramazski.craps.handler;
+package com.gramazski.craps.util;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -8,7 +12,8 @@ import java.io.IOException;
  * Created by gs on 12.03.2017.
  */
 public class JSONReader {
-    //own exception
+    private final static Logger logger = LogManager.getLogger(JSONReader.class);
+
     public static String readJsonString(HttpServletRequest request){
         StringBuilder sb = new StringBuilder();
         BufferedReader br = null;
@@ -19,7 +24,7 @@ public class JSONReader {
                 sb.append(str);
             }
         } catch (IOException e) {
-            //e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
         }
 
 

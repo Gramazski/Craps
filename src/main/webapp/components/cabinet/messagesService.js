@@ -16,13 +16,12 @@ function sendMessage($rootScope) {
         console.dir(message);
         var newMessage = JSON.parse(message);
         $rootScope.userInfo.messages.push(newMessage);
-        $rootScope.userInfo.messages.$apply();
+        commonModule.updateMessagesList();
         console.dir($rootScope.userInfo);
     }
 
     return{
         send: function (message) {
-            $rootScope.userInfo.messages.push(message);
             var outMessage = JSON.stringify(message);
             console.dir(outMessage);
             commonModule.closeMessageModal();

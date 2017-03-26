@@ -35,7 +35,7 @@
                         <tbody>
                         <tr>
                             <td>{{translateModel.cabinet.table.date}}</td>
-                            <td>{{userInfo.createDate}}</td>
+                            <td>{{userInfo.createTime}}</td>
                         </tr>
                         <tr>
                             <td>{{translateModel.cabinet.table.amount}}</td>
@@ -79,28 +79,20 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="name">{{translateModel.label.name}}</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="{{translateModel.input.name}}">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="{{userInfo.name}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="surName">{{translateModel.label.surname}}</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="surName" name="surname" placeholder="{{translateModel.input.surname}}">
+                            <input type="text" class="form-control" id="surName" name="surname" placeholder="{{userInfo.surname}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="calendar">{{translateModel.label.birthday}}</label>
                         <div class="col-sm-10">
-                            <input type="date" class="form-control" id="calendar" name="birthday" value="1997-06-01"
+                            <input type="date" class="form-control" id="calendar" name="birthday" value="{{userInfo.date}}"
                                    min="1940-01-01" max="1998-01-01">
-                            <span id="error_birthday" class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2">{{translateModel.label.sex.sex}}</label>
-                        <div class="col-sm-10">
-                            <label class="radio-inline"><input type="radio" name="sex" value="male" checked="">{{translateModel.label.sex.male}}</label>
-                            <label class="radio-inline"><input type="radio" name="sex" value="female">{{translateModel.label.sex.female}}</label>
                         </div>
                     </div>
                     <div class="form-group">

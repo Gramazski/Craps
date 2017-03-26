@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * Created by gs on 19.02.2017.
  */
-//Create own hibernate
 public abstract class AbstractDAO<T extends Entity> implements AutoCloseable {
     public abstract List<T> findAll() throws DAOException;
     public abstract T findEntityById(int id);

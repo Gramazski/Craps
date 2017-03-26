@@ -3,9 +3,10 @@ package com.gramazski.craps.command.impl;
 
 import com.gramazski.craps.command.ICommand;
 import com.gramazski.craps.entity.impl.User;
-import com.gramazski.craps.handler.JSONReader;
+import com.gramazski.craps.util.JSONReader;
 import com.gramazski.craps.mapper.ObjectMapperWrapper;
 import com.gramazski.craps.service.LoginService;
+import org.apache.logging.log4j.Level;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +35,7 @@ public class LoginCommand implements ICommand {
             response.setContentType("application/json");
             ObjectMapperWrapper.writeValue(response.getOutputStream(), user);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
         }
 
     }

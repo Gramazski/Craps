@@ -19,6 +19,7 @@ public class ChooseTag extends TagSupport {
     public void setRows(Integer rows) {
         this.rows = rows;
     }
+
     @Override
     public int doStartTag() throws JspTagException {
         try {
@@ -32,6 +33,7 @@ public class ChooseTag extends TagSupport {
         }
         return EVAL_BODY_INCLUDE;
     }
+
     @Override
     public int doAfterBody() throws JspTagException {
         if (rows-- > 1) {
@@ -45,6 +47,7 @@ public class ChooseTag extends TagSupport {
             return SKIP_BODY;
         }
     }
+
     @Override
     public int doEndTag() throws JspTagException {
         try {

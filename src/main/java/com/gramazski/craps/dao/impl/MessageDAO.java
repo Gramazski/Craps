@@ -27,6 +27,7 @@ public class MessageDAO extends AbstractDAO<Message> {
             "status, receiver_id FROM message WHERE id = ?";
     private static final String SQL_UPDATE_MESSAGE = "UPDATE user SET id=?, title=?, create_date=?, body=?," +
             "status=?, sender_id=?, receiver_id=? WHERE id=?";
+    private static final String SQL_GET_LAST_GENERATED_ID = "SELECT LAST_INSERT_ID()";
 
     public MessageDAO(){
         connection = new WrapperConnection();
@@ -82,8 +83,7 @@ public class MessageDAO extends AbstractDAO<Message> {
     @Override
     public void create(Message entity) throws DAOException {
         PreparedStatement st = null;
-        UserDAO userDAO = new UserDAO();
-        try {
+        try(UserDAO userDAO = new UserDAO()) {
             st = connection.createPreparedStatement(SQL_INSERT_MESSAGE);
             st.setString(1, null);
             st.setString(2, entity.getTitle());
@@ -93,6 +93,7 @@ public class MessageDAO extends AbstractDAO<Message> {
             st.setInt(6, userDAO.getUserIdByName(entity.getSender()));
             st.setInt(7, userDAO.getUserIdByName(entity.getReceiver()));
             st.executeUpdate();
+            entity.setId(getLastId());
         }catch (SQLException e) {
             throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
         } finally {
@@ -103,8 +104,7 @@ public class MessageDAO extends AbstractDAO<Message> {
     @Override
     public Message update(Message entity) throws DAOException {
         PreparedStatement st = null;
-        UserDAO userDAO = new UserDAO();
-        try {
+        try(UserDAO userDAO = new UserDAO()) {
             st = connection.createPreparedStatement(SQL_UPDATE_MESSAGE);
             st.setInt(1, entity.getId());
             st.setString(2, entity.getTitle());
@@ -115,6 +115,7 @@ public class MessageDAO extends AbstractDAO<Message> {
             st.setInt(7, userDAO.getUserIdByName(entity.getReceiver()));
             st.setInt(8, entity.getId());
             st.executeUpdate();
+
         }catch (SQLException e) {
             throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
         } finally {
@@ -132,9 +133,9 @@ public class MessageDAO extends AbstractDAO<Message> {
     public List<Message> getAllMessagesForUser(int id) throws DAOException{
         List<Message> messages = new ArrayList<>();
         PreparedStatement st = null;
-        try {
+        try(UserDAO userDAO = new UserDAO()) {
             st = connection.createPreparedStatement(SQL_SELECT_ALL_MESSAGES_FOR_USER);
-            UserDAO userDAO = new UserDAO();
+
             st.setInt(1, id);
             st.setInt(2, id);
             ResultSet resultSet = st.executeQuery();
@@ -157,5 +158,23 @@ public class MessageDAO extends AbstractDAO<Message> {
         }
 
         return messages;
+    }
+
+    private int getLastId() throws DAOException{
+        Statement st = null;
+        int id = -1;
+        try {
+            st = connection.createStatement();
+            ResultSet rs = st.executeQuery(SQL_GET_LAST_GENERATED_ID);
+            if (rs.next()){
+                id = rs.getInt(1);
+            }
+        }catch (SQLException e) {
+            throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
+        } finally {
+            connection.closeStatement(st);
+        }
+
+        return id;
     }
 }

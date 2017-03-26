@@ -5,20 +5,26 @@ import com.gramazski.craps.dao.impl.UserDAO;
 import com.gramazski.craps.entity.impl.Message;
 import com.gramazski.craps.entity.impl.User;
 import com.gramazski.craps.exception.DAOException;
+import com.gramazski.craps.util.DateHandler;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
 public class UserService {
+    private final static Logger logger = LogManager.getLogger(UserService.class);
+
     public User createUser(User user){
         try(UserDAO userDAO = new UserDAO()) {
-            user.setCreateTime("2012-02-12");
+            user.setCreateTime(DateHandler.getCurrentDate());
             user.setAvatar("assets/img/user/cube.jpg");
             user.setMessages(new ArrayList<Message>());
             user.setAdmin(false);
             user.setBanned(false);
             userDAO.create(user);
         } catch (DAOException e){
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
         }
 
         return user;
@@ -30,7 +36,7 @@ public class UserService {
             user = userDAO.findEntityByName(userName);
             user.setMessages(messageDAO.getAllMessagesForUser(user.getId()));
         } catch (DAOException e) {
-            e.printStackTrace();
+            logger.log(Level.ERROR, e.getMessage());
         }
 
         return user;
