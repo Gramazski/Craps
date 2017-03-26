@@ -21,6 +21,10 @@ var commonModule = (function () {
             else {
                 $('#outMessages').click();
             }
+        },
+        setActiveMenu : function (activeItem) {
+            $('.site-menu').removeClass("active");
+            $(activeItem).addClass("active");
         }
     }
 })();

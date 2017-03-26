@@ -45,11 +45,22 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
     );
 
     $routeProvider.otherwise({redirectTo: '/'});
-}).run(function($rootScope, $location) {
+}).run(function($rootScope, $location, userService) {
     $rootScope.loggedInUser = false;
+    var promiseObj=userService.getUser();
+    promiseObj.then(function(value) {
+        if (value == null){
+            console.dir(value);
+            $rootScope.loggedInUser = false;
+        }
+        else {
+            $rootScope.loggedInUser = true;
+            $rootScope.userInfo = value;
+            console.dir($rootScope.userInfo);
+        }
+    });
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
         if ($rootScope.loggedInUser === false) {
-            // no logged user, redirect to /login
             if (!((next.templateUrl == "components/home/view.html") || (next.templateUrl == "components/login/view.html")
                     || (next.templateUrl == "components/register/view.html"))) {
                 $location.path("/");
