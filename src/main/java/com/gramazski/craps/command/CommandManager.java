@@ -23,6 +23,7 @@ public class CommandManager {
         commandMap.put("LOGOUT", new LogoutCommand());
         commandMap.put("REGISTER", new RegisterCommand());
         commandMap.put("RELOAD", new ReloadCommand());
+        commandMap.put("UPDATE", new UpdateUserCommand());
     }
 
     public static CommandManager getInstance(){

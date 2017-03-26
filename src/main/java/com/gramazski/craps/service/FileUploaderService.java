@@ -8,18 +8,21 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by gs on 21.02.2017.
  */
 public class FileUploaderService {
 
-    public String uploadFileFromRequest(HttpServletRequest request, String rootPath) throws HandlerException{
+    public Map<String, String> uploadFileFromRequest(HttpServletRequest request, String rootPath) throws HandlerException{
         return processMultipartRequest(request, rootPath);
     }
 
-    private String processMultipartRequest(HttpServletRequest request, String rootPath) throws HandlerException {
+    private Map<String, String> processMultipartRequest(HttpServletRequest request, String rootPath) throws HandlerException {
+        Map<String, String> paramMap = new HashMap<>();
         ServletFileUpload servletFileUpload = new ServletFileUpload(new DiskFileItemFactory());
         Iterator<FileItem> iterator = null;
 
@@ -39,23 +42,26 @@ public class FileUploaderService {
                     fileName = item.getName();
                 }
             }
+            else {
+                paramMap.put(item.getFieldName(), item.getString());
+            }
         }
 
         if (fileToUpload != null && fileName != null) {
-            return saveFile(fileToUpload, fileName, rootPath);
+            paramMap.put("avatar", saveFile(fileToUpload, fileName, rootPath));
         }
 
-        return "";
+        return paramMap;
     }
 
 
     private String saveFile(FileItem fileItem, String fileName, String rootPath) throws HandlerException {
-        String filePath = rootPath + "xml/" + fileName;
-        File uploadedFile = new File(rootPath + "xml/", fileName);
+        String filePath = "assets/img/" + fileName;
+        File uploadedFile = new File(rootPath + "assets/img", fileName);
         try {
             fileItem.write(uploadedFile);
         } catch (Exception e) {
-            throw new HandlerException("Can't write data to file: " + rootPath + "xml/" + fileName, e);
+            throw new HandlerException("Can't write data to file: " + rootPath + "assets/img" + fileName, e);
         }
 
         return filePath;

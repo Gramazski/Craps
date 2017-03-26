@@ -2,8 +2,6 @@ package com.gramazski.craps.command.impl;
 
 import com.gramazski.craps.command.ICommand;
 import com.gramazski.craps.entity.impl.User;
-import com.gramazski.craps.util.JSONReader;
-import com.gramazski.craps.mapper.ObjectMapperWrapper;
 import com.gramazski.craps.service.UpdateUserService;
 import org.apache.logging.log4j.Level;
 
@@ -24,20 +22,13 @@ public class UpdateUserCommand implements ICommand {
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
         try {
-            String params = JSONReader.readJsonString(request);
-            User user = ObjectMapperWrapper.readValue(params, User.class);
             UpdateUserService updateUserService = new UpdateUserService();
             HttpSession session = request.getSession();
+            User user = updateUserService.tryUpdateUser(request);
 
-            if (updateUserService.tryUpdateUser(user)){
-                session.setAttribute("user", user);
-            }
-            else {
-                user = (User) session.getAttribute("user");
-            }
+            session.setAttribute("user", user);
 
-            response.setContentType("application/json");
-            ObjectMapperWrapper.writeValue(response.getOutputStream(), user);
+            response.sendRedirect("/#/cabinet");
         } catch (IOException e) {
             logger.log(Level.ERROR, e.getMessage());
         }

@@ -23,7 +23,8 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        ICommand command = getCommand(req);
+        command.handleRequest(req, resp);
     }
 
     private ICommand getCommand(HttpServletRequest request){

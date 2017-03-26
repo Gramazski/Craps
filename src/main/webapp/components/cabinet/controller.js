@@ -9,6 +9,10 @@ function control($scope, $rootScope, messagesService) {
     $scope.showing.receiver = $rootScope.userInfo.userName;
     $scope.showing.sender = "";
 
+    $scope.updateUserInfo = function () {
+        
+    };
+
     $scope.showOutMessages = function () {
         $scope.showing.receiver = "";
         $scope.showing.sender = $rootScope.userInfo.userName;
