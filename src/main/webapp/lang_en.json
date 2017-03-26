@@ -26,7 +26,11 @@
       "edit" : "Edit",
       "submit" : "Submit",
       "send" : "Send",
-      "answer" : "Send answer"
+      "answer" : "Send answer",
+      "transfer" : {
+        "out" : "Transfer out",
+        "in" : "Transfer in"
+      }
     },
     "input" : {
       "username" : "Enter username",
@@ -53,6 +57,8 @@
     "cabinet" : {
       "header" : "Personal",
       "modelheader" : "Edit data",
+      "transferOut" : "Transfer your money out from site",
+      "transferIn" : "Transfer your money in site",
       "table" : {
         "date" : "Register date",
         "amount" : "Max amount",
@@ -119,7 +125,8 @@
         "incoming" : "Incoming",
         "outgoing" : "Outgoing"
       },
-      "receiver" : "Receiver"
+      "receiver" : "Receiver",
+      "accountNumber" : "Account number"
     },
     "message" : {
       "error" : {

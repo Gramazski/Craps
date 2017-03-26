@@ -19,9 +19,8 @@
                     <tr>
                         <th>{{translateModel.label.number}}</th>
                         <th ng-click="changeSort('date')">{{translateModel.label.date}}</th>
-                        <th>{{translateModel.label.amount}}</th>
-                        <th ng-click="changeSort('change')">{{translateModel.label.change}}</th>
-                        <th ng-click="changeSort('lobby')">{{translateModel.label.bill}}</th>
+                        <th ng-click="changeSort('amount')">{{translateModel.label.amount}}</th>
+                        <th ng-click="changeSort('bill')">{{translateModel.label.bill}}</th>
                         <th>{{translateModel.label.transfer.type}}</th>
                     </tr>
                     </thead>
@@ -30,8 +29,7 @@
                         <td>{{$index}}</td>
                         <td>{{x.date}}</td>
                         <td>{{x.amount}}</td>
-                        <td>{{x.change}}</td>
-                        <td>{{x.bill}}</td>
+                        <td>{{x.accountNumber}}</td>
                         <td class="bg-success" ng-show="x.isIncoming">{{translateModel.label.transfer.incoming}}</td>
                         <td class="bg-danger" ng-show="!x.isIncoming">{{translateModel.label.transfer.outgoing}}</td>
                     </tr>

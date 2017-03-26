@@ -56,8 +56,8 @@ public class FileUploaderService {
 
 
     private String saveFile(FileItem fileItem, String fileName, String rootPath) throws HandlerException {
-        String filePath = "assets/img/" + fileName;
-        File uploadedFile = new File(rootPath + "assets/img", fileName);
+        String filePath = "assets/img/user/" + fileName;
+        File uploadedFile = new File(rootPath + "assets/img/user/", fileName);
         try {
             fileItem.write(uploadedFile);
         } catch (Exception e) {

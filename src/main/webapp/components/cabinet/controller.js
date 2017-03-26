@@ -2,15 +2,25 @@
  * Created by gs on 10.03.2017.
  */
 var crapsApp = angular.module("crapsApp");
-crapsApp.controller("cabinetController",['$scope', '$rootScope', 'messagesService', control]);
+crapsApp.controller("cabinetController",['$scope', '$rootScope', 'messagesService', 'transferService', control]);
 
-function control($scope, $rootScope, messagesService) {
+function control($scope, $rootScope, messagesService, transferService) {
     $scope.showing = {};
     $scope.showing.receiver = $rootScope.userInfo.userName;
     $scope.showing.sender = "";
 
-    $scope.updateUserInfo = function () {
-        
+    $scope.transferType = false;
+
+    $scope.setTransferType = function (newTransferType) {
+        $scope.transferType = newTransferType;
+    };
+
+    $scope.makeTransfer = function () {
+        var newTransfer = {};
+        newTransfer.isIncoming = $scope.transferType;
+        newTransfer.amount = $scope.amount;
+        newTransfer.accountNumber = $scope.account;
+        transferService.makeTransfer(newTransfer);
     };
 
     $scope.showOutMessages = function () {

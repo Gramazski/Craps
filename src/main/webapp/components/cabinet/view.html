@@ -15,14 +15,18 @@
                             <h4 class="media-heading">{{userInfo.name}} {{userInfo.surname}}</h4>
                             <p>{{userInfo.birthday}}</p>
                             <p>{{userInfo.sex}}</p>
-                            <p>{{userInfo.username}}</p>
-                            <p>{{userInfo.amount}}</p>
+                            <p>{{userInfo.userName}}</p>
                             <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#contactData">{{translateModel.button.edit}}</button>
                         </div>
                         <div class="col-sm-6">
                             <h4 class="media-heading">{{translateModel.label.statistic}}</h4>
-                            <p>20/204</p>
-                            <p>19%</p>
+                            <p><span class="label label-info">{{translateModel.games.header}}</span> - 0</p>
+                            <p><span class="label label-info">{{translateModel.transfers.header}}</span> - 0</p>
+                            <p><span class="label label-success">{{translateModel.label.amount}}</span> - {{userInfo.amount}}</p>
+                            <div class="btn-group btn-group-lg">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferOutModal" ng-click="setTransferType(false)">{{translateModel.button.transfer.out}}</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferOutModal" ng-click="setTransferType(true)">{{translateModel.button.transfer.in}}</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -93,6 +97,43 @@
                         <div class="col-sm-10">
                             <input type="date" class="form-control" id="calendar" name="birthday" value="{{userInfo.birthday}}"
                                    min="1940-01-01" max="1998-01-01">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default pull-right">{{translateModel.button.submit}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="transferOutModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" ng-show="!transferType">{{translateModel.cabinet.transferOut}}</h4>
+                <h4 class="modal-title" ng-show="transferType">{{translateModel.cabinet.transferIn}}</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" ng-submit="makeTransfer()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">{{translateModel.label.accountNumber}}</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="account" name="account" ng-model="account" placeholder="{{userInfo.name}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="surName">{{translateModel.label.amount}}</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="amount" name="amount" ng-model="amount" min="0" max="{{userInfo.amount}}" placeholder="{{userInfo.amount}}">
                         </div>
                     </div>
                     <div class="form-group">
