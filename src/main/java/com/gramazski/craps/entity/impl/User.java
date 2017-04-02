@@ -21,6 +21,20 @@ public class User extends Entity {
     private boolean isBanned;
     private String birthday;
     private Sex sex;
+    private List<Message> messages;
+    private List<Transfer> transfers;
+
+    public List<Transfer> getTransfers() {
+        return transfers;
+    }
+
+    public void setTransfers(List<Transfer> transfers) {
+        this.transfers = transfers;
+    }
+
+    public void addTransfer(Transfer transfer){
+        transfers.add(transfer);
+    }
 
     public String getBirthday() {
         return birthday;
@@ -37,8 +51,6 @@ public class User extends Entity {
     public void setSex(Sex sex) {
         this.sex = sex;
     }
-
-    private List<Message> messages;
 
     public boolean isBanned() {
         return isBanned;

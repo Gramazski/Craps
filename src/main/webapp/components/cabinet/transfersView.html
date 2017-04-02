@@ -30,8 +30,8 @@
                         <td>{{x.date}}</td>
                         <td>{{x.amount}}</td>
                         <td>{{x.accountNumber}}</td>
-                        <td class="bg-success" ng-show="x.isIncoming">{{translateModel.label.transfer.incoming}}</td>
-                        <td class="bg-danger" ng-show="!x.isIncoming">{{translateModel.label.transfer.outgoing}}</td>
+                        <td class="bg-success" ng-show="x.incoming">{{translateModel.label.transfer.incoming}}</td>
+                        <td class="bg-danger" ng-show="!x.incoming">{{translateModel.label.transfer.outgoing}}</td>
                     </tr>
                     </tbody>
                 </table>

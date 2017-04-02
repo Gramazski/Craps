@@ -8,8 +8,20 @@ function control($scope, $rootScope, messagesService, transferService) {
     $scope.showing = {};
     $scope.showing.receiver = $rootScope.userInfo.userName;
     $scope.showing.sender = "";
+    var promiseObj=transferService.getCurrencies();
+    promiseObj.then(function(value) {
+        console.dir(value);
+        $scope.currencies=value;
+        $scope.selectedCurrency = $scope.currencies[0];
+        $scope.amountIn = 0;
+        $scope.amountOut = 0;
+    });
 
     $scope.transferType = false;
+
+    $scope.close = function (formName) {
+        commonModule.resetFormIn(formName);
+    };
 
     $scope.setTransferType = function (newTransferType) {
         $scope.transferType = newTransferType;
@@ -17,10 +29,21 @@ function control($scope, $rootScope, messagesService, transferService) {
 
     $scope.makeTransfer = function () {
         var newTransfer = {};
-        newTransfer.isIncoming = $scope.transferType;
-        newTransfer.amount = $scope.amount;
+        newTransfer.incoming = $scope.transferType;
+        if ($scope.transferType){
+            newTransfer.amount = $scope.amountIn;
+        }
+        else {
+            newTransfer.amount = $scope.amountOut;
+        }
+
         newTransfer.accountNumber = $scope.account;
-        transferService.makeTransfer(newTransfer);
+
+        var promiseObj = transferService.makeTransfer(newTransfer);
+        promiseObj.then(function(value) {
+            $rootScope.userInfo = value;
+        });
+        commonModule.closeMessageModal();
     };
 
     $scope.showOutMessages = function () {

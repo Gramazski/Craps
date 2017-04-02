@@ -22,9 +22,8 @@ var commonModule = (function () {
                 $('#outMessages').click();
             }
         },
-        setActiveMenu : function (activeItem) {
-            $('.site-menu').removeClass("active");
-            $(activeItem).addClass("active");
+        resetFormIn : function (formName) {
+            $(formName)[0].reset();
         }
     }
 })();

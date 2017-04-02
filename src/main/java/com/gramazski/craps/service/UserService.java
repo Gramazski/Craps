@@ -1,8 +1,10 @@
 package com.gramazski.craps.service;
 
 import com.gramazski.craps.dao.impl.MessageDAO;
+import com.gramazski.craps.dao.impl.TransferDAO;
 import com.gramazski.craps.dao.impl.UserDAO;
 import com.gramazski.craps.entity.impl.Message;
+import com.gramazski.craps.entity.impl.Transfer;
 import com.gramazski.craps.entity.impl.User;
 import com.gramazski.craps.exception.DAOException;
 import com.gramazski.craps.util.DateHandler;
@@ -20,6 +22,7 @@ public class UserService {
             user.setCreateTime(DateHandler.getCurrentDate());
             user.setAvatar("assets/img/user/cube.jpg");
             user.setMessages(new ArrayList<Message>());
+            user.setTransfers(new ArrayList<Transfer>());
             user.setAdmin(false);
             user.setBanned(false);
             userDAO.create(user);
@@ -32,9 +35,11 @@ public class UserService {
 
     public User getUserByUserName(String userName){
         User user = null;
-        try(UserDAO userDAO = new UserDAO(); MessageDAO messageDAO = new MessageDAO()) {
+        try(UserDAO userDAO = new UserDAO(); MessageDAO messageDAO = new MessageDAO();
+            TransferDAO transferDAO = new TransferDAO()) {
             user = userDAO.findEntityByName(userName);
             user.setMessages(messageDAO.getAllMessagesForUser(user.getId()));
+            user.setTransfers(transferDAO.getAllTransfersForUser(user.getId()));
         } catch (DAOException e) {
             logger.log(Level.ERROR, e.getMessage());
         }

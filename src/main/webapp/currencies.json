@@ -1,0 +1,6 @@
+{
+  "currencies" : [
+    {"name" : "USD", "koef" : "1.1", "symbol" : "$"},
+    {"name" : "BYN", "koef" : "0.55", "symbol" : "BYN"}
+  ]
+}

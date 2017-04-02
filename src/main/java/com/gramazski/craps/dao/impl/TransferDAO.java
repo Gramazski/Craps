@@ -83,7 +83,7 @@ public class TransferDAO extends AbstractDAO<Transfer> {
         connection.close();
     }
 
-    public List<Transfer> getAllMessagesForUser(int id) throws DAOException{
+    public List<Transfer> getAllTransfersForUser(int id) throws DAOException{
         List<Transfer> transfers = new ArrayList<>();
         PreparedStatement st = null;
         try(UserDAO userDAO = new UserDAO()) {
