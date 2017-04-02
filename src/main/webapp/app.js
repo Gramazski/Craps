@@ -27,26 +27,26 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
     );
     $routeProvider.when('/cabinet/messages',
         {
-            templateUrl: 'components/cabinet/messagesView.html',
+            templateUrl: 'components/cabinet/message/view.html',
             controller: 'cabinetController'
         }
     );
     $routeProvider.when('/cabinet/games',
         {
-            templateUrl: 'components/cabinet/gamesView.html',
+            templateUrl: 'components/cabinet/game/view.html',
             controller: 'cabinetController'
         }
     );
     $routeProvider.when('/cabinet/transfers',
         {
-            templateUrl: 'components/cabinet/transfersView.html',
+            templateUrl: 'components/cabinet/transfer/view.html',
             controller: 'cabinetController'
         }
     );
 
     $routeProvider.otherwise({redirectTo: '/'});
 }).run(function($rootScope, $location, userService) {
-    $rootScope.loggedInUser = false;
+    $rootScope.loggedInUser = true;
     var promiseObj=userService.getUser();
     promiseObj.then(function(value) {
         if (value == null){
