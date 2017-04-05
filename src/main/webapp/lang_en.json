@@ -30,7 +30,9 @@
       "transfer" : {
         "out" : "Transfer out",
         "in" : "Transfer in"
-      }
+      },
+      "ban" : "Ban",
+      "unban" : "Un ban"
     },
     "input" : {
       "username" : "Enter username",
@@ -126,7 +128,10 @@
         "outgoing" : "Outgoing"
       },
       "receiver" : "Receiver",
-      "accountNumber" : "Account number"
+      "accountNumber" : "Account number",
+      "banned" : "Banned",
+      "unbanned" : "Not banned",
+      "action" : "Action"
     },
     "message" : {
       "error" : {

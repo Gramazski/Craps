@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserService {
     private final static Logger logger = LogManager.getLogger(UserService.class);
@@ -45,5 +46,18 @@ public class UserService {
         }
 
         return user;
+    }
+
+    public List<User> getAllUsers(){
+        List<User> users = new ArrayList<>();
+
+        try(UserDAO userDAO = new UserDAO()) {
+            users = userDAO.findAll();
+        }
+        catch (DAOException e){
+            logger.log(Level.ERROR, e.getMessage());
+        }
+
+        return users;
     }
 }

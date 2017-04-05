@@ -25,7 +25,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="x in userInfo.transfers | orderBy : sortParam | filter : searchTransfer" data-toggle="modal" data-target="#game" ng-click="showGame(x)">
+                    <tr ng-repeat="x in userInfo.transfers | orderBy : sortParam | filter : searchTransfer">
                         <td>{{$index}}</td>
                         <td>{{x.date}}</td>
                         <td>{{x.amount}}</td>

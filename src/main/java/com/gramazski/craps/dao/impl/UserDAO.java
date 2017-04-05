@@ -80,7 +80,7 @@ public class UserDAO extends AbstractDAO<User> {
             while (resultSet.next()) {
                 User user = new User();
                 user.setPassword(resultSet.getString("password"));
-                user.setUserName(resultSet.getString("name"));
+                user.setUserName(resultSet.getString("username"));
                 user.setId(resultSet.getInt("id"));
                 user.setEmail(resultSet.getString("email"));
                 user.setName(resultSet.getString("name"));
@@ -93,7 +93,9 @@ public class UserDAO extends AbstractDAO<User> {
                 user.setBanned(resultSet.getBoolean("is_banned"));
                 user.setSex(User.Sex.valueOf(resultSet.getString("sex")));
                 user.setBirthday(resultSet.getString("birthday"));
-                users.add(user);
+                if (!user.isAdmin()){
+                    users.add(user);
+                }
             }
         }catch (SQLException e) {
             throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);

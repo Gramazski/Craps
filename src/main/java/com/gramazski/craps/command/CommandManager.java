@@ -25,6 +25,7 @@ public class CommandManager {
         commandMap.put("RELOAD", new ReloadCommand());
         commandMap.put("UPDATE", new UpdateUserCommand());
         commandMap.put("TRANSFER", new TransferCommand());
+        commandMap.put("LOADUSERS", new GetUsersCommand());
     }
 
     public static CommandManager getInstance(){

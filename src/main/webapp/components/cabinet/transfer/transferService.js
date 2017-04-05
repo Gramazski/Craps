@@ -28,7 +28,7 @@ function transfer($rootScope, $q, $http) {
         },
         getCurrencies: function () {
             var deferred = $q.defer();
-            $http({method: 'GET', url: 'currencies.json', params: {noCache: (new Date().getTime()) + Math.random()}}).
+            $http({method: 'GET', url: 'currencies.json', params: {}}).
             then(function(response) {
                     deferred.resolve(response.data.currencies);
                 },
