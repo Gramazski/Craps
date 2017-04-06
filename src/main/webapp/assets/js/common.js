@@ -22,6 +22,9 @@ var commonModule = (function () {
                 $('#outMessages').click();
             }
         },
+        updateChat : function () {
+            $('#gameId').click();
+        },
         resetFormIn : function (formName) {
             $(formName)[0].reset();
         }

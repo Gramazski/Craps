@@ -1,10 +1,6 @@
 package com.gramazski.craps.endpoint;
 
-import com.gramazski.craps.configurator.ChatServerEndPointConfigurator;
-import com.gramazski.craps.entity.impl.Message;
-import com.gramazski.craps.mapper.ObjectMapperWrapper;
-import com.gramazski.craps.service.MessageService;
-import org.apache.logging.log4j.Level;
+import com.gramazski.craps.configurator.MessageServerEndPointConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,18 +9,12 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-/**
- * Created by gs on 07.03.2017.
- */
-@ServerEndpoint(value="/chat", configurator=ChatServerEndPointConfigurator.class)
+@ServerEndpoint(value="/chat", configurator=MessageServerEndPointConfigurator.class)
 public class ChatServerEndPoint {
-    private Map<String, Session> userSessions = new ConcurrentHashMap<>();
-    private final static Logger logger = LogManager.getLogger(ChatServerEndPoint.class);
+    private CopyOnWriteArrayList<Session> userSessions = new CopyOnWriteArrayList<>();
+    private final static Logger logger = LogManager.getLogger(MessageServerEndPoint.class);
 
     /**
      * Callback hook for Connection open events. This method will be invoked when a
@@ -33,12 +23,7 @@ public class ChatServerEndPoint {
      */
     @OnOpen
     public void onOpen(Session userSession) {
-        Map<String, List<String>> requestMap = userSession.getRequestParameterMap();
-        if (requestMap.containsKey("login")){
-            logger.log(Level.DEBUG, "+1: : " + requestMap.get("login").get(0));
-            userSessions.put(requestMap.get("login").get(0), userSession);
-        }
-
+        userSessions.add(userSession);
     }
 
     /**
@@ -48,7 +33,7 @@ public class ChatServerEndPoint {
      */
     @OnClose
     public void onClose(Session userSession) {
-        if (userSessions.containsValue(userSession)){
+        if (userSessions.contains(userSession)){
             userSessions.remove(userSession);
         }
     }
@@ -61,21 +46,8 @@ public class ChatServerEndPoint {
      */
     @OnMessage
     public void onMessage(String message, Session userSession) {
-        System.out.println("Message Received: " + message);
-        try {
-            Message inMessage = ObjectMapperWrapper.readValue(message, Message.class);
-            MessageService messageService = new MessageService();
-            if (messageService.trySaveMessage(inMessage)){
-                Session session = userSessions.get(inMessage.getSender());
-                session.getAsyncRemote().sendText(ObjectMapperWrapper.writeValueAsString(inMessage));
-
-                if (userSessions.containsKey(inMessage.getReceiver())){
-                    session = userSessions.get(inMessage.getReceiver());
-                    session.getAsyncRemote().sendText(ObjectMapperWrapper.writeValueAsString(inMessage));
-                }
-            }
-        } catch (IOException e) {
-            logger.log(Level.ERROR, e.getMessage());
+        for (Session session : userSessions) {
+            session.getAsyncRemote().sendText(message);
         }
 
     }

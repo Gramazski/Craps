@@ -2,9 +2,9 @@
  * Created by gs on 06.04.2017.
  */
 var crapsApp = angular.module("crapsApp");
-crapsApp.controller("gamesController",['$scope', '$rootScope', "gamesService", control]);
+crapsApp.controller("gamesController",['$scope', '$rootScope', 'gamesService', 'chatService', control]);
 
-function control($scope, $rootScope, gamesService) {
+function control($scope, $rootScope, gamesService, chatService) {
     var promiseObj=gamesService.getGames();
     promiseObj.then(function(value) {
         $scope.games = value;
@@ -17,6 +17,23 @@ function control($scope, $rootScope, gamesService) {
         $scope.minBet = 1;
         $scope.maxBet = 1;
     });
+
+    $scope.chatShow = true;
+    $rootScope.messages = [];
+
+    $scope.showChat = function () {
+        $scope.chatShow = !$scope.chatShow;
+    };
+
+    $scope.sendMessage = function () {
+        var newMessage = {};
+        newMessage.body = $scope.message;
+        newMessage.sender = $rootScope.userInfo.userName;
+        var date = new Date();
+        newMessage.time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+        chatService.send(newMessage);
+    };
 
     $scope.changeSort = function (newParam) {
         $rootScope.sortParam = newParam;

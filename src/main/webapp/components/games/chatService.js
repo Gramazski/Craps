@@ -1,11 +1,11 @@
 /**
- * Created by gs on 12.03.2017.
+ * Created by gs on 06.04.2017.
  */
 var crapsApp = angular.module('crapsApp');
-crapsApp.factory('messagesService',['$rootScope', sendMessage]);
+crapsApp.factory('chatService',['$rootScope', sendMessage]);
 
 function sendMessage($rootScope) {
-    var socket = new WebSocket("ws://localhost:8083/message?login=" + $rootScope.userInfo.userName);
+    var socket = new WebSocket("ws://localhost:8083/chat");
 
     socket.onmessage = function(event) {
         var incomingMessage = event.data;
@@ -13,18 +13,14 @@ function sendMessage($rootScope) {
     };
 
     function showMessage(message) {
-        console.dir(message);
         var newMessage = JSON.parse(message);
-        $rootScope.userInfo.messages.push(newMessage);
-        commonModule.updateMessagesList();
-        console.dir($rootScope.userInfo);
+        $rootScope.messages.push(newMessage);
+        commonModule.updateChat();
     }
 
     return{
         send: function (message) {
             var outMessage = JSON.stringify(message);
-            console.dir(outMessage);
-            commonModule.closeMessageModal();
             socket.send(outMessage);
         }
     }

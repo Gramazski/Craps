@@ -15,7 +15,7 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th ng-click="changeSort('id')">{{translateModel.label.id}}</th>
+                        <th id="gameId" ng-click="changeSort('id')">{{translateModel.label.id}}</th>
                         <th ng-click="changeSort('lobby')">{{translateModel.label.lobby}}</th>
                         <th ng-click="changeSort('type')">{{translateModel.label.type}}</th>
                         <th ng-click="changeSort('minBet')">{{translateModel.label.bet.min}}</th>
@@ -28,7 +28,7 @@
                         <td>{{x.id}}</td>
                         <td>{{x.lobby}}</td>
                         <td>{{x.type}}</td>
-                        <td class="bg-primary">{{x.minBet}}</td>
+                        <td class="bg-info">{{x.minBet}}</td>
                         <td class="bg-warning">{{x.maxBet}}</td>
                         <td ng-show="!userInfo.admin"><button type="button" class="btn btn-success" >{{translateModel.button.join}}</button></td>
                         <td ng-show="userInfo.admin"><button type="button" class="btn btn-danger" ng-click="removeGame($index)">{{translateModel.button.remove}}</button></td>
@@ -36,6 +36,29 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default" style="position: fixed; z-index: 999; bottom: 0">
+    <div class="panel-heading" ng-click="showChat()">
+        <h4><a>{{translateModel.label.chat}}</a></h4>
+    </div>
+    <div class="panel-body" ng-show="chatShow" style="overflow: hidden; overflow-y: scroll; height: 250px">
+        <div>
+            <div ng-repeat="x in messages">
+                <div>
+                    <p ng-show="x.sender!=userInfo.userName">{{x.sender}}: {{x.body}}<span class="pull-right">{{x.time}}</span></p>
+                    <p class="text-info" style="text-align: right" ng-show="x.sender==userInfo.userName">{{x.body}}</p>
+                </div>
+            </div>
+        </div>
+        <hr style="margin-top: 2%; margin-bottom: 2%">
+        <div style="bottom: 0">
+            <div class="form-group">
+                <label for="message">{{translateModel.label.message}}: </label>
+                <input class="form-control" rows="5" id="message" ng-model="message"/>
+            </div>
+            <button type="button" class="btn btn-info btn-md pull-right" ng-click="sendMessage()">{{translateModel.button.send}}</button>
         </div>
     </div>
 </div>

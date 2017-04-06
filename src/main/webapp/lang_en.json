@@ -142,7 +142,8 @@
         "min" : "Min bet",
         "max" : "Max bet",
         "bet" : "Bet"
-      }
+      },
+      "chat" : "Chat"
     },
     "message" : {
       "error" : {
