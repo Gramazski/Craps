@@ -8,7 +8,7 @@
         "ru" : "Russian",
         "en" : "English"
       },
-      "result" : "Test",
+      "game" : "Game",
       "rules" : "Rules",
       "rates" : "Rates",
       "help" : "Help",
@@ -32,7 +32,10 @@
         "in" : "Transfer in"
       },
       "ban" : "Ban",
-      "unban" : "Un ban"
+      "unban" : "Un ban",
+      "add" : "Add",
+      "join" : "Join",
+      "remove" : "Remove"
     },
     "input" : {
       "username" : "Enter username",
@@ -79,7 +82,8 @@
       "date" : "Game date",
       "type" : "Game type",
       "bet" : "Game bet",
-      "betType" : "Bet type"
+      "betType" : "Bet type",
+      "newGame" : "New game"
     },
     "transfers" : {
       "header" : "Transfers"
@@ -131,7 +135,14 @@
       "accountNumber" : "Account number",
       "banned" : "Banned",
       "unbanned" : "Not banned",
-      "action" : "Action"
+      "action" : "Action",
+      "id" : "ID",
+      "type" : "Type",
+      "bet" : {
+        "min" : "Min bet",
+        "max" : "Max bet",
+        "bet" : "Bet"
+      }
     },
     "message" : {
       "error" : {

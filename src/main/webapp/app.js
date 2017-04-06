@@ -43,6 +43,11 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
             controller: 'cabinetController'
         }
     );
+    $routeProvider.when('/games',
+        {
+            templateUrl: 'components/games/view.html',
+            controller: 'gamesController'
+        });
 
     $routeProvider.otherwise({redirectTo: '/'});
 }).run(function($rootScope, $location, userService) {
@@ -67,9 +72,15 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
             }
         }
         else {
+            if ($rootScope.userInfo.banned && (next.templateUrl == "components/games/view.html")){
+                $location.path("/");
+            }
+
             if ((next.templateUrl == "components/register/view.html") || (next.templateUrl == "components/login/view.html")) {
                 $location.path("/");
             }
         }
+
+
     });
 });

@@ -28,6 +28,9 @@ public class CommandManager {
         commandMap.put("LOADUSERS", new GetUsersCommand());
         commandMap.put("BAN", new BanUserCommand());
         commandMap.put("UNBAN", new UnBanUserCommand());
+        commandMap.put("LOADGAMES", new LoadGamesCommand());
+        commandMap.put("ADDGAME", new AddGameCommand());
+        commandMap.put("REMOVEGAME", new RemoveGameCommand());
     }
 
     public static CommandManager getInstance(){
