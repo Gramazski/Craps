@@ -10,7 +10,6 @@ function control($scope, $rootScope, messagesService, transferService, adminServ
     $scope.showing.sender = "";
     var promiseObj=transferService.getCurrencies();
     promiseObj.then(function(value) {
-        console.dir(value);
         $scope.currencies=value;
         $scope.selectedCurrency = $scope.currencies[0];
         $scope.amountIn = 0;
@@ -20,7 +19,6 @@ function control($scope, $rootScope, messagesService, transferService, adminServ
     if ($rootScope.userInfo.admin){
         var promiseObjUsers=adminService.getUsers();
         promiseObjUsers.then(function(value) {
-            console.dir(value);
             $scope.users=value;
         });
     }
@@ -28,7 +26,13 @@ function control($scope, $rootScope, messagesService, transferService, adminServ
     $scope.banUser = function (user) {
         var promiseObjUsers=adminService.banUser(user);
         promiseObjUsers.then(function(value) {
-            console.dir(value);
+            $scope.users=value;
+        });
+    };
+
+    $scope.unBanUser = function (user) {
+        var promiseObjUsers=adminService.unBanUser(user);
+        promiseObjUsers.then(function(value) {
             $scope.users=value;
         });
     };

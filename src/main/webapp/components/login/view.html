@@ -20,12 +20,10 @@
                 <div class="form-group">
                     <label for="username"><span class="glyphicon glyphicon-user"></span> {{translateModel.label.username}}</label>
                     <input type="text" class="form-control input-lg" required pattern="[a-zA-z0-9]{3,9}" id="username" name="login" ng-model="username" placeholder="{{translateModel.input.username}}">
-                    <span id="error_first_name" class="control-label" ng-show="!Auth.login.$valid && Auth.login.$dirty" style="color: red">{{translateModel.message.error.name}}</span>
                 </div>
                 <div class="form-group">
                     <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> {{translateModel.label.password}}</label>
                     <input type="password" class="form-control input-lg" required pattern="[a-zA-Z0-9]{6,9}" id="psw" name="password" ng-model="password" placeholder="{{translateModel.input.password}}">
-                    <span id="error" class="help-block" ng-show="!Auth.password.$valid && Auth.password.$dirty" style="color: red">{{translateModel.message.error.password}}</span>
                     <span id="error" class="help-block" ng-show="!Auth.password.$valid && Auth.password.$dirty" style="color: red">{{translateModel.message.error.login}}</span>
                 </div>
                 <div class="checkbox">

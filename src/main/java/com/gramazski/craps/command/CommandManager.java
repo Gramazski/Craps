@@ -26,6 +26,8 @@ public class CommandManager {
         commandMap.put("UPDATE", new UpdateUserCommand());
         commandMap.put("TRANSFER", new TransferCommand());
         commandMap.put("LOADUSERS", new GetUsersCommand());
+        commandMap.put("BAN", new BanUserCommand());
+        commandMap.put("UNBAN", new UnBanUserCommand());
     }
 
     public static CommandManager getInstance(){

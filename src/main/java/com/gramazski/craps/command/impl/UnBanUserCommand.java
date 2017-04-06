@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class BanUserCommand implements ICommand {
+public class UnBanUserCommand implements ICommand {
     @Override
     public String handleRequest(HttpServletRequest request) {
         return null;
@@ -26,7 +26,7 @@ public class BanUserCommand implements ICommand {
             User user = ObjectMapperWrapper.readValue(params, User.class);
             BanService banService = new BanService();
 
-            banService.makeBanUser(user, true);
+            banService.makeBanUser(user, false);
 
             UserService userService = new UserService();
             List<User> users = userService.getAllUsers();
