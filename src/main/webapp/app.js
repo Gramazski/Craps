@@ -47,7 +47,14 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
         {
             templateUrl: 'components/games/view.html',
             controller: 'gamesController'
-        });
+        }
+    );
+    $routeProvider.when('/game/:id',
+        {
+            templateUrl: 'components/game/view.html',
+            controller: 'gameController'
+        }
+    );
 
     $routeProvider.otherwise({redirectTo: '/'});
 }).run(function($rootScope, $location, userService) {

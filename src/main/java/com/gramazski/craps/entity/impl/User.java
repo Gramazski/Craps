@@ -23,6 +23,15 @@ public class User extends Entity {
     private Sex sex;
     private List<Message> messages;
     private List<Transfer> transfers;
+    private List<Bet> bets;
+
+    public List<Bet> getBets() {
+        return bets;
+    }
+
+    public void setBets(List<Bet> bets) {
+        this.bets = bets;
+    }
 
     public List<Transfer> getTransfers() {
         return transfers;

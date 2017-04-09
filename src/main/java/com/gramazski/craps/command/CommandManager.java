@@ -31,6 +31,8 @@ public class CommandManager {
         commandMap.put("LOADGAMES", new LoadGamesCommand());
         commandMap.put("ADDGAME", new AddGameCommand());
         commandMap.put("REMOVEGAME", new RemoveGameCommand());
+        commandMap.put("LOADGAME", new LoadGameCommand());
+        commandMap.put("THROWCUBE", new ThrowCubeCommand());
     }
 
     public static CommandManager getInstance(){

@@ -1,0 +1,36 @@
+{
+  "betsPos" : [
+    {
+      "shape" : "rect",
+      "coordsSt" : [0.29, 0.22, 0.37, 0.31],
+      "coords" : [],
+      "widthSt" : 0.05,
+      "width" : 0,
+      "type" : "4"
+    },
+    {
+      "shape" : "rect",
+      "coordsSt" : [0.37, 0.22, 0.44, 0.31],
+      "coords" : [],
+      "widthSt" : 0.05,
+      "width" : 0,
+      "type" : "5"
+    },
+    {
+      "shape" : "rect",
+      "coordsSt" : [0.44, 0.22, 0.51, 0.31],
+      "coords" : [],
+      "widthSt" : 0.05,
+      "width" : 0,
+      "type" : "six"
+    },
+    {
+      "shape" : "rect",
+      "coordsSt" : [0.51, 0.22, 0.59, 0.31],
+      "coords" : [],
+      "widthSt" : 0.05,
+      "width" : 0,
+      "type" : "8"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+<resize change="changeAreaCoords"></resize>
+<div class="container">
+    <div class="panel panel-success">
+
+        <div class="panel-heading">
+            <h3>GAME <span class="pull-right text-primary">ID{{game.id}}</span></h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-8 col-xs-12" id="imgTable">
+                    <img src="assets/img/game/table1.gif" alt="Table" id="imgField" ng-model="field" ng-show="!throwing" usemap="#tablemap" style="width: 100%">
+                    <img src="" alt="Table" id="gifField" style="width: 100%; visibility: hidden">
+                    <map name="tablemap" ng-cloak>
+                        <area ng-repeat="x in betsPos" shape="{{x.shape}}" coords="{{x.coords}}" ng-click="makeBet(x)" style="cursor: pointer">
+                    </map>
+                    <hr class="hidden-lg hidden-md hidden-sm" style="margin-top: 2%; margin-bottom: 2%">
+                </div>
+
+                <div class="col-sm-4 col-xs-12" style="border-left: 1px solid">
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="assets/img/game/1.png" class="media-object" style="width:60px">
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{userInfo.userName}}</h4>
+                            <span class="label label-success">Amount - {{userInfo.amount}}</span>
+                        </div>
+                        <div class="media-footer">
+                            <div class="btn-group btn-group-justified">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-info" ng-click="throwCubes()" ng-disabled="bets.length==0">Throw</button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger" ng-click="removeAll()" ng-disabled="bets.length==0">Release bets</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="margin-top: 2%; margin-bottom: 2%">
+                    <h4>Bets:</h4>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item" ng-repeat="x in bets">
+                            <h5 class="list-group-item-heading">{{x.type}} <span class="pull-right text-danger">{{x.amount}}</span></h5>
+                            <p class="list-group-item-text">Descr</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-top: 2%; margin-bottom: 2%">
+            <div class="row">
+                <div class="col-sm-5">
+                    <form name="betForm">
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="assets/img/game/bet.jpg" class="media-object" style="width:60px">
+                            </div>
+                            <div class="media-body">
+                                <div class="form-group col-sm-11">
+                                    <label for="bet">Bet amount:</label>
+                                    <input type="number" class="form-control" name="bet" required min="{{game.minBet}}" max="{{game.maxBet}}" id="bet" ng-model="betting.amount">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-group btn-group-justified col-sm-11">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success" ng-click="setBet()" ng-disabled="betForm.bet.$invalid">Make bet</button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-warning" ng-click="setRemovingBet()" ng-disabled="bets.length==0">Disable bet</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-7" style="border-left: 1px solid">
+                    <h4>History: </h4>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Description</th>
+                            <th>Result</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="x in history">
+                            <td ng-if="x.type=='make'" class="info">{{x.action}}</td>
+                            <td ng-if="x.type=='make'" class="info">{{x.descr}}</td>
+                            <td ng-if="x.type=='make'" class="info">{{x.result}}</td>
+                            <td ng-if="x.type=='disable'" class="warning">{{x.action}}</td>
+                            <td ng-if="x.type=='disable'" class="warning">{{x.descr}}</td>
+                            <td ng-if="x.type=='disable'" class="warning">{{x.result}}</td>
+                            <td ng-if="x.type=='lose'" class="danger">{{x.action}}</td>
+                            <td ng-if="x.type=='lose'" class="danger">{{x.descr}}</td>
+                            <td ng-if="x.type=='lose'" class="danger">{{x.result}}</td>
+                            <td ng-if="x.type=='win'" class="success">{{x.action}}</td>
+                            <td ng-if="x.type=='win'" class="success">{{x.descr}}</td>
+                            <td ng-if="x.type=='win'" class="success">{{x.result}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="throwingResult" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" ng-click="close()">&times;</button>
+                <h3 class="modal-title">Cubes say</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-4">
+                        <img src="assets/img/game/1.png" alt="1" style="width:100%">
+                    </div>
+                    <div class="col-sm-4 col-xs-4">
+                        <img src="assets/img/game/5.png" alt="5" style="width:100%">
+                    </div>
+                    <div class="col-md-4 col-xs-4" style="border-left: 1px solid">
+                        <div class="form-group">
+                            <h4>You get - <span class="label label-info">6</span></h4>
+                        </div>
+                        <hr style="margin-top: 2%; margin-bottom: 2%">
+                        <div class="form-group">
+                            <label class="control-label">Result:</label>
+                            <p class="label label-default pull-right">You win: 10</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

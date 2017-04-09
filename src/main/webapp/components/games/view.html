@@ -30,7 +30,7 @@
                         <td>{{x.type}}</td>
                         <td class="bg-info">{{x.minBet}}</td>
                         <td class="bg-warning">{{x.maxBet}}</td>
-                        <td ng-show="!userInfo.admin"><button type="button" class="btn btn-success" >{{translateModel.button.join}}</button></td>
+                        <td ng-show="!userInfo.admin"><a href="#/game/{{x.id}}"><button type="button" class="btn btn-success">{{translateModel.button.join}}</button></a></td>
                         <td ng-show="userInfo.admin"><button type="button" class="btn btn-danger" ng-click="removeGame($index)">{{translateModel.button.remove}}</button></td>
                     </tr>
                     </tbody>
