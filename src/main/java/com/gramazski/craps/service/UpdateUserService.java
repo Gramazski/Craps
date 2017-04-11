@@ -1,8 +1,6 @@
 package com.gramazski.craps.service;
 
-import com.gramazski.craps.dao.impl.UserDAO;
 import com.gramazski.craps.entity.impl.User;
-import com.gramazski.craps.exception.DAOException;
 import com.gramazski.craps.exception.HandlerException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -19,20 +17,21 @@ public class UpdateUserService {
     private final static Logger logger = LogManager.getLogger(UpdateUserService.class);
 
     public User tryUpdateUser(HttpServletRequest request){
+        UserService userService = new UserService();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         FileUploaderService uploaderService = new FileUploaderService();
-        try(UserDAO userDAO = new UserDAO()) {
+        try {
             Map<String, String> paramMap = uploaderService.uploadFileFromRequest(request, session.getServletContext().getRealPath("/"));
             user.setAvatar(paramMap.get("avatar"));
             user.setName(paramMap.get("name"));
             user.setSurname(paramMap.get("surname"));
             user.setBirthday(paramMap.get("birthday"));
-            userDAO.update(user);
+            userService.updateUser(user);
 
             return user;
         }
-        catch (DAOException | HandlerException e){
+        catch (HandlerException e){
             logger.log(Level.ERROR, e.getMessage());
         }
 

@@ -2,8 +2,8 @@ package com.gramazski.craps.game;
 
 import com.gramazski.craps.entity.impl.BetType;
 import com.gramazski.craps.entity.impl.Game;
+import com.gramazski.craps.service.BettingService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class GamesSharedList {
     private CopyOnWriteArrayList<Game> games;
-    private final ArrayList<BetType> betTypes;
+    private final List<BetType> betTypes;
     private AtomicInteger lastId;
     private static GamesSharedList instance;
     private static AtomicBoolean instanceFlag = new AtomicBoolean(false);
@@ -20,7 +20,8 @@ public class GamesSharedList {
 
     private GamesSharedList(){
         games = new CopyOnWriteArrayList<>();
-        betTypes = new ArrayList<>();
+        BettingService bettingService = new BettingService();
+        betTypes = bettingService.getBetTypes();
         lastId = new AtomicInteger(0);
     }
 

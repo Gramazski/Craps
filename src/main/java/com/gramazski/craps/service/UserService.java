@@ -60,4 +60,13 @@ public class UserService {
 
         return users;
     }
+
+    public void updateUser(User user){
+        try(UserDAO userDAO = new UserDAO()) {
+            userDAO.update(user);
+        }
+        catch (DAOException e){
+            logger.log(Level.ERROR, e.getMessage());
+        }
+    }
 }

@@ -6,7 +6,7 @@ public class BetType extends Entity {
     private String type;
     private double koef;
     private int[] winNumbers;
-    private int[] passiveNumbers;
+    private int[] loseNumbers;
     private String description;
 
     public int[] getWinNumbers() {
@@ -17,12 +17,12 @@ public class BetType extends Entity {
         this.winNumbers = winNumbers;
     }
 
-    public int[] getPassiveNumbers() {
-        return passiveNumbers;
+    public int[] getLoseNumbers() {
+        return loseNumbers;
     }
 
-    public void setPassiveNumbers(int[] passiveNumbers) {
-        this.passiveNumbers = passiveNumbers;
+    public void setLoseNumbers(int[] loseNumbers) {
+        this.loseNumbers = loseNumbers;
     }
 
     public String getType() {

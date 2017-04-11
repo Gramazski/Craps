@@ -1,5 +1,8 @@
 package com.gramazski.craps.entity.impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Bet {
     private int amount;
     private String type;

@@ -55,7 +55,7 @@ public class GameService {
                 leftBets.add(bets.get(i));
             }
 
-            if (resultArray[i] < 0){
+            if (resultArray[i] == 0){
                 gameResult.setAmount(gameResult.getAmount() - bets.get(i).getAmount());
                 loseBets.add(bets.get(i));
             }

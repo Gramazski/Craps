@@ -55,8 +55,9 @@ function control($scope, $routeParams, $rootScope, gameService) {
         var promiseObj=gameService.sendBetsToServer($rootScope.userInfo);
         promiseObj.then(function(value) {
             $scope.cube = value.cube;
+            $scope.throwResult = value;
             updateBetList(value);
-            $rootScope.userInfo.amount = value.amount;
+            $rootScope.userInfo.amount += value.amount;
         });
         $scope.showAnimate();
 
@@ -69,7 +70,7 @@ function control($scope, $routeParams, $rootScope, gameService) {
     };
 
     $scope.onFallenNumber = function () {
-        addToHistory("Cubes fallen", "number", "win", "win");
+        addToHistory("Cubes fallen", $scope.cube.first + $scope.cube.second, $scope.throwResult.amount, "win");
 
     };
 
