@@ -1,5 +1,13 @@
 {
   "translateModel": {
+    "title" : {
+      "main" : "Крэпс",
+      "login" : "Авторизация",
+      "register" : "Регистраци",
+      "cabinet" : "Кабинет",
+      "games" : "Игры",
+      "game" : "Игра"
+    },
     "menu" : {
       "brandName" : "Крэпс",
       "login" : "Авторизация",

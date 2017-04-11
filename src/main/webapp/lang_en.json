@@ -1,5 +1,13 @@
 {
   "translateModel": {
+    "title" : {
+      "main" : "Craps",
+      "login" : "Login",
+      "register" : "Register",
+      "cabinet" : "Cabinet",
+      "games" : "Games",
+      "game" : "Game"
+    },
     "menu" : {
       "brandName" : "Craps",
       "login" : "Login",

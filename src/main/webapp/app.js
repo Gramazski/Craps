@@ -57,7 +57,7 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
     );
 
     $routeProvider.otherwise({redirectTo: '/'});
-}).run(function($rootScope, $location, userService) {
+}).run(function($rootScope, $location, userService, translateService) {
     $rootScope.loggedInUser = true;
     var promiseObj=userService.getUser();
     promiseObj.then(function(value) {
@@ -71,6 +71,13 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
             console.dir($rootScope.userInfo);
         }
     });
+
+    var promiseObjTranslate=translateService.getTranslate('lang_en.json');
+    promiseObjTranslate.then(function(value) {
+        $rootScope.translateModel=value;
+        $rootScope.title = "";
+    });
+
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
         if ($rootScope.loggedInUser === false) {
             if (!((next.templateUrl == "components/home/view.html") || (next.templateUrl == "components/login/view.html")

@@ -5,6 +5,7 @@ var crapsApp = angular.module("crapsApp");
 crapsApp.controller("cabinetController",['$scope', '$rootScope', 'messagesService', 'transferService', 'adminService', 'gameInfoService', control]);
 
 function control($scope, $rootScope, messagesService, transferService, adminService, gameInfoService) {
+    $rootScope.title = $rootScope.translateModel.title.cabinet;
     $scope.showing = {};
     $scope.showing.receiver = $rootScope.userInfo.userName;
     $scope.showing.sender = "";

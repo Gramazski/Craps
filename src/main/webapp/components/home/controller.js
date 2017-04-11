@@ -2,14 +2,8 @@
  * Created by gs on 28.02.2017.
  */
 var crapsApp = angular.module("crapsApp");
-crapsApp.controller("homeController",['$scope', '$location', control]);
+crapsApp.controller("homeController",['$scope', '$rootScope', control]);
 
-function control($scope, $location) {
-    $scope.parseXML = function (parserName) {
-        $location.path('#/result');
-        /*var promiseObj=xmlParsingService.getParse(parserName);
-        promiseObj.then(function(value) {
-            $scope.parser=value;
-        });*/
-    };
+function control($scope, $rootScope) {
+    $rootScope.title = $rootScope.translateModel.title.main;
 }

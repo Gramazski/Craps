@@ -19,6 +19,7 @@ function control($scope, $routeParams, $rootScope, gameService) {
     $scope.$on("$routeChangeSuccess", function () {
         var id = $routeParams["id"];
         if(id!=='undefined'){
+            $rootScope.title = $rootScope.translateModel.title.game + id;
 
             var promiseObj=gameService.getGame(id);
             promiseObj.then(function(value) {

@@ -5,6 +5,8 @@ var crapsApp = angular.module("crapsApp");
 crapsApp.controller("gamesController",['$scope', '$rootScope', 'gamesService', 'chatService', control]);
 
 function control($scope, $rootScope, gamesService, chatService) {
+    $rootScope.title = $rootScope.translateModel.title.games;
+
     var promiseObj=gamesService.getGames();
     promiseObj.then(function(value) {
         $scope.games = value;
