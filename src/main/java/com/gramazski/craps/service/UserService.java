@@ -1,5 +1,6 @@
 package com.gramazski.craps.service;
 
+import com.gramazski.craps.dao.impl.GameDAO;
 import com.gramazski.craps.dao.impl.MessageDAO;
 import com.gramazski.craps.dao.impl.TransferDAO;
 import com.gramazski.craps.dao.impl.UserDAO;
@@ -37,10 +38,11 @@ public class UserService {
     public User getUserByUserName(String userName){
         User user = null;
         try(UserDAO userDAO = new UserDAO(); MessageDAO messageDAO = new MessageDAO();
-            TransferDAO transferDAO = new TransferDAO()) {
+            TransferDAO transferDAO = new TransferDAO(); GameDAO gameDAO = new GameDAO()) {
             user = userDAO.findEntityByName(userName);
             user.setMessages(messageDAO.getAllMessagesForUser(user.getId()));
             user.setTransfers(transferDAO.getAllTransfersForUser(user.getId()));
+            user.setPlayedBets(gameDAO.getUserPlayedBets(user.getId()));
         } catch (DAOException e) {
             logger.log(Level.ERROR, e.getMessage());
         }

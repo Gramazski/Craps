@@ -1,6 +1,6 @@
 package com.gramazski.craps.endpoint;
 
-import com.gramazski.craps.configurator.MessageServerEndPointConfigurator;
+import com.gramazski.craps.configurator.ChatServerEndPointConfigurator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +11,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@ServerEndpoint(value="/chat", configurator=MessageServerEndPointConfigurator.class)
+@ServerEndpoint(value="/chat", configurator=ChatServerEndPointConfigurator.class)
 public class ChatServerEndPoint {
     private CopyOnWriteArrayList<Session> userSessions = new CopyOnWriteArrayList<>();
     private final static Logger logger = LogManager.getLogger(MessageServerEndPoint.class);

@@ -2,9 +2,9 @@
  * Created by gs on 26.03.2017.
  */
 var crapsApp = angular.module('crapsApp');
-crapsApp.factory('transferService',['$rootScope', '$q', '$http', transfer]);
+crapsApp.factory('transferService',['$q', '$http', transfer]);
 
-function transfer($rootScope, $q, $http) {
+function transfer($q, $http) {
 
     return{
         makeTransfer: function (transfer) {

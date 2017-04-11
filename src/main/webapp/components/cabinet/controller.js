@@ -2,9 +2,9 @@
  * Created by gs on 10.03.2017.
  */
 var crapsApp = angular.module("crapsApp");
-crapsApp.controller("cabinetController",['$scope', '$rootScope', 'messagesService', 'transferService', 'adminService', control]);
+crapsApp.controller("cabinetController",['$scope', '$rootScope', 'messagesService', 'transferService', 'adminService', 'gameInfoService', control]);
 
-function control($scope, $rootScope, messagesService, transferService, adminService) {
+function control($scope, $rootScope, messagesService, transferService, adminService, gameInfoService) {
     $scope.showing = {};
     $scope.showing.receiver = $rootScope.userInfo.userName;
     $scope.showing.sender = "";
@@ -22,6 +22,14 @@ function control($scope, $rootScope, messagesService, transferService, adminServ
             $scope.users=value;
         });
     }
+
+    $scope.getMaxWin = function () {
+        return gameInfoService.getMaxWin($rootScope.userInfo.playedBets);
+    };
+
+    $scope.getMaxLose = function () {
+        return gameInfoService.getMaxLose($rootScope.userInfo.playedBets);
+    };
 
     $scope.banUser = function (user) {
         var promiseObjUsers=adminService.banUser(user);

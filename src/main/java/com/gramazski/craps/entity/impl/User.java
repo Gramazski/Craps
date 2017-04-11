@@ -24,6 +24,15 @@ public class User extends Entity {
     private List<Message> messages;
     private List<Transfer> transfers;
     private List<Bet> bets;
+    private List<PlayedBet> playedBets;
+
+    public List<PlayedBet> getPlayedBets() {
+        return playedBets;
+    }
+
+    public void setPlayedBets(List<PlayedBet> playedBets) {
+        this.playedBets = playedBets;
+    }
 
     public List<Bet> getBets() {
         return bets;

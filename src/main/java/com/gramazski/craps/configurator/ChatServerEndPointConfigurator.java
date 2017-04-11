@@ -1,14 +1,14 @@
 package com.gramazski.craps.configurator;
 
-import com.gramazski.craps.endpoint.MessageServerEndPoint;
+import com.gramazski.craps.endpoint.ChatServerEndPoint;
 
-import javax.websocket.server.ServerEndpointConfig;
+import javax.websocket.server.ServerEndpointConfig.Configurator;
 
-public class ChatServerEndPointConfigurator extends ServerEndpointConfig.Configurator {
-    private static MessageServerEndPoint messageServer = new MessageServerEndPoint();
+public class ChatServerEndPointConfigurator extends Configurator {
+    private static ChatServerEndPoint chatServer = new ChatServerEndPoint();
 
     @Override
     public <T> T getEndpointInstance(Class<T> endpointClass) throws InstantiationException {
-        return (T)messageServer;
+        return (T)chatServer;
     }
 }

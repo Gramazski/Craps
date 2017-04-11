@@ -7,7 +7,7 @@
         <div class="panel-body" ng-show="!userInfo.admin">
             <div class="media">
                 <div class="media-left">
-                    <img src="{{userInfo.avatar}}" class="media-object" style="width:100px">
+                    <img ng-src="{{userInfo.avatar}}" class="media-object" style="width:100px">
                 </div>
                 <div class="media-body">
                     <div class="row">
@@ -20,8 +20,8 @@
                         </div>
                         <div class="col-sm-6">
                             <h4 class="media-heading">{{translateModel.label.statistic}}</h4>
-                            <p><span class="label label-info">{{translateModel.games.header}}</span> - 0</p>
-                            <p><span class="label label-info">{{translateModel.transfers.header}}</span> - 0</p>
+                            <p><span class="label label-info">{{translateModel.games.header}}</span> - {{userInfo.playedBets.length}}</p>
+                            <p><span class="label label-info">{{translateModel.transfers.header}}</span> - {{userInfo.transfers.length}}</p>
                             <p><span class="label label-success">{{translateModel.label.amount}}</span> - {{userInfo.amount}}</p>
                             <div class="btn-group btn-group-lg">
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transferOutModal" ng-click="setTransferType(false)">{{translateModel.button.transfer.out}}</button>
@@ -43,15 +43,15 @@
                         </tr>
                         <tr>
                             <td>{{translateModel.cabinet.table.amount}}</td>
-                            <td>10000$</td>
+                            <td>{{userInfo.amount}}</td>
                         </tr>
                         <tr>
                             <td>{{translateModel.cabinet.table.win}}</td>
-                            <td>1000$</td>
+                            <td>{{getMaxWin()}}</td>
                         </tr>
                         <tr>
                             <td>{{translateModel.cabinet.table.lose}}</td>
-                            <td>200$</td>
+                            <td>{{getMaxLose()}}</td>
                         </tr>
                         </tbody>
                     </table>

@@ -26,7 +26,7 @@
                             <span class="label label-success">{{translateModel.label.amount}} - {{userInfo.amount}}</span>
                         </div>
                         <div class="media-footer">
-                            <div class="btn-group btn-group-justified">
+                            <div class="btn-group btn-group-justified" style="margin-top: 2%">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-info" ng-click="throwCubes()" ng-disabled="bets.length==0">{{translateModel.button.throw}}</button>
                                 </div>
@@ -120,9 +120,9 @@
                         <img ng-src="assets/img/game/{{cube.first}}.png" alt="1" style="width:100%">
                     </div>
                     <div class="col-sm-4 col-xs-4">
-                        <img src="assets/img/game/{{cube.second}}.png" alt="5" style="width:100%">
+                        <img ng-src="assets/img/game/{{cube.second}}.png" alt="5" style="width:100%">
                     </div>
-                    <div class="col-md-4 col-xs-4" style="border-left: 1px solid">
+                    <div class="col-md-4 col-sm-4 col-xs-12" style="border-left: 1px solid">
                         <div class="form-group">
                             <h4>{{translateModel.label.youGet}} - <span class="label label-info">{{cube.first + cube.second}}</span></h4>
                         </div>

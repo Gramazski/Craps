@@ -19,18 +19,16 @@
                     <tr>
                         <th>{{translateModel.label.number}}</th>
                         <th ng-click="changeSort('date')">{{translateModel.label.date}}</th>
-                        <th>{{translateModel.label.amount}}</th>
-                        <th ng-click="changeSort('change')">{{translateModel.label.change}}</th>
+                        <th ng-click="changeSort('amount')">{{translateModel.label.amount}}</th>
                         <th ng-click="changeSort('lobby')">{{translateModel.label.lobby}}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="x in userInfo.games | orderBy : sortParam | filter : searchGame" data-toggle="modal" data-target="#game" ng-click="showGame(x)">
+                    <tr ng-repeat="x in userInfo.playedBets | orderBy : sortParam | filter : searchGame" data-toggle="modal" data-target="#game" ng-click="showGame(x)">
                         <td>{{$index}}</td>
-                        <td>{{x.date}}</td>
-                        <td>{{x.amount}}</td>
-                        <td class="bg-success" ng-show="x.change>0">{{x.change}}</td>
-                        <td class="bg-danger" ng-show="x.change<0">{{x.change}}</td>
+                        <td>{{x.time}}</td>
+                        <td class="bg-success" ng-show="x.amount>0">{{x.amount}}</td>
+                        <td class="bg-danger" ng-show="x.amount<0">{{x.amount}}</td>
                         <td>{{x.lobby}}</td>
                     </tr>
                     </tbody>
@@ -47,20 +45,20 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">{{translateModel.games.id}} - {{game.id}}</h4>
+                <h4 class="modal-title">{{translateModel.label.game}}</h4>
             </div>
             <div class="modal-body">
                 <div class="row" style="margin-left: 2%; margin-right: 2%">
                     <div class="col-sm-6" style="border-right: 1px solid">
                         <p><span class="label label-info">{{translateModel.games.lobby}} - {{game.lobby}}</span></p>
-                        <p><span class="label label-info">{{translateModel.games.date}} - {{game.date}}</span></p>
+                        <p><span class="label label-info">{{translateModel.games.date}} - {{game.time}}</span></p>
                         <p><span class="label label-info">{{translateModel.games.type}} - {{game.type}}</span></p>
                     </div>
                     <div class="col-sm-6">
                         <p><span class="label label-primary">{{translateModel.games.bet}} - {{game.bet}}</span></p>
                         <p><span class="label label-primary">{{translateModel.games.betType}} - {{game.betType}}</span> </p>
-                        <p ng-show="game.change>0"><span class="label label-success">{{translateModel.label.change}} - {{game.change}}</span></p>
-                        <p ng-show="game.change<0"><span class="label label-danger">{{translateModel.label.change}} - {{game.change}}</span></p>
+                        <p ng-show="game.amount>0"><span class="label label-success">{{translateModel.label.amount}} - {{game.amount}}</span></p>
+                        <p ng-show="game.amount<0"><span class="label label-danger">{{translateModel.label.amount}} - {{game.amount}}</span></p>
                     </div>
                 </div>
             </div>
