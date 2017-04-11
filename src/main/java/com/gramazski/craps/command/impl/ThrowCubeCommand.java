@@ -38,6 +38,8 @@ public class ThrowCubeCommand implements ICommand {
                 user.setAmount(user.getAmount() + gameResult.getAmount());
                 bettingService.saveBets(gameResult.getLoseBets(), false, user.getId());
                 bettingService.saveBets(gameResult.getWinBets(), true, user.getId());
+                user.setPlayedBets(bettingService.getUserPlayedBets(user.getId()));
+                gameResult.setPlayedBets(user.getPlayedBets());
 
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);

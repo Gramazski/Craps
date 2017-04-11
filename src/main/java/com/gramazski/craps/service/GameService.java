@@ -100,4 +100,15 @@ public class GameService {
 
         return 0;
     }
+
+    public List<Game> getStartGameList(){
+        try(GameDAO gameDAO = new GameDAO()) {
+            return gameDAO.getStartGameList(2);
+        }
+        catch (DAOException e){
+            logger.log(Level.ERROR, e.getMessage());
+        }
+
+        return new ArrayList<>();
+    }
 }

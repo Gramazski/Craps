@@ -7,7 +7,16 @@ public class GameResult {
     private List<Bet> leftBets;
     private List<Bet> loseBets;
     private List<Bet> winBets;
+    private List<PlayedBet> playedBets;
     private Cube cube;
+
+    public List<PlayedBet> getPlayedBets() {
+        return playedBets;
+    }
+
+    public void setPlayedBets(List<PlayedBet> playedBets) {
+        this.playedBets = playedBets;
+    }
 
     public int getAmount() {
         return amount;

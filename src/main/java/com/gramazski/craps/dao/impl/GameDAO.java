@@ -16,6 +16,7 @@ import java.util.List;
 
 public class GameDAO extends AbstractDAO<Game> {
     private WrapperConnection connection;
+    private static final String SQL_GET_PRESET_GAMES = "SELECT * FROM game WHERE id<?";
     private static final String SQL_INSERT_GAME = "INSERT INTO game(id, lobbyname, min, max, type) VALUES(?,?,?,?,?)";
     private static final String SQL_INSERT_BET = "INSERT INTO game_has_user(id, game_id, user_id, is_win, amount," +
             " bet_type_id, time) VALUES(?,?,?,?,?,?,?)";
@@ -147,6 +148,33 @@ public class GameDAO extends AbstractDAO<Game> {
         }
 
         return playedBets;
+    }
+
+    public List<Game> getStartGameList(int count) throws DAOException{
+        List<Game> games = new ArrayList<>();
+        PreparedStatement st = null;
+        try {
+            st = connection.createPreparedStatement(SQL_GET_PRESET_GAMES);
+            st.setInt(1, count + 1);
+            ResultSet resultSet = st.executeQuery();
+            while (resultSet.next() && (count > 0)){
+                Game game = new Game();
+                game.setId(resultSet.getInt("id"));
+                game.setType(resultSet.getString("type"));
+                game.setLobby(resultSet.getString("lobbyname"));
+                game.setMaxBet(resultSet.getInt("max"));
+                game.setMinBet(resultSet.getInt("min"));
+
+                games.add(game);
+                count--;
+            }
+        }catch (SQLException e) {
+            throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
+        } finally {
+            connection.closeStatement(st);
+        }
+
+        return games;
     }
 
     @Override

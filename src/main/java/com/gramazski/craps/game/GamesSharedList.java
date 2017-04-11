@@ -20,9 +20,9 @@ public class GamesSharedList {
     private static ReentrantLock lock = new ReentrantLock();
 
     private GamesSharedList(){
-        games = new CopyOnWriteArrayList<>();
         BettingService bettingService = new BettingService();
         GameService gameService = new GameService();
+        games = new CopyOnWriteArrayList<>(gameService.getStartGameList());
         betTypes = bettingService.getBetTypes();
         lastId = new AtomicInteger(gameService.getLastGameId());
     }

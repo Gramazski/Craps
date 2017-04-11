@@ -26,7 +26,6 @@ function control($scope, $routeParams, $rootScope, gameService) {
                 var promiseObjBets=gameService.loadBetsPos(value.type);
                 promiseObjBets.then(function(value) {
                     $scope.betsPos = value.betsPos;
-                    console.dir(value);
                     commonModule.setAreaWidth($scope.betsPos, $scope.bets);
                 });
             });
@@ -58,6 +57,7 @@ function control($scope, $routeParams, $rootScope, gameService) {
             $scope.throwResult = value;
             updateBetList(value);
             $rootScope.userInfo.amount += value.amount;
+            $rootScope.userInfo.playedBets = value.playedBets;
         });
         $scope.showAnimate();
 
@@ -70,7 +70,7 @@ function control($scope, $routeParams, $rootScope, gameService) {
     };
 
     $scope.onFallenNumber = function () {
-        addToHistory("Cubes fallen", $scope.cube.first + $scope.cube.second, $scope.throwResult.amount, "win");
+        addToHistory($scope.cube.first + $scope.cube.second, $scope.throwResult.amount, "cubes");
 
     };
 
@@ -79,19 +79,18 @@ function control($scope, $routeParams, $rootScope, gameService) {
         var i;
 
         for (i = 0; i < betsResults.loseBets.length; i++){
-            addToHistory("Lose bet", betsResults.loseBets[i].type, betsResults.loseBets[i].amount, "lose");
+            addToHistory(betsResults.loseBets[i].type, betsResults.loseBets[i].amount, "lose");
             commonModule.removeBet(betsResults.loseBets[i].type);
         }
 
         for (i = 0; i < betsResults.winBets.length; i++){
-            addToHistory("Win bet", betsResults.winBets[i].type, betsResults.winBets[i].amount, "win");
+            addToHistory(betsResults.winBets[i].type, betsResults.winBets[i].amount, "win");
             commonModule.removeBet(betsResults.winBets[i].type);
         }
     };
 
-    var addToHistory = function (action, descr, result, type) {
+    var addToHistory = function (descr, result, type) {
         var historyAction = {};
-        historyAction.action = action;
         historyAction.descr = descr;
         historyAction.result = result;
         historyAction.type = type;
@@ -99,9 +98,23 @@ function control($scope, $routeParams, $rootScope, gameService) {
         $scope.history.push(historyAction);
     };
 
+    var checkBet = function () {
+        return $scope.betting.amount >= $scope.game.minBet && $scope.betting.amount <= $scope.game.maxBet
+            && calcAllBetsAmount($scope.betting.amount) <= $rootScope.userInfo.amount;
+    };
+
+    var calcAllBetsAmount = function (newAmount) {
+        var result = newAmount;
+        for (var i = 0; i < $scope.bets.length; i++){
+            result += $scope.bets[i].amount;
+        }
+
+        return result;
+    };
+
     $scope.makeBet = function (bet) {
-        if ($scope.betting.isMakeBet && $scope.addNewBetToList(bet)){
-            addToHistory("Make bet", bet.type, bet.amount, "make");
+        if ($scope.betting.isMakeBet && checkBet() && $scope.addNewBetToList(bet)){
+            addToHistory(bet.type, bet.amount, "make");
         }
 
         if ($scope.betting.isRemoveBet){
@@ -117,7 +130,7 @@ function control($scope, $routeParams, $rootScope, gameService) {
     $scope.removeBet = function (type) {
         for (var i = 0; i < $scope.bets.length; i++){
             if ($scope.bets[i].type == type){
-                addToHistory("Disable bet", $scope.bets[i].type, $scope.bets[i].amount, "disable");
+                addToHistory($scope.bets[i].type, $scope.bets[i].amount, "disable");
                 $scope.bets.splice(i, 1);
                 commonModule.removeBet(type);
                 $scope.betting.isRemoveBet = false;

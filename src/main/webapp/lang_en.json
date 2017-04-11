@@ -154,7 +154,19 @@
       "description" : "Description",
       "cubesSay" : "Cubes say",
       "youGet" : "You get",
-      "result" : "Result"
+      "result" : "Result",
+      "historyTable" : {
+        "make" : "Make bet",
+        "disable" : "Disable bet",
+        "lose" : "Lose bet",
+        "win" : "Win bet",
+        "cubes" : "Cubes fallen"
+      },
+      "throwEvent" : {
+        "win" : "You win",
+        "lose" : "You lose",
+        "left" : "You left"
+      }
     },
     "message" : {
       "error" : {

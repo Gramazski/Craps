@@ -79,7 +79,8 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
             }
         }
         else {
-            if ($rootScope.userInfo.banned && (next.templateUrl == "components/games/view.html")){
+            if ($rootScope.userInfo.banned && (next.templateUrl == "components/games/view.html")
+                    && (next.templateUrl =="components/game/view.html")){
                 $location.path("/");
             }
 
