@@ -65,14 +65,15 @@ public class MessageServerEndPoint {
         try {
             Message inMessage = ObjectMapperWrapper.readValue(message, Message.class);
             MessageService messageService = new MessageService();
-            if (messageService.trySaveMessage(inMessage)){
-                Session session = userSessions.get(inMessage.getSender());
-                session.getAsyncRemote().sendText(ObjectMapperWrapper.writeValueAsString(inMessage));
 
-                if (userSessions.containsKey(inMessage.getReceiver())){
-                    session = userSessions.get(inMessage.getReceiver());
-                    session.getAsyncRemote().sendText(ObjectMapperWrapper.writeValueAsString(inMessage));
-                }
+            messageService.trySaveMessage(inMessage);
+
+            Session session = userSessions.get(inMessage.getSender());
+            session.getAsyncRemote().sendText(ObjectMapperWrapper.writeValueAsString(inMessage));
+
+            if (userSessions.containsKey(inMessage.getReceiver())){
+                session = userSessions.get(inMessage.getReceiver());
+                session.getAsyncRemote().sendText(ObjectMapperWrapper.writeValueAsString(inMessage));
             }
         } catch (IOException e) {
             logger.log(Level.ERROR, e.getMessage());

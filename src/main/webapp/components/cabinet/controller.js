@@ -12,8 +12,8 @@ function control($scope, $rootScope, messagesService, transferService, adminServ
     promiseObj.then(function(value) {
         $scope.currencies=value;
         $scope.selectedCurrency = $scope.currencies[0];
-        $scope.amountIn = 0;
-        $scope.amountOut = 0;
+        $scope.amountIn = 1;
+        $scope.amountOut = 1;
     });
 
     if ($rootScope.userInfo.admin){

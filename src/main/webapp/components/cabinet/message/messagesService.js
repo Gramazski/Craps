@@ -13,18 +13,20 @@ function sendMessage($rootScope) {
     };
 
     function showMessage(message) {
-        console.dir(message);
         var newMessage = JSON.parse(message);
-        $rootScope.userInfo.messages.push(newMessage);
-        commonModule.updateMessagesList();
-        console.dir($rootScope.userInfo);
+        if (newMessage.id != -1){
+            $rootScope.userInfo.messages.push(newMessage);
+            commonModule.closeMessageModal();
+            commonModule.updateMessagesList();
+        }
+        else {
+            commonModule.clearMessageModal();
+        }
     }
 
     return{
         send: function (message) {
             var outMessage = JSON.stringify(message);
-            console.dir(outMessage);
-            commonModule.closeMessageModal();
             socket.send(outMessage);
         }
     }

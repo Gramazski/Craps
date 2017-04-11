@@ -1,7 +1,12 @@
 <nav class="navbar navbar-inverse" ng-controller="mainController">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand site-menu" id="brand" href="#/">{{translateModel.menu.brandName}}</a>
+            <a class="navbar-brand site-menu" id="brandGif" href="#/">
+                <img src="assets/img/game/brand.gif" class="media-object" style="width:50%; margin-top: -10px">
+            </a>
+            <a class="navbar-brand site-menu" id="brandName" href="#/" style="margin-left: -50px">
+                {{translateModel.menu.brandName}}
+            </a>
         </div>
         <ul class="nav navbar-nav">
             <li class="site-menu" ng-show="loggedInUser"><a href="#/games">{{translateModel.menu.game}}</a></li>

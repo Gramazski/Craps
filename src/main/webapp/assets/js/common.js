@@ -23,6 +23,14 @@ var commonModule = (function () {
         closeMessageModal : function () {
             $('.close').click();
         },
+        clearMessageModal : function () {
+            var target = document.getElementById('title');
+            target.value = "";
+            target = document.getElementById('username');
+            target.value = "";
+            target = document.getElementById('body');
+            target.value = "";
+        },
         setActiveInMessageList : function () {
             $('#inMessages').addClass("active");
             $('#outMessages').removeClass("active");

@@ -21,6 +21,9 @@ public class MessageService {
 
                 return true;
             }
+            else {
+                message.setId(-1);
+            }
         } catch (DAOException e){
             logger.log(Level.ERROR, e.getMessage());
         }

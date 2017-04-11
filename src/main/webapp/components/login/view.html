@@ -1,4 +1,4 @@
-<div class="container" style="background-color: white">
+<div class="container">
     <h2 style="text-align: center">{{translateModel.label.quickEnter}}</h2>
     <div class="row">
         <div class="col-sm-4">
@@ -12,28 +12,32 @@
         </div>
     </div>
 
-    <h2 style="text-align: center; margin-top: 10%">{{translateModel.label.enter}}</h2>
-    <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-            <form role="form" ng-submit="login()" name="Auth">
-                <div class="form-group">
-                    <label for="username"><span class="glyphicon glyphicon-user"></span> {{translateModel.label.username}}</label>
-                    <input type="text" class="form-control input-lg" required pattern="[a-zA-z0-9]{3,9}" id="username" name="login" ng-model="username" placeholder="{{translateModel.input.username}}">
-                </div>
-                <div class="form-group">
-                    <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> {{translateModel.label.password}}</label>
-                    <input type="password" class="form-control input-lg" required pattern="[a-zA-Z0-9]{6,9}" id="psw" name="password" ng-model="password" placeholder="{{translateModel.input.password}}">
-                    <span id="error" class="help-block" ng-show="!Auth.password.$valid && Auth.password.$dirty" style="color: red">{{translateModel.message.error.login}}</span>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="" checked>{{translateModel.label.remember}}</label>
-                </div>
-                <button type="submit" class="btn btn-large btn-success btn-block"><span class="glyphicon glyphicon-off"></span> {{translateModel.button.login}}</button>
-            </form>
+    <div style="background-color: white; width: 60%; margin: auto; margin-top: 2%; border-radius: 30px; padding-bottom: 15px; padding-top: 1px;">
+        <h2 style="text-align: center; margin-top: 10%">{{translateModel.label.enter}}</h2>
+        <div class="row">
+            <div class="col-sm-1 col-xs-1"></div>
+            <div class="col-sm-10 col-xs-10">
+                <form role="form" ng-submit="login()" name="Auth">
+                    <div class="form-group">
+                        <label for="username"><span class="glyphicon glyphicon-user"></span> {{translateModel.label.username}}</label>
+                        <input type="text" class="form-control input-lg" required pattern="[a-zA-z0-9]{3,9}" id="username" name="login" ng-model="username" placeholder="{{translateModel.input.username}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> {{translateModel.label.password}}</label>
+                        <input type="password" class="form-control input-lg" required pattern="[a-zA-Z0-9]{6,9}" id="psw" name="password" ng-model="password" placeholder="{{translateModel.input.password}}">
+                        <span id="error" class="help-block" ng-show="!Auth.password.$valid && Auth.password.$dirty" style="color: red">{{translateModel.message.error.login}}</span>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" value="" checked>{{translateModel.label.remember}}</label>
+                    </div>
+                    <button type="submit" class="btn btn-large btn-success btn-block" ng-disabled="Auth.$invalid"><span class="glyphicon glyphicon-off"></span> {{translateModel.button.login}}</button>
+                </form>
+            </div>
         </div>
+        <hr style="margin-top: 2%; margin-bottom: 2%">
+        <h3 style="text-align: center; margin-top: 2%"><p>{{translateModel.label.member}} <a href="#/register">{{translateModel.label.signup}}</a></p>
+            <p><a href="#">{{translateModel.label.fPass}}</a></p></h3>
     </div>
-    <hr style="margin-top: 2%; margin-bottom: 2%">
-    <h3 style="text-align: center; margin-top: 2%"><p>{{translateModel.label.member}} <a href="#/register">{{translateModel.label.signup}}</a></p>
-        <p><a href="#">{{translateModel.label.fPass}}</a></p></h3>
+
+
 </div>
