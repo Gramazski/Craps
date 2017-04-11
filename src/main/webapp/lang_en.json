@@ -35,7 +35,11 @@
       "unban" : "Un ban",
       "add" : "Add",
       "join" : "Join",
-      "remove" : "Remove"
+      "remove" : "Remove",
+      "throw" : "Throw",
+      "releaseBets" : "Release bets",
+      "makeBet" : "Make bet",
+      "disableBet" : "Disable bet"
     },
     "input" : {
       "username" : "Enter username",
@@ -143,7 +147,14 @@
         "max" : "Max bet",
         "bet" : "Bet"
       },
-      "chat" : "Chat"
+      "chat" : "Chat",
+      "game" : "GAME",
+      "bets" : "Bets",
+      "history" : "History",
+      "description" : "Description",
+      "cubesSay" : "Cubes say",
+      "youGet" : "You get",
+      "result" : "Result"
     },
     "message" : {
       "error" : {

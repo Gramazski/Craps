@@ -4,6 +4,7 @@ import com.gramazski.craps.command.ICommand;
 import com.gramazski.craps.entity.impl.GameResult;
 import com.gramazski.craps.entity.impl.User;
 import com.gramazski.craps.mapper.ObjectMapperWrapper;
+import com.gramazski.craps.service.BettingService;
 import com.gramazski.craps.service.GameService;
 import com.gramazski.craps.service.UserService;
 import com.gramazski.craps.util.JSONReader;
@@ -26,12 +27,18 @@ public class ThrowCubeCommand implements ICommand {
             String params = JSONReader.readJsonString(request);
             User user = ObjectMapperWrapper.readValue(params, User.class);
             GameService gameService = new GameService();
-            UserService userService = new UserService();
             GameResult gameResult = null;
 
             if (gameService.checkUserBets(user.getAmount(), user.getBets())){
                 gameResult = gameService.playGame(user.getBets());
+
+                BettingService bettingService = new BettingService();
+                UserService userService = new UserService();
+
                 user.setAmount(user.getAmount() + gameResult.getAmount());
+                bettingService.saveBets(gameResult.getLoseBets(), false, user.getId());
+                bettingService.saveBets(gameResult.getWinBets(), true, user.getId());
+
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 userService.updateUser(user);

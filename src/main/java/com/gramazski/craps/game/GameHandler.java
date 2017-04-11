@@ -12,8 +12,8 @@ public class GameHandler {
 
     public Cube throwCube(){
         Cube cube = new Cube();
-        cube.setFirst(/*random.nextInt(6) + 1*/1);
-        cube.setSecond(/*random.nextInt(6) + 1*/6);
+        cube.setFirst(random.nextInt(6) + 1);
+        cube.setSecond(random.nextInt(6) + 1);
 
         return cube;
     }

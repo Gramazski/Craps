@@ -11,4 +11,11 @@ public class DateHandler {
 
         return dateFormat.format(date);
     }
+
+    public static String getCurrentDateTime(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = new Date();
+
+        return dateFormat.format(date);
+    }
 }

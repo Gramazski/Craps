@@ -21,6 +21,7 @@ public class BetTypeDAO extends AbstractDAO<BetType> {
             "AND bet_type_has_combination.combination_result=?";
     private static final String SQL_SELECT_ALL_BET_TYPES = "SELECT *" +
             "FROM bet_type";
+    private static final String SQL_SELECT_ID_BY_TYPE = "SELECT id FROM bet_type WHERE type=?";
 
     public BetTypeDAO(){
         connection = new WrapperConnection();
@@ -86,6 +87,25 @@ public class BetTypeDAO extends AbstractDAO<BetType> {
     @Override
     public void close() {
         connection.close();
+    }
+
+    public int getIdByType(String type) throws DAOException{
+        PreparedStatement st = null;
+        try {
+            st = connection.createPreparedStatement(SQL_SELECT_ID_BY_TYPE);
+            st.setString(1, type);
+            ResultSet resultSet = st.executeQuery();
+            if (resultSet.next()){
+                return resultSet.getInt("id");
+            }
+            else {
+                return -1;
+            }
+        }catch (SQLException e) {
+            throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
+        } finally {
+            connection.closeStatement(st);
+        }
     }
 
     private int[] getCombinations(int betId, boolean isWin) throws DAOException{

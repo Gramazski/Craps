@@ -3,6 +3,7 @@ package com.gramazski.craps.game;
 import com.gramazski.craps.entity.impl.BetType;
 import com.gramazski.craps.entity.impl.Game;
 import com.gramazski.craps.service.BettingService;
+import com.gramazski.craps.service.GameService;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -21,8 +22,9 @@ public class GamesSharedList {
     private GamesSharedList(){
         games = new CopyOnWriteArrayList<>();
         BettingService bettingService = new BettingService();
+        GameService gameService = new GameService();
         betTypes = bettingService.getBetTypes();
-        lastId = new AtomicInteger(0);
+        lastId = new AtomicInteger(gameService.getLastGameId());
     }
 
     public static GamesSharedList getInstance(){

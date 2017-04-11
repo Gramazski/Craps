@@ -1,23 +1,40 @@
 package com.gramazski.craps.service;
 
+import com.gramazski.craps.dao.impl.GameDAO;
 import com.gramazski.craps.entity.impl.Bet;
 import com.gramazski.craps.entity.impl.Game;
 import com.gramazski.craps.entity.impl.GameResult;
+import com.gramazski.craps.exception.DAOException;
 import com.gramazski.craps.game.GameHandler;
 import com.gramazski.craps.game.GamesSharedList;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameService {
+    private final static Logger logger = LogManager.getLogger(GameService.class);
+
     public void addGame(Game game){
         game.setId(-1);
         GamesSharedList.getInstance().addGame(game);
+        saveGame(game);
     }
 
     public void removeGame(Game game){
         if (GamesSharedList.getInstance().removeGame(game)){
             game.setId(-1);
+        }
+    }
+
+    private void saveGame(Game game){
+        try(GameDAO gameDAO = new GameDAO()) {
+            gameDAO.create(game);
+        }
+        catch (DAOException e){
+            logger.log(Level.ERROR, e.getMessage());
         }
     }
 
@@ -61,7 +78,7 @@ public class GameService {
             }
 
             if (resultArray[i] > bets.get(i).getAmount()){
-                gameResult.setAmount(gameResult.getAmount() - bets.get(i).getAmount());
+                gameResult.setAmount(gameResult.getAmount() + bets.get(i).getAmount());
                 winBets.add(bets.get(i));
             }
         }
@@ -71,5 +88,16 @@ public class GameService {
         gameResult.setLoseBets(loseBets);
 
         return gameResult;
+    }
+
+    public int getLastGameId(){
+        try(GameDAO gameDAO = new GameDAO()) {
+            return gameDAO.getLastId();
+        }
+        catch (DAOException e){
+            logger.log(Level.ERROR, e.getMessage());
+        }
+
+        return 0;
     }
 }

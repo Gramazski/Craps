@@ -80,10 +80,12 @@ function control($scope, $routeParams, $rootScope, gameService) {
 
         for (i = 0; i < betsResults.loseBets.length; i++){
             addToHistory("Lose bet", betsResults.loseBets[i].type, betsResults.loseBets[i].amount, "lose");
+            commonModule.removeBet(betsResults.loseBets[i].type);
         }
 
         for (i = 0; i < betsResults.winBets.length; i++){
             addToHistory("Win bet", betsResults.winBets[i].type, betsResults.winBets[i].amount, "win");
+            commonModule.removeBet(betsResults.winBets[i].type);
         }
     };
 
