@@ -1,9 +1,8 @@
 package com.gramazski.craps.service;
 
 import com.gramazski.craps.dao.impl.GameDAO;
-import com.gramazski.craps.entity.impl.Bet;
-import com.gramazski.craps.entity.impl.Game;
-import com.gramazski.craps.entity.impl.GameResult;
+import com.gramazski.craps.endpoint.GameServerEndPoint;
+import com.gramazski.craps.entity.impl.*;
 import com.gramazski.craps.exception.DAOException;
 import com.gramazski.craps.game.GameHandler;
 import com.gramazski.craps.game.GamesSharedList;
@@ -58,10 +57,34 @@ public class GameService {
         return amount >= 0;
     }
 
-    public GameResult playGame(List<Bet> bets){
+    public void throwCube(int gameId){
+        GameHandler gameHandler = new GameHandler();
+
+        Cube cube = gameHandler.throwCube();
+        GamesSharedList.getInstance().getGameById(gameId).setLastCube(cube);
+        GameServerEndPoint.notifyUsersInGameForThrowing(gameId);
+    }
+
+    public GameResult playGame(User user, int throwerId){
+        Cube cube = GamesSharedList.getInstance().getGameByThrowerId(throwerId).getLastCube();
+        GameResult gameResult;
+        gameResult = playGame(user.getBets(), cube);
+
+        BettingService bettingService = new BettingService();
+
+        user.setAmount(user.getAmount() + gameResult.getAmount());
+        bettingService.saveBets(gameResult.getLoseBets(), false, user.getId());
+        bettingService.saveBets(gameResult.getWinBets(), true, user.getId());
+        user.setPlayedBets(bettingService.getUserPlayedBets(user.getId()));
+        gameResult.setPlayedBets(user.getPlayedBets());
+
+        return gameResult;
+    }
+
+    private GameResult playGame(List<Bet> bets, Cube cube){
         GameResult gameResult = new GameResult();
         GameHandler gameHandler = new GameHandler();
-        gameResult.setCube(gameHandler.throwCube());
+        gameResult.setCube(cube);
         List<Bet> leftBets = new ArrayList<>();
         List<Bet> winBets = new ArrayList<>();
         List<Bet> loseBets = new ArrayList<>();
@@ -110,5 +133,13 @@ public class GameService {
         }
 
         return new ArrayList<>();
+    }
+
+    public void becomeThrower(int gameId, int userId){
+        Game game = GamesSharedList.getInstance().getGameById(gameId);
+
+        if (game.getThrowerId().get() == 0){
+            game.setThrowerId(userId);
+        }
     }
 }

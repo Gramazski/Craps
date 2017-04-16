@@ -17,9 +17,10 @@ import java.util.List;
 public class GameDAO extends AbstractDAO<Game> {
     private WrapperConnection connection;
     private static final String SQL_GET_PRESET_GAMES = "SELECT * FROM game WHERE id<?";
-    private static final String SQL_INSERT_GAME = "INSERT INTO game(id, lobbyname, min, max, type) VALUES(?,?,?,?,?)";
-    private static final String SQL_INSERT_BET = "INSERT INTO game_has_user(id, game_id, user_id, is_win, amount," +
-            " bet_type_id, time) VALUES(?,?,?,?,?,?,?)";
+    private static final String SQL_INSERT_GAME = "INSERT INTO game(id, lobbyname, min, max, type, max_players_count)" +
+            " VALUES(?,?,?,?,?,?)";
+    private static final String SQL_INSERT_BET = "INSERT INTO game_has_user(id, game_id, user_id, is_win," +
+            " amount, bet_type_id, time) VALUES(?,?,?,?,?,?,?)";
     private static final String SQL_GET_LAST_ID = "SELECT MAX(id) FROM game";
     private static final String SQL_GET_GAME_HISTORY_FOR_USER =
             "SELECT game_history.amount, game_history.is_win, game_history.time, game_history.lobbyname, " +
@@ -68,6 +69,7 @@ public class GameDAO extends AbstractDAO<Game> {
             st.setInt(3, entity.getMinBet());
             st.setInt(4, entity.getMaxBet());
             st.setString(5, entity.getType());
+            st.setInt(6, entity.getMaxPlayersCount());
             st.executeUpdate();
         }catch (SQLException e) {
             throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
@@ -164,6 +166,7 @@ public class GameDAO extends AbstractDAO<Game> {
                 game.setLobby(resultSet.getString("lobbyname"));
                 game.setMaxBet(resultSet.getInt("max"));
                 game.setMinBet(resultSet.getInt("min"));
+                game.setMaxPlayersCount(resultSet.getInt("max_players_count"));
 
                 games.add(game);
                 count--;

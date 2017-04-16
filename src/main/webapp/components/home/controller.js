@@ -5,5 +5,5 @@ var crapsApp = angular.module("crapsApp");
 crapsApp.controller("homeController",['$scope', '$rootScope', control]);
 
 function control($scope, $rootScope) {
-    $rootScope.title = $rootScope.translateModel.title.main;
+    //$rootScope.title = $rootScope.translateModel.title.main;
 }

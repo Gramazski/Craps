@@ -1,6 +1,7 @@
 package com.gramazski.craps.command.impl;
 
 import com.gramazski.craps.command.ICommand;
+import com.gramazski.craps.endpoint.GamesServerEndPoint;
 import com.gramazski.craps.entity.impl.Game;
 import com.gramazski.craps.mapper.ObjectMapperWrapper;
 import com.gramazski.craps.service.GameService;
@@ -25,6 +26,7 @@ public class RemoveGameCommand implements ICommand {
             GameService gameService = new GameService();
 
             gameService.removeGame(game);
+            GamesServerEndPoint.notifyAllUsers();
 
             response.setContentType("application/json");
             ObjectMapperWrapper.writeValue(response.getOutputStream(), game);

@@ -73,4 +73,34 @@ public class GamesSharedList {
 
         return null;
     }
+
+    public Game getGameById(int id){
+        for (Game game : games){
+            if (game.getId() == id){
+                return game;
+            }
+        }
+
+        return new Game();
+    }
+
+    public Game getGameByThrowerId(int throwerId){
+        for (Game game : games){
+            if (game.getThrowerId().get() == throwerId){
+                return game;
+            }
+        }
+
+        return new Game();
+    }
+
+    public int getGameIdByThrowerId(int throwerId){
+        for (Game game : games){
+            if (game.getThrowerId().get() == throwerId){
+                return game.getId();
+            }
+        }
+
+        return 0;
+    }
 }

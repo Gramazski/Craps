@@ -7,6 +7,10 @@ crapsApp.controller("gamesController",['$scope', '$rootScope', 'gamesService', '
 function control($scope, $rootScope, gamesService, chatService) {
     $rootScope.title = $rootScope.translateModel.title.games;
 
+    $scope.$on('$locationChangeStart', function(event, next, current) {
+        gamesService.sendLeaveToServer();
+    });
+
     var promiseObj=gamesService.getGames();
     promiseObj.then(function(value) {
         $scope.games = value;
@@ -18,7 +22,15 @@ function control($scope, $rootScope, gamesService, chatService) {
         $scope.selectedType = $scope.types[0];
         $scope.minBet = 1;
         $scope.maxBet = 1;
+        $scope.maxPlayersCount = 1;
     });
+
+    var updateGames = function (newGames) {
+        $scope.games = newGames;
+        console.dir($scope.games);
+    };
+
+    gamesService.setGamesCallback(updateGames);
 
     $scope.chatShow = true;
     $rootScope.messages = [];
@@ -54,11 +66,12 @@ function control($scope, $rootScope, gamesService, chatService) {
         game.minBet = $scope.minBet;
         game.maxBet = $scope.maxBet;
         game.type = $scope.selectedType;
+        game.maxPlayersCount = $scope.maxPlayersCount;
 
         var promiseObj=gamesService.addGame(game);
         promiseObj.then(function(value) {
             if (value.id != -1){
-                $scope.games.push(value);
+                //$scope.games.push(value);
                 $scope.close();
             }
             commonModule.closeMessageModal();
@@ -71,7 +84,7 @@ function control($scope, $rootScope, gamesService, chatService) {
         var promiseObj=gamesService.removeGame(game);
         promiseObj.then(function(value) {
             if (value.id == -1){
-                $scope.games.splice(index, 1);
+                //$scope.games.splice(index, 1);
             }
         });
     };

@@ -20,6 +20,7 @@ function control($scope, $routeParams, $rootScope, gameService) {
         var id = $routeParams["id"];
         if(id!=='undefined'){
             $rootScope.title = $rootScope.translateModel.title.game + id;
+            gameService.setGameId(id);
 
             var promiseObj=gameService.getGame(id);
             promiseObj.then(function(value) {
@@ -33,9 +34,41 @@ function control($scope, $routeParams, $rootScope, gameService) {
         }
     });
 
+    $scope.$on('$locationChangeStart', function(event, next, current) {
+        gameService.sendLeaveToServer();
+    });
+
+    var updateGame = function (newGame) {
+        $scope.game = newGame;
+    };
+
+    var sendBets = function () {
+        $rootScope.userInfo.bets = $scope.bets;
+        var promiseObj=gameService.sendBetsToServer($rootScope.userInfo, $scope.game.throwerId);
+        promiseObj.then(function(value) {
+            $scope.cube = value.cube;
+            $scope.throwResult = value;
+            updateBetList(value);
+            $rootScope.userInfo.amount += value.amount;
+            $rootScope.userInfo.playedBets = value.playedBets;
+        });
+        $scope.showAnimate();
+
+        setTimeout($scope.hideAnimate, 2300);
+    };
+
+    gameService.setCallbacks(updateGame, sendBets);
+
     $scope.bets = [];
     $scope.history = [];
     $scope.throwing = false;
+
+    $scope.becomeThrower = function () {
+        var promiseObj=gameService.becomeThrower($scope.game.id);
+        promiseObj.then(function(value) {
+            $scope.game = value;
+        });
+    };
 
     $scope.showAnimate = function () {
         $scope.throwing = true;
@@ -52,17 +85,10 @@ function control($scope, $routeParams, $rootScope, gameService) {
 
     $scope.throwCubes = function () {
         $rootScope.userInfo.bets = $scope.bets;
-        var promiseObj=gameService.sendBetsToServer($rootScope.userInfo);
+        var promiseObj=gameService.throwCube($scope.game.id);
         promiseObj.then(function(value) {
-            $scope.cube = value.cube;
-            $scope.throwResult = value;
-            updateBetList(value);
-            $rootScope.userInfo.amount += value.amount;
-            $rootScope.userInfo.playedBets = value.playedBets;
-        });
-        $scope.showAnimate();
 
-        setTimeout($scope.hideAnimate, 2300);
+        });
     };
 
     $scope.setBet = function () {

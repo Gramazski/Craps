@@ -20,6 +20,7 @@
                         <th ng-click="changeSort('type')">{{translateModel.label.type}}</th>
                         <th ng-click="changeSort('minBet')">{{translateModel.label.bet.min}}</th>
                         <th ng-click="changeSort('maxBet')">{{translateModel.label.bet.max}}</th>
+                        <th>{{translateModel.label.count}}</th>
                         <th>{{translateModel.label.action}}</th>
                     </tr>
                     </thead>
@@ -30,8 +31,9 @@
                         <td>{{x.type}}</td>
                         <td class="bg-info">{{x.minBet}}</td>
                         <td class="bg-warning">{{x.maxBet}}</td>
-                        <td ng-show="!userInfo.admin"><a href="#/game/{{x.id}}"><button type="button" class="btn btn-success">{{translateModel.button.join}}</button></a></td>
-                        <td ng-show="userInfo.admin"><button type="button" class="btn btn-danger" ng-click="removeGame($index)">{{translateModel.button.remove}}</button></td>
+                        <td>{{x.playersCount}}/{{x.maxPlayersCount}}</td>
+                        <td ng-show="!userInfo.admin"><a href="#/game/{{x.id}}"><button type="button" class="btn btn-success" ng-disabled="x.maxPlayersCount==x.playersCount">{{translateModel.button.join}}</button></a></td>
+                        <td ng-show="userInfo.admin"><button type="button" class="btn btn-danger" ng-click="removeGame($index)" ng-disabled="x.playersCount>0">{{translateModel.button.remove}}</button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -81,9 +83,15 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-sm-2" for="minBet">{{translateModel.label.maxPlayersCount}}</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="maxPlayersCount" required name="maxPlayersCount" ng-model="maxPlayersCount" min="1" placeholder="{{userInfo.amount}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-sm-2" for="minBet">{{translateModel.label.bet.min}}</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="minBet" required name="minBet" ng-model="minBet" min="1" max="{{maxBet}}" placeholder="{{userInfo.amount}}" ng-show="!transferType">
+                            <input type="number" class="form-control" id="minBet" required name="minBet" ng-model="minBet" min="1" max="{{maxBet}}" placeholder="{{userInfo.amount}}">
                         </div>
                     </div>
                     <div class="form-group">

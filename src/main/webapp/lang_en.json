@@ -47,7 +47,8 @@
       "throw" : "Throw",
       "releaseBets" : "Release bets",
       "makeBet" : "Make bet",
-      "disableBet" : "Disable bet"
+      "disableBet" : "Disable bet",
+      "becomeThrower" : "Become thrower"
     },
     "input" : {
       "username" : "Enter username",
@@ -174,7 +175,10 @@
         "win" : "You win",
         "lose" : "You lose",
         "left" : "You left"
-      }
+      },
+      "maxPlayersCount" : "Max players count",
+      "count" : "Count",
+      "time" : "time"
     },
     "message" : {
       "error" : {
