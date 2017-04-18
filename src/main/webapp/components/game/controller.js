@@ -35,11 +35,12 @@ function control($scope, $routeParams, $rootScope, gameService) {
     });
 
     $scope.$on('$locationChangeStart', function(event, next, current) {
-        gameService.sendLeaveToServer();
+        gameService.sendLeaveToServer($scope.game.id);
     });
 
     var updateGame = function (newGame) {
         $scope.game = newGame;
+        commonModule.updateGame();
     };
 
     var sendBets = function () {

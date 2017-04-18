@@ -33,8 +33,25 @@ function service($http, $q) {
                 showMessage(incomingMessage);
             };
         },
-        sendLeaveToServer: function () {
+        sendLeaveToServer: function (gameId) {
             socket.close();
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                url: '/controller?command=LEAVEGAME',
+                headers: {
+                    'Content-Type': 'json'
+                },
+                data: gameId
+            }).
+            then(function(response) {
+                    deferred.resolve(response.data);
+                },
+                function(response) {
+                    deferred.reject(response.status);
+                });
+
+            return deferred.promise;
         },
         getGame: function (id) {
             var deferred = $q.defer();

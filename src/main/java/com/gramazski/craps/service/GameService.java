@@ -57,6 +57,15 @@ public class GameService {
         return amount >= 0;
     }
 
+    public void removePlayer(int gameId, int playerId){
+        Game game = GamesSharedList.getInstance().getGameById(gameId);
+        game.setPlayersCount(game.getPlayersCount() - 1);
+
+        if (game.getThrowerId().get() == playerId){
+            game.setThrowerId(0);
+        }
+    }
+
     public void throwCube(int gameId){
         GameHandler gameHandler = new GameHandler();
 

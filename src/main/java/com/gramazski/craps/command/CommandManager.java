@@ -35,6 +35,7 @@ public class CommandManager {
         commandMap.put("THROWCUBE", new ThrowCubeCommand());
         commandMap.put("BECOMETHROWER", new BecomeThrowerCommand());
         commandMap.put("PLAYGAME", new PlayGameCommand());
+        commandMap.put("LEAVEGAME", new LeaveGameCommand());
     }
 
     public static CommandManager getInstance(){

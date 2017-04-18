@@ -5,21 +5,24 @@ var crapsApp = angular.module('crapsApp');
 crapsApp.factory('gamesService',['$http', '$q', service]);
 
 function service($http, $q) {
-    var socket = new WebSocket("ws://192.168.137.1:8083/games");
+    var socket;
     var updateGames;
 
-    socket.onmessage = function(event) {
-        var incomingMessage = event.data;
-        showMessage(incomingMessage);
-    };
-
-    function showMessage(message) {
-        var newGames = JSON.parse(message);
-        updateGames(newGames);
-        commonModule.updateChat();
-    }
-
     return{
+        sendConnectToServer : function () {
+            socket = new WebSocket("ws://192.168.137.1:8083/games");
+
+            socket.onmessage = function(event) {
+                var incomingMessage = event.data;
+                showMessage(incomingMessage);
+            };
+
+            function showMessage(message) {
+                var newGames = JSON.parse(message);
+                updateGames(newGames);
+                commonModule.updateChat();
+            }
+        },
         setGamesCallback : function (callback) {
             updateGames = callback;
         },

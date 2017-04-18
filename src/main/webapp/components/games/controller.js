@@ -6,6 +6,7 @@ crapsApp.controller("gamesController",['$scope', '$rootScope', 'gamesService', '
 
 function control($scope, $rootScope, gamesService, chatService) {
     $rootScope.title = $rootScope.translateModel.title.games;
+    gamesService.sendConnectToServer();
 
     $scope.$on('$locationChangeStart', function(event, next, current) {
         gamesService.sendLeaveToServer();

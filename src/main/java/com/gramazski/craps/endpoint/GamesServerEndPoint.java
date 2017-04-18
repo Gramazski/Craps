@@ -27,7 +27,7 @@ public class GamesServerEndPoint {
      */
     @OnOpen
     public void onOpen(Session userSession) {
-        logger.log(Level.ERROR, "+1");
+        logger.log(Level.INFO, "+1");
         userSessions.add(userSession);
     }
 
@@ -39,7 +39,7 @@ public class GamesServerEndPoint {
     @OnClose
     public void onClose(Session userSession) {
         if (userSessions.contains(userSession)){
-            logger.log(Level.ERROR, "-1");
+            logger.log(Level.INFO, "-1");
             userSessions.remove(userSession);
         }
     }

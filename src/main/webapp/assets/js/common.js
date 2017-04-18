@@ -50,6 +50,9 @@ var commonModule = (function () {
         updateChat : function () {
             $('#gameId').click();
         },
+        updateGame : function () {
+            $('#bet').click();
+        },
         resetFormIn : function (formName) {
             $(formName)[0].reset();
         },

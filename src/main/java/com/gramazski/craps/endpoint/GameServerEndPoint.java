@@ -61,9 +61,6 @@ public class GameServerEndPoint {
 
         if (gameSessions.containsKey(gameId)){
             gameSessions.get(gameId).remove(userSession);
-            Game game = GamesSharedList.getInstance().getGameById(Integer.valueOf(gameId));
-            game.setPlayersCount(game.getPlayersCount() - 1);
-            GamesServerEndPoint.notifyAllUsers();
         }
 
         if (throwingMap.containsKey(userSession)){
