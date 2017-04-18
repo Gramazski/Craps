@@ -16,10 +16,10 @@ import java.io.IOException;
  * Created by gs on 27.02.2017.
  */
 public class RegisterCommand implements ICommand {
-    public String handleRequest(HttpServletRequest request) {
-        return null;
-    }
-
+    /**
+     * @param request
+     * @param response
+     */
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
         try {

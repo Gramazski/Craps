@@ -36,6 +36,11 @@ public class UserDAO extends AbstractDAO<User> {
         connection = new WrapperConnection();
     }
 
+    /**
+     * @param name
+     * @return
+     * @throws DAOException
+     */
     public User findEntityByName(String name) throws DAOException {
         PreparedStatement st = null;
         try {
@@ -71,6 +76,10 @@ public class UserDAO extends AbstractDAO<User> {
         }
     }
 
+    /**
+     * @return
+     * @throws DAOException
+     */
     public List<User> findAll() throws DAOException {
         List<User> users = new ArrayList<User>();
         Statement st = null;
@@ -106,18 +115,10 @@ public class UserDAO extends AbstractDAO<User> {
         return users;
     }
 
-    public User findEntityById(int id) {
-        return null;
-    }
-
-    public boolean delete(int id) {
-        return false;
-    }
-
-    public boolean delete(User entity) {
-        return false;
-    }
-
+    /**
+     * @param entity
+     * @throws DAOException
+     */
     public void create(User entity) throws DAOException {
         PreparedStatement st = null;
         try {
@@ -145,6 +146,11 @@ public class UserDAO extends AbstractDAO<User> {
         }
     }
 
+    /**
+     * @param entity
+     * @return
+     * @throws DAOException
+     */
     public User update(User entity) throws DAOException {
         PreparedStatement st = null;
         try {
@@ -174,6 +180,11 @@ public class UserDAO extends AbstractDAO<User> {
         return entity;
     }
 
+    /**
+     * @param username
+     * @return
+     * @throws DAOException
+     */
     public int getUserIdByName(String username) throws DAOException{
         PreparedStatement st = null;
         try {
@@ -193,6 +204,11 @@ public class UserDAO extends AbstractDAO<User> {
         }
     }
 
+    /**
+     * @param id
+     * @return
+     * @throws DAOException
+     */
     public String getUserNameById(int id) throws DAOException{
         PreparedStatement st = null;
         try {
@@ -212,6 +228,11 @@ public class UserDAO extends AbstractDAO<User> {
         }
     }
 
+    /**
+     * @param email
+     * @return
+     * @throws DAOException
+     */
     public boolean isEmailExists(String email) throws DAOException{
         PreparedStatement st = null;
         try {
@@ -227,6 +248,11 @@ public class UserDAO extends AbstractDAO<User> {
         }
     }
 
+    /**
+     * @param userName
+     * @return
+     * @throws DAOException
+     */
     public boolean isUserNameExists(String userName) throws DAOException{
         PreparedStatement st = null;
         try {

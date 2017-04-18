@@ -16,6 +16,10 @@ import java.util.Map;
 public class UpdateUserService {
     private final static Logger logger = LogManager.getLogger(UpdateUserService.class);
 
+    /**
+     * @param request
+     * @return
+     */
     public User tryUpdateUser(HttpServletRequest request){
         UserService userService = new UserService();
         HttpSession session = request.getSession();

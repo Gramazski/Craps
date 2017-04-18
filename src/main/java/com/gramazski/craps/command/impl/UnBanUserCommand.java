@@ -14,11 +14,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class UnBanUserCommand implements ICommand {
-    @Override
-    public String handleRequest(HttpServletRequest request) {
-        return null;
-    }
-
+    /**
+     * @param request
+     * @param response
+     */
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
         try {

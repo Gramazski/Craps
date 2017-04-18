@@ -11,11 +11,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class ReloadCommand implements ICommand {
-    @Override
-    public String handleRequest(HttpServletRequest request) {
-        return null;
-    }
-
+    /**
+     * @param request
+     * @param response
+     */
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
         try {
             HttpSession session = request.getSession();

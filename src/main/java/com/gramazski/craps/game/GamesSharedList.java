@@ -27,6 +27,9 @@ public class GamesSharedList {
         lastId = new AtomicInteger(gameService.getLastGameId());
     }
 
+    /**
+     * @return
+     */
     public static GamesSharedList getInstance(){
         if (!instanceFlag.get()){
             lock.lock();
@@ -45,15 +48,25 @@ public class GamesSharedList {
         return instance;
     }
 
+    /**
+     * @return
+     */
     public List<Game> getGames() {
         return (List<Game>)games.clone();
     }
 
+    /**
+     * @param game
+     */
     public void addGame(Game game){
         game.setId(lastId.incrementAndGet());
         games.add(game);
     }
 
+    /**
+     * @param game
+     * @return
+     */
     public boolean removeGame(Game game){
         if (games.contains(game)){
             games.remove(game);
@@ -64,6 +77,10 @@ public class GamesSharedList {
         return false;
     }
 
+    /**
+     * @param type
+     * @return
+     */
     public BetType getBetType(String type){
         for (BetType betType : betTypes) {
             if (betType.getType().equals(type)){
@@ -74,6 +91,10 @@ public class GamesSharedList {
         return null;
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public Game getGameById(int id){
         for (Game game : games){
             if (game.getId() == id){
@@ -84,6 +105,10 @@ public class GamesSharedList {
         return new Game();
     }
 
+    /**
+     * @param throwerId
+     * @return
+     */
     public Game getGameByThrowerId(int throwerId){
         for (Game game : games){
             if (game.getThrowerId().get() == throwerId){
@@ -94,6 +119,10 @@ public class GamesSharedList {
         return new Game();
     }
 
+    /**
+     * @param throwerId
+     * @return
+     */
     public int getGameIdByThrowerId(int throwerId){
         for (Game game : games){
             if (game.getThrowerId().get() == throwerId){

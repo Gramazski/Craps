@@ -10,7 +10,6 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * Created by gs on 22.02.2017.
  */
-//Enum map
 public class CommandManager {
     private Map<String, ICommand> commandMap;
     private static CommandManager instance;
@@ -38,6 +37,9 @@ public class CommandManager {
         commandMap.put("LEAVEGAME", new LeaveGameCommand());
     }
 
+    /**
+     * @return
+     */
     public static CommandManager getInstance(){
         if (!instanceFlag.get()){
             lock.lock();
@@ -55,6 +57,11 @@ public class CommandManager {
         return instance;
     }
 
+    /**
+     * @param key
+     * @param command
+     * @return
+     */
     public boolean registerCommand(String key, ICommand command){
         lock.lock();
         try {
@@ -70,7 +77,10 @@ public class CommandManager {
         }
     }
 
-    //Exception??
+    /**
+     * @param key
+     * @return
+     */
     public ICommand getCommand(String key){
         if (commandMap.containsKey(key)){
             return commandMap.get(key);

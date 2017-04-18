@@ -27,6 +27,10 @@ public class BetTypeDAO extends AbstractDAO<BetType> {
         connection = new WrapperConnection();
     }
 
+    /**
+     * @return
+     * @throws DAOException
+     */
     @Override
     public List<BetType> findAll() throws DAOException {
         List<BetType> betTypeList = new ArrayList<>();
@@ -54,31 +58,30 @@ public class BetTypeDAO extends AbstractDAO<BetType> {
         return betTypeList;
     }
 
-    @Override
-    public BetType findEntityById(int id) {
-        return null;
-    }
-
+    /**
+     * @param name
+     * @return
+     * @throws DAOException
+     */
     @Override
     public BetType findEntityByName(String name) throws DAOException {
         return null;
     }
 
-    @Override
-    public boolean delete(int id) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(BetType entity) {
-        return false;
-    }
-
+    /**
+     * @param entity
+     * @throws DAOException
+     */
     @Override
     public void create(BetType entity) throws DAOException {
 
     }
 
+    /**
+     * @param entity
+     * @return
+     * @throws DAOException
+     */
     @Override
     public BetType update(BetType entity) throws DAOException {
         return null;
@@ -89,6 +92,11 @@ public class BetTypeDAO extends AbstractDAO<BetType> {
         connection.close();
     }
 
+    /**
+     * @param type
+     * @return
+     * @throws DAOException
+     */
     public int getIdByType(String type) throws DAOException{
         PreparedStatement st = null;
         try {
@@ -108,6 +116,12 @@ public class BetTypeDAO extends AbstractDAO<BetType> {
         }
     }
 
+    /**
+     * @param betId
+     * @param isWin
+     * @return
+     * @throws DAOException
+     */
     private int[] getCombinations(int betId, boolean isWin) throws DAOException{
         PreparedStatement st = null;
         try {
@@ -128,6 +142,10 @@ public class BetTypeDAO extends AbstractDAO<BetType> {
         }
     }
 
+    /**
+     * @param combinationList
+     * @return
+     */
     private int[] getArrayFromList(ArrayList<Integer> combinationList){
         int[] resultArray = new int[combinationList.size()];
 

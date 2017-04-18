@@ -28,31 +28,29 @@ public class TransferDAO extends AbstractDAO<Transfer> {
         connection = new WrapperConnection();
     }
 
+    /**
+     * @return
+     * @throws DAOException
+     */
     @Override
     public List<Transfer> findAll() throws DAOException {
         return null;
     }
 
-    @Override
-    public Transfer findEntityById(int id) {
-        return null;
-    }
-
+    /**
+     * @param name
+     * @return
+     * @throws DAOException
+     */
     @Override
     public Transfer findEntityByName(String name) throws DAOException {
         return null;
     }
 
-    @Override
-    public boolean delete(int id) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(Transfer entity) {
-        return false;
-    }
-
+    /**
+     * @param entity
+     * @throws DAOException
+     */
     @Override
     public void create(Transfer entity) throws DAOException {
         PreparedStatement st = null;
@@ -73,6 +71,11 @@ public class TransferDAO extends AbstractDAO<Transfer> {
         }
     }
 
+    /**
+     * @param entity
+     * @return
+     * @throws DAOException
+     */
     @Override
     public Transfer update(Transfer entity) throws DAOException {
         return null;
@@ -83,6 +86,11 @@ public class TransferDAO extends AbstractDAO<Transfer> {
         connection.close();
     }
 
+    /**
+     * @param id
+     * @return
+     * @throws DAOException
+     */
     public List<Transfer> getAllTransfersForUser(int id) throws DAOException{
         List<Transfer> transfers = new ArrayList<>();
         PreparedStatement st = null;
@@ -111,6 +119,10 @@ public class TransferDAO extends AbstractDAO<Transfer> {
         return transfers;
     }
 
+    /**
+     * @return
+     * @throws DAOException
+     */
     private int getLastId() throws DAOException{
         Statement st = null;
         int id = -1;

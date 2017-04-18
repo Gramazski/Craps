@@ -58,6 +58,9 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * @return
+     */
     public static ConnectionPool getInstance(){
         if (instanceFlag.intValue() == 0){
             lock.lock();
@@ -76,6 +79,9 @@ public class ConnectionPool {
         return instance;
     }
 
+    /**
+     * @return
+     */
     public Connection getConnection() {
         Connection connection = null;
         try {
@@ -88,6 +94,9 @@ public class ConnectionPool {
         return connection;
     }
 
+    /**
+     * @param connection
+     */
     public void returnConnection(Connection connection){
         try {
             if (connection != null){
@@ -100,6 +109,9 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     *
+     */
     public void closePool(){
         if (instance != null){
             for (int i = 0; i < CON_COUNT; i++){
@@ -123,6 +135,11 @@ public class ConnectionPool {
         }
     }
 
+    /**
+     * @param databaseUrl
+     * @param properties
+     * @return
+     */
     private Connection createConnection(String databaseUrl, Properties properties){
         Connection connection = null;
 

@@ -13,6 +13,10 @@ import org.apache.logging.log4j.Logger;
 public class RegisterService {
     private final static Logger logger = LogManager.getLogger(RegisterService.class);
 
+    /**
+     * @param user
+     * @return
+     */
     public boolean tryAddUser(User user){
         try(UserDAO userDAO = new UserDAO()) {
             if (!(userDAO.isUserNameExists(user.getUserName()) && userDAO.isEmailExists(user.getEmail()))){

@@ -10,6 +10,10 @@ import org.apache.logging.log4j.Logger;
 public class BanService {
     private final static Logger logger = LogManager.getLogger(BanService.class);
 
+    /**
+     * @param user
+     * @param isBanning
+     */
     public void makeBanUser(User user, boolean isBanning){
         try(UserDAO userDAO = new UserDAO()) {
             if (userDAO.isUserNameExists(user.getUserName())){

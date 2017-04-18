@@ -8,6 +8,11 @@ import com.gramazski.craps.entity.impl.User;
 public class LoginService {
     private User user  = null;
 
+    /**
+     * @param login
+     * @param password
+     * @return
+     */
     public boolean checkUser(String login, String password){
         UserService userService = new UserService();
         User user = userService.getUserByUserName(login);
@@ -22,6 +27,9 @@ public class LoginService {
         }
     }
 
+    /**
+     * @return
+     */
     public User getUser(){
         return user;
     }

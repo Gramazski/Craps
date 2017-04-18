@@ -19,6 +19,10 @@ import java.util.List;
 public class UserService {
     private final static Logger logger = LogManager.getLogger(UserService.class);
 
+    /**
+     * @param user
+     * @return
+     */
     public User createUser(User user){
         try(UserDAO userDAO = new UserDAO()) {
             user.setCreateTime(DateHandler.getCurrentDate());
@@ -35,6 +39,10 @@ public class UserService {
         return user;
     }
 
+    /**
+     * @param userName
+     * @return
+     */
     public User getUserByUserName(String userName){
         User user = null;
         try(UserDAO userDAO = new UserDAO(); MessageDAO messageDAO = new MessageDAO();
@@ -50,6 +58,9 @@ public class UserService {
         return user;
     }
 
+    /**
+     * @return
+     */
     public List<User> getAllUsers(){
         List<User> users = new ArrayList<>();
 
@@ -63,6 +74,9 @@ public class UserService {
         return users;
     }
 
+    /**
+     * @param user
+     */
     public void updateUser(User user){
         try(UserDAO userDAO = new UserDAO()) {
             userDAO.update(user);

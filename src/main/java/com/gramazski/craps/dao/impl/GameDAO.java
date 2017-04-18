@@ -34,31 +34,29 @@ public class GameDAO extends AbstractDAO<Game> {
         connection = new WrapperConnection();
     }
 
+    /**
+     * @return
+     * @throws DAOException
+     */
     @Override
     public List<Game> findAll() throws DAOException {
         return null;
     }
 
-    @Override
-    public Game findEntityById(int id) {
-        return null;
-    }
-
+    /**
+     * @param name
+     * @return
+     * @throws DAOException
+     */
     @Override
     public Game findEntityByName(String name) throws DAOException {
         return null;
     }
 
-    @Override
-    public boolean delete(int id) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(Game entity) {
-        return false;
-    }
-
+    /**
+     * @param entity
+     * @throws DAOException
+     */
     @Override
     public void create(Game entity) throws DAOException {
         PreparedStatement st = null;
@@ -78,11 +76,20 @@ public class GameDAO extends AbstractDAO<Game> {
         }
     }
 
+    /**
+     * @param entity
+     * @return
+     * @throws DAOException
+     */
     @Override
     public Game update(Game entity) throws DAOException {
         return null;
     }
 
+    /**
+     * @return
+     * @throws DAOException
+     */
     public int getLastId() throws DAOException{
         Statement st = null;
         int id = 0;
@@ -101,6 +108,12 @@ public class GameDAO extends AbstractDAO<Game> {
         return id;
     }
 
+    /**
+     * @param bet
+     * @param userId
+     * @param isWin
+     * @throws DAOException
+     */
     public void saveBet(Bet bet, int userId, boolean isWin) throws DAOException{
         PreparedStatement st = null;
         try(BetTypeDAO betTypeDAO = new BetTypeDAO()) {
@@ -120,6 +133,11 @@ public class GameDAO extends AbstractDAO<Game> {
         }
     }
 
+    /**
+     * @param userId
+     * @return
+     * @throws DAOException
+     */
     public List<PlayedBet> getUserPlayedBets(int userId) throws DAOException{
         List<PlayedBet> playedBets = new ArrayList<>();
         PreparedStatement st = null;
@@ -152,6 +170,11 @@ public class GameDAO extends AbstractDAO<Game> {
         return playedBets;
     }
 
+    /**
+     * @param count
+     * @return
+     * @throws DAOException
+     */
     public List<Game> getStartGameList(int count) throws DAOException{
         List<Game> games = new ArrayList<>();
         PreparedStatement st = null;

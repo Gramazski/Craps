@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface ICommand {
     Logger logger = LogManager.getLogger(ICommand.class);
-    String handleRequest(HttpServletRequest request);
+
+    /**
+     * @param request
+     * @param response
+     */
     void handleRequest(HttpServletRequest request, HttpServletResponse response);
 }

@@ -81,6 +81,9 @@ public class GameServerEndPoint {
 
     }
 
+    /**
+     * @param gameId
+     */
     public static void notifyAllUsersInGame(int gameId){
         if (gameSessions.containsKey(String.valueOf(gameId))){
             for (Session session : gameSessions.get(String.valueOf(gameId))){
@@ -93,6 +96,9 @@ public class GameServerEndPoint {
         }
     }
 
+    /**
+     * @param gameId
+     */
     public static void notifyUsersInGameForThrowing(int gameId){
         if (gameSessions.containsKey(String.valueOf(gameId))){
             for (Session session : gameSessions.get(String.valueOf(gameId))){
@@ -106,6 +112,10 @@ public class GameServerEndPoint {
         }
     }
 
+    /**
+     * @param gameId
+     * @param userSession
+     */
     private void addNewPlayer(String gameId, Session userSession){
         Game game = GamesSharedList.getInstance().getGameById(Integer.valueOf(gameId));
 

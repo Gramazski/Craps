@@ -12,6 +12,10 @@ import org.apache.logging.log4j.Logger;
 public class MessageService {
     private final static Logger logger = LogManager.getLogger(MessageService.class);
 
+    /**
+     * @param message
+     * @return
+     */
     public boolean trySaveMessage(Message message){
         try(MessageDAO messageDAO = new MessageDAO(); UserDAO userDAO = new UserDAO()) {
             if (userDAO.isUserNameExists(message.getReceiver())){

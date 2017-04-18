@@ -12,10 +12,10 @@ import java.io.IOException;
  * Created by gs on 22.02.2017.
  */
 public class LogoutCommand implements ICommand {
-    public String handleRequest(HttpServletRequest request) {
-        return null;
-    }
-
+    /**
+     * @param request
+     * @param response
+     */
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();

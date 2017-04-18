@@ -11,10 +11,16 @@ import javax.servlet.annotation.WebListener;
  */
 @WebListener
 public class ContextServletListenerImpl implements ServletContextListener {
+    /**
+     * @param servletContextEvent
+     */
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ConnectionPool.getInstance();
     }
 
+    /**
+     * @param servletContextEvent
+     */
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         ConnectionPool.getInstance().closePool();
     }

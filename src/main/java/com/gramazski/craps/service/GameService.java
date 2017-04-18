@@ -16,18 +16,27 @@ import java.util.List;
 public class GameService {
     private final static Logger logger = LogManager.getLogger(GameService.class);
 
+    /**
+     * @param game
+     */
     public void addGame(Game game){
         game.setId(-1);
         GamesSharedList.getInstance().addGame(game);
         saveGame(game);
     }
 
+    /**
+     * @param game
+     */
     public void removeGame(Game game){
         if (GamesSharedList.getInstance().removeGame(game)){
             game.setId(-1);
         }
     }
 
+    /**
+     * @param game
+     */
     private void saveGame(Game game){
         try(GameDAO gameDAO = new GameDAO()) {
             gameDAO.create(game);
@@ -37,6 +46,10 @@ public class GameService {
         }
     }
 
+    /**
+     * @param id
+     * @return
+     */
     public Game getGameById(int id){
         List<Game> games = GamesSharedList.getInstance().getGames();
 
@@ -49,6 +62,11 @@ public class GameService {
         return null;
     }
 
+    /**
+     * @param amount
+     * @param bets
+     * @return
+     */
     public boolean checkUserBets(int amount, List<Bet> bets){
         for (Bet bet : bets) {
             amount -= bet.getAmount();
@@ -57,6 +75,10 @@ public class GameService {
         return amount >= 0;
     }
 
+    /**
+     * @param gameId
+     * @param playerId
+     */
     public void removePlayer(int gameId, int playerId){
         Game game = GamesSharedList.getInstance().getGameById(gameId);
         game.setPlayersCount(game.getPlayersCount() - 1);
@@ -66,6 +88,9 @@ public class GameService {
         }
     }
 
+    /**
+     * @param gameId
+     */
     public void throwCube(int gameId){
         GameHandler gameHandler = new GameHandler();
 
@@ -74,6 +99,11 @@ public class GameService {
         GameServerEndPoint.notifyUsersInGameForThrowing(gameId);
     }
 
+    /**
+     * @param user
+     * @param throwerId
+     * @return
+     */
     public GameResult playGame(User user, int throwerId){
         Cube cube = GamesSharedList.getInstance().getGameByThrowerId(throwerId).getLastCube();
         GameResult gameResult;
@@ -90,6 +120,11 @@ public class GameService {
         return gameResult;
     }
 
+    /**
+     * @param bets
+     * @param cube
+     * @return
+     */
     private GameResult playGame(List<Bet> bets, Cube cube){
         GameResult gameResult = new GameResult();
         GameHandler gameHandler = new GameHandler();
@@ -122,6 +157,9 @@ public class GameService {
         return gameResult;
     }
 
+    /**
+     * @return
+     */
     public int getLastGameId(){
         try(GameDAO gameDAO = new GameDAO()) {
             return gameDAO.getLastId();
@@ -133,6 +171,9 @@ public class GameService {
         return 0;
     }
 
+    /**
+     * @return
+     */
     public List<Game> getStartGameList(){
         try(GameDAO gameDAO = new GameDAO()) {
             return gameDAO.getStartGameList(2);
@@ -144,6 +185,10 @@ public class GameService {
         return new ArrayList<>();
     }
 
+    /**
+     * @param gameId
+     * @param userId
+     */
     public void becomeThrower(int gameId, int userId){
         Game game = GamesSharedList.getInstance().getGameById(gameId);
 

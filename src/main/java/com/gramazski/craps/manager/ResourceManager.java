@@ -12,10 +12,20 @@ public class ResourceManager {
 
     private ResourceManager() { }
 
+    /**
+     * @return
+     */
     public static ResourceManager getInstance() {
         return instance;
     }
 
+    /**
+     * @param key
+     * @param bundleName
+     * @param locale
+     * @return
+     * @throws ResourceManagerException
+     */
     public String getString(String key, String bundleName, Locale locale) throws ResourceManagerException {
         ResourceBundle resourceBundle = createBundle(bundleName, locale);
         if ((resourceBundle != null) && resourceBundle.containsKey(key)){
@@ -25,6 +35,12 @@ public class ResourceManager {
         throw new ResourceManagerException("Key not exists.");
     }
 
+    /**
+     * @param bundleName
+     * @param locale
+     * @return
+     * @throws ResourceManagerException
+     */
     public Properties getAllProperties(String bundleName, Locale locale) throws ResourceManagerException {
         ResourceBundle resourceBundle = createBundle(bundleName, locale);
         Properties properties = new Properties();
@@ -38,6 +54,12 @@ public class ResourceManager {
         return properties;
     }
 
+    /**
+     * @param bundleName
+     * @param locale
+     * @return
+     * @throws ResourceManagerException
+     */
     private ResourceBundle createBundle(String bundleName, Locale locale) throws ResourceManagerException {
         try {
             ResourceBundle resourceBundle = ResourceBundle.getBundle(bundleName, locale);

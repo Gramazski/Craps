@@ -14,6 +14,10 @@ import java.io.IOException;
 public class JSONReader {
     private final static Logger logger = LogManager.getLogger(JSONReader.class);
 
+    /**
+     * @param request
+     * @return
+     */
     public static String readJsonString(HttpServletRequest request){
         StringBuilder sb = new StringBuilder();
         BufferedReader br = null;

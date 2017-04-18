@@ -17,6 +17,11 @@ import java.util.List;
 public class BettingService {
     private final static Logger logger = LogManager.getLogger(BettingService.class);
 
+    /**
+     * @param bet
+     * @param isWin
+     * @param userId
+     */
     public void saveBet(Bet bet, boolean isWin, int userId){
         try(GameDAO gameDAO = new GameDAO()) {
             bet.setTime(DateHandler.getCurrentDateTime());
@@ -27,6 +32,11 @@ public class BettingService {
         }
     }
 
+    /**
+     * @param bets
+     * @param isWin
+     * @param userId
+     */
     public void saveBets(List<Bet> bets, boolean isWin, int userId){
         try(GameDAO gameDAO = new GameDAO()) {
             for (Bet bet : bets){
@@ -39,6 +49,9 @@ public class BettingService {
         }
     }
 
+    /**
+     * @return
+     */
     public List<BetType> getBetTypes(){
         try(BetTypeDAO betTypeDAO = new BetTypeDAO()) {
             return betTypeDAO.findAll();
@@ -50,6 +63,10 @@ public class BettingService {
         return new ArrayList<>();
     }
 
+    /**
+     * @param userId
+     * @return
+     */
     public List<PlayedBet> getUserPlayedBets(int userId){
         try(GameDAO gameDAO = new GameDAO()) {
             return gameDAO.getUserPlayedBets(userId);

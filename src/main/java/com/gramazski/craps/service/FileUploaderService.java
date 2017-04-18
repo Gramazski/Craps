@@ -17,6 +17,12 @@ import java.util.Map;
  */
 public class FileUploaderService {
 
+    /**
+     * @param request
+     * @param rootPath
+     * @return
+     * @throws HandlerException
+     */
     public Map<String, String> uploadFileFromRequest(HttpServletRequest request, String rootPath) throws HandlerException{
         return processMultipartRequest(request, rootPath);
     }
@@ -55,6 +61,13 @@ public class FileUploaderService {
     }
 
 
+    /**
+     * @param fileItem
+     * @param fileName
+     * @param rootPath
+     * @return
+     * @throws HandlerException
+     */
     private String saveFile(FileItem fileItem, String fileName, String rootPath) throws HandlerException {
         String filePath = "assets/img/user/" + fileName;
         File uploadedFile = new File(rootPath + "assets/img/user/", fileName);

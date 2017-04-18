@@ -14,11 +14,10 @@ import java.io.IOException;
  * Created by gs on 12.03.2017.
  */
 public class UpdateUserCommand implements ICommand {
-    @Override
-    public String handleRequest(HttpServletRequest request) {
-        return null;
-    }
-
+    /**
+     * @param request
+     * @param response
+     */
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) {
         try {

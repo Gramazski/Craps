@@ -18,6 +18,10 @@ public class WrapperConnection {
         connection = ConnectionPool.getInstance().getConnection();
     }
 
+    /**
+     * @return
+     * @throws DAOException
+     */
     public Statement createStatement() throws DAOException {
         if (connection != null) {
             Statement statement = null;
@@ -35,6 +39,11 @@ public class WrapperConnection {
         throw new DAOException("Connection or statement is null");
     }
 
+    /**
+     * @param sqlRequest
+     * @return
+     * @throws DAOException
+     */
     public PreparedStatement createPreparedStatement(String sqlRequest) throws DAOException{
         if (connection != null) {
             PreparedStatement statement = null;
@@ -52,6 +61,10 @@ public class WrapperConnection {
         throw new DAOException("Connection or statement is null");
     }
 
+    /**
+     * @param statement
+     * @throws DAOException
+     */
     public void closeStatement(Statement statement) throws DAOException {
         if (statement != null) {
             try {

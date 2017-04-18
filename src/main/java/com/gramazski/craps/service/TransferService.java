@@ -13,6 +13,11 @@ import org.apache.logging.log4j.Logger;
 public class TransferService {
     private final static Logger logger = LogManager.getLogger(RegisterService.class);
 
+    /**
+     * @param transfer
+     * @param user
+     * @return
+     */
     public boolean makeTransfer(Transfer transfer, User user){
         if (checkTransfer(transfer, user)){
             return false;
@@ -40,6 +45,11 @@ public class TransferService {
         return false;
     }
 
+    /**
+     * @param transfer
+     * @param user
+     * @return
+     */
     private boolean checkTransfer(Transfer transfer, User user){
         return !transfer.isIncoming() && (transfer.getAmount() > user.getAmount());
     }

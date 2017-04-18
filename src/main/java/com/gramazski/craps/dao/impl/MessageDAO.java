@@ -33,6 +33,10 @@ public class MessageDAO extends AbstractDAO<Message> {
         connection = new WrapperConnection();
     }
 
+    /**
+     * @return
+     * @throws DAOException
+     */
     @Override
     public List<Message> findAll() throws DAOException {
         List<Message> messages = new ArrayList<>();
@@ -60,26 +64,20 @@ public class MessageDAO extends AbstractDAO<Message> {
         return messages;
     }
 
-    @Override
-    public Message findEntityById(int id) {
-        return null;
-    }
-
+    /**
+     * @param name
+     * @return
+     * @throws DAOException
+     */
     @Override
     public Message findEntityByName(String name) throws DAOException {
         return null;
     }
 
-    @Override
-    public boolean delete(int id) {
-        return false;
-    }
-
-    @Override
-    public boolean delete(Message entity) {
-        return false;
-    }
-
+    /**
+     * @param entity
+     * @throws DAOException
+     */
     @Override
     public void create(Message entity) throws DAOException {
         PreparedStatement st = null;
@@ -101,6 +99,11 @@ public class MessageDAO extends AbstractDAO<Message> {
         }
     }
 
+    /**
+     * @param entity
+     * @return
+     * @throws DAOException
+     */
     @Override
     public Message update(Message entity) throws DAOException {
         PreparedStatement st = null;
@@ -130,6 +133,11 @@ public class MessageDAO extends AbstractDAO<Message> {
         connection.close();
     }
 
+    /**
+     * @param id
+     * @return
+     * @throws DAOException
+     */
     public List<Message> getAllMessagesForUser(int id) throws DAOException{
         List<Message> messages = new ArrayList<>();
         PreparedStatement st = null;
@@ -160,6 +168,10 @@ public class MessageDAO extends AbstractDAO<Message> {
         return messages;
     }
 
+    /**
+     * @return
+     * @throws DAOException
+     */
     private int getLastId() throws DAOException{
         Statement st = null;
         int id = -1;
