@@ -1,4 +1,5 @@
 <resize change="changeAreaCoords"></resize>
+<leave change="closeWindow"></leave>
 <div class="container">
     <div class="panel panel-success">
 
@@ -8,7 +9,7 @@
         <div class="panel-body" id="gamePlace">
             <div class="row">
                 <div class="col-sm-8 col-xs-12" id="imgTable">
-                    <img src="assets/img/game/table1.gif" alt="Table" id="imgField" ng-model="field" ng-show="!throwing" usemap="#tablemap">
+                    <img src="assets/img/game/table2.gif" alt="Table" id="imgField" ng-model="field" ng-show="!throwing" usemap="#tablemap">
                     <img src="" alt="Table" id="gifField">
                     <map name="tablemap" ng-cloak>
                         <area ng-repeat="x in betsPos" shape="{{x.shape}}" coords="{{x.coords}}" ng-click="makeBet(x)">

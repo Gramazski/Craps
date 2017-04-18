@@ -67,15 +67,16 @@ var commonModule = (function () {
 
             return fieldPos;
         },
-        setBet : function (x, y, width, type) {
+        setBet : function (x, y, width, type, height) {
             var parent = document.getElementById('imgTable');
             var target = document.createElement("img");
-            target.src ="assets/img/game/bet.jpg";
+            target.src ="assets/img/game/simpleBet.png";
             target.id = type;
             target.style.position = "absolute";
             target.style.left = x + 'px';
             target.style.top =y + 'px';
             target.style.width = width + 'px';
+            target.style.height = height + 'px';
 
             parent.appendChild(target);
         },
@@ -101,13 +102,15 @@ var commonModule = (function () {
 
                 areas[i].coords = newCoords;
                 areas[i].width = areas[i].widthSt * field.width;
+                areas[i].height = areas[i].heightSt * field.height;
             }
 
             for (i = 0; i < bets.length; i++){
                 var target = document.getElementById(bets[i].type);
-                target.style.left = bets[i].position.x * field.width + 'px';
+                target.style.left = bets[i].position.x * field.width + 15 + 'px';
                 target.style.top =bets[i].position.y * field.height + 'px';
                 target.style.width = bets[i].position.width * field.width + 'px';
+                target.style.height = bets[i].position.height * field.height + 'px';
             }
         }
     }

@@ -12,6 +12,10 @@ function control($scope, $rootScope, gamesService, chatService) {
         gamesService.sendLeaveToServer();
     });
 
+    $scope.$on('$destroy', function () {
+        gamesService.sendLeaveToServer();
+    });
+
     var promiseObj=gamesService.getGames();
     promiseObj.then(function(value) {
         $scope.games = value;

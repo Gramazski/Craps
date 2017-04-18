@@ -38,6 +38,14 @@ function control($scope, $routeParams, $rootScope, gameService) {
         gameService.sendLeaveToServer($scope.game.id);
     });
 
+    $scope.$on('$destroy', function () {
+        gameService.sendLeaveToServer($scope.game.id);
+    });
+
+    $scope.closeWindow = function () {
+        gameService.sendLeaveToServer($scope.game.id);
+    };
+
     $scope.changeSort = function (newParam) {
         $rootScope.sortParam = newParam;
     };
@@ -109,6 +117,19 @@ function control($scope, $routeParams, $rootScope, gameService) {
     var updateBetList = function (betsResults) {
         $scope.bets = betsResults.leftBets;
         var i;
+
+        for (i = 0; i < betsResults.leftBets.length; i++){
+            for (var j = 0; j < $scope.betsPos.length; j++){
+                if ($scope.betsPos[j].type == betsResults.leftBets[i].type){
+                    $scope.bets[i].position = {
+                        "x" : $scope.betsPos[j].coordsSt[0],// + Math.round((bet.coordsSt[2] - bet.coordsSt[0] - bet.widthSt) / 2) + bet.widthSt,
+                        "y" : $scope.betsPos[j].coordsSt[1],// + Math.round((bet.coordsSt[3] - bet.coordsSt[1] - bet.widthSt) / 2),
+                        "width" : $scope.betsPos[j].widthSt,
+                        "height" : $scope.betsPos[j].heightSt
+                    }
+                }
+            }
+        }
 
         for (i = 0; i < betsResults.loseBets.length; i++){
             addToHistory(betsResults.loseBets[i].type, betsResults.loseBets[i].amount, "lose");
@@ -202,15 +223,16 @@ function control($scope, $routeParams, $rootScope, gameService) {
         }
 
         if (!added){
-            var xBet = bet.coords[0] + Math.round((bet.coords[2] - bet.coords[0] - bet.width) / 2) + bet.width;
-            var yBet = bet.coords[1] + Math.round((bet.coords[3] - bet.coords[1] - bet.width) / 2);
+            var xBet = bet.coords[0] + 15; //+ Math.round((bet.coords[2] - bet.coords[0] - bet.width) / 2) + bet.width;
+            var yBet = bet.coords[1]; //+ Math.round((bet.coords[3] - bet.coords[1] - bet.width) / 2);
 
-            commonModule.setBet(xBet, yBet, bet.width, bet.type);
+            commonModule.setBet(xBet, yBet, bet.width, bet.type, bet.height);
 
             bet.position = {
-                "x" : bet.coordsSt[0] + Math.round((bet.coordsSt[2] - bet.coordsSt[0] - bet.widthSt) / 2) + bet.widthSt,
-                "y" : bet.coordsSt[1] + Math.round((bet.coordsSt[3] - bet.coordsSt[1] - bet.widthSt) / 2),
-                "width" : bet.widthSt
+                "x" : bet.coordsSt[0],// + Math.round((bet.coordsSt[2] - bet.coordsSt[0] - bet.widthSt) / 2) + bet.widthSt,
+                "y" : bet.coordsSt[1],// + Math.round((bet.coordsSt[3] - bet.coordsSt[1] - bet.widthSt) / 2),
+                "width" : bet.widthSt,
+                "height" : bet.heightSt
             };
 
             bet.amount = $scope.betting.amount;

@@ -2,37 +2,23 @@
   "betsPos" : [
     {
       "shape" : "rect",
-      "coordsSt" : [0.29, 0.22, 0.37, 0.31],
+      "coordsSt" : [0.45, 0.22, 0.52, 0.32],
       "coords" : [],
-      "widthSt" : 0.05,
+      "widthSt" : 0.068,
       "width" : 0,
-      "type" : "4",
-      "descr" : ""
-    },
-    {
-      "shape" : "rect",
-      "coordsSt" : [0.37, 0.22, 0.44, 0.31],
-      "coords" : [],
-      "widthSt" : 0.05,
-      "width" : 0,
-      "type" : "5",
-      "descr" : ""
-    },
-    {
-      "shape" : "rect",
-      "coordsSt" : [0.44, 0.22, 0.51, 0.31],
-      "coords" : [],
-      "widthSt" : 0.05,
-      "width" : 0,
+      "height" : 0,
+      "heightSt" : 0.095,
       "type" : "big 6",
       "descr" : "6 before 7"
     },
     {
       "shape" : "rect",
-      "coordsSt" : [0.51, 0.22, 0.59, 0.31],
+      "coordsSt" : [0.52, 0.22, 0.59, 0.32],
       "coords" : [],
-      "widthSt" : 0.05,
+      "widthSt" : 0.068,
       "width" : 0,
+      "height" : 0,
+      "heightSt" : 0.095,
       "type" : "big 8",
       "descr" : "8 before 7"
     }
