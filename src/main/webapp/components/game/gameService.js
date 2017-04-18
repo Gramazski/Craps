@@ -26,7 +26,7 @@ function service($http, $q) {
             sendBets = sendBetsCallback;
         },
         setGameId : function (id) {
-            socket = new WebSocket("ws://192.168.137.1:8083/games/" + id);
+            socket = new WebSocket("ws://localhost:8083/games/" + id);
 
             socket.onmessage = function(event) {
                 var incomingMessage = event.data;

@@ -10,7 +10,7 @@ function service($http, $q) {
 
     return{
         sendConnectToServer : function () {
-            socket = new WebSocket("ws://192.168.137.1:8083/games");
+            socket = new WebSocket("ws://localhost:8083/games");
 
             socket.onmessage = function(event) {
                 var incomingMessage = event.data;

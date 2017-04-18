@@ -5,7 +5,7 @@ var crapsApp = angular.module('crapsApp');
 crapsApp.factory('messagesService',['$rootScope', sendMessage]);
 
 function sendMessage($rootScope) {
-    var socket = new WebSocket("ws://192.168.137.1:8083/message?login=" + $rootScope.userInfo.userName);
+    var socket = new WebSocket("ws://localhost:8083/message?login=" + $rootScope.userInfo.userName);
 
     socket.onmessage = function(event) {
         var incomingMessage = event.data;
