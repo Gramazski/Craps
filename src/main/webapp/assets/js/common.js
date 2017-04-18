@@ -53,6 +53,9 @@ var commonModule = (function () {
         updateGame : function () {
             $('#noSort').click();
         },
+        showNewMessageModal : function () {
+            $('#newMessage').modal('show');
+        },
         resetFormIn : function (formName) {
             $(formName)[0].reset();
         },

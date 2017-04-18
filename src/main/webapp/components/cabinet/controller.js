@@ -9,6 +9,7 @@ function control($scope, $rootScope, messagesService, transferService, adminServ
     $scope.showing = {};
     $scope.showing.receiver = $rootScope.userInfo.userName;
     $scope.showing.sender = "";
+    $scope.title = "";
     var promiseObj=transferService.getCurrencies();
     promiseObj.then(function(value) {
         $scope.currencies=value;
@@ -109,5 +110,10 @@ function control($scope, $rootScope, messagesService, transferService, adminServ
         messagesService.send(message);
 
         return true;
+    };
+
+    $scope.showNewMessageTo = function (receiver) {
+        $scope.username = receiver;
+        commonModule.showNewMessageModal();
     }
 }
