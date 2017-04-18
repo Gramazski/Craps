@@ -51,7 +51,7 @@ var commonModule = (function () {
             $('#gameId').click();
         },
         updateGame : function () {
-            $('#bet').click();
+            $('#noSort').click();
         },
         resetFormIn : function (formName) {
             $(formName)[0].reset();

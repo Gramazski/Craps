@@ -5,28 +5,28 @@
         <div class="panel-heading">
             <h3>{{translateModel.label.game}} <span class="pull-right text-primary">ID{{game.id}}</span></h3>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" id="gamePlace">
             <div class="row">
                 <div class="col-sm-8 col-xs-12" id="imgTable">
-                    <img src="assets/img/game/table1.gif" alt="Table" id="imgField" ng-model="field" ng-show="!throwing" usemap="#tablemap" style="width: 100%">
-                    <img src="" alt="Table" id="gifField" style="width: 100%; visibility: hidden">
+                    <img src="assets/img/game/table1.gif" alt="Table" id="imgField" ng-model="field" ng-show="!throwing" usemap="#tablemap">
+                    <img src="" alt="Table" id="gifField">
                     <map name="tablemap" ng-cloak>
-                        <area ng-repeat="x in betsPos" shape="{{x.shape}}" coords="{{x.coords}}" ng-click="makeBet(x)" style="cursor: pointer">
+                        <area ng-repeat="x in betsPos" shape="{{x.shape}}" coords="{{x.coords}}" ng-click="makeBet(x)">
                     </map>
-                    <hr class="hidden-lg hidden-md hidden-sm" style="margin-top: 2%; margin-bottom: 2%">
+                    <hr class="hidden-lg hidden-md hidden-sm">
                 </div>
 
-                <div class="col-sm-4 col-xs-12" style="border-left: 1px solid">
+                <div class="col-sm-4 col-xs-12 bordered-col">
                     <div class="media">
                         <div class="media-left">
-                            <img ng-src="{{userInfo.avatar}}" class="media-object" style="width:60px; height: 60px">
+                            <img ng-src="{{userInfo.avatar}}" class="media-object">
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">{{userInfo.userName}}</h4>
                             <span class="label label-success">{{translateModel.label.amount}} - {{userInfo.amount}}</span>
                         </div>
                         <div class="media-footer">
-                            <div class="btn-group btn-group-justified" style="margin-top: 2%">
+                            <div class="btn-group btn-group-justified">
                                 <div class="btn-group" ng-show="game.throwerId!=userInfo.id">
                                     <button type="button" class="btn btn-success" ng-click="becomeThrower()" ng-disabled="game.throwerId!=0">{{translateModel.button.becomeThrower}}</button>
                                 </div>
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr style="margin-top: 2%; margin-bottom: 2%">
+                    <hr>
                     <h4>{{translateModel.label.bets}}:</h4>
                     <div class="list-group">
                         <a class="list-group-item" ng-repeat="x in bets">
@@ -49,13 +49,13 @@
                     </div>
                 </div>
             </div>
-            <hr style="margin-top: 2%; margin-bottom: 2%">
+            <hr>
             <div class="row">
                 <div class="col-sm-5">
                     <form name="betForm">
                         <div class="media">
                             <div class="media-left">
-                                <img src="assets/img/game/bet.jpg" class="media-object" style="width:60px">
+                                <img src="assets/img/game/bet.jpg" class="media-object">
                             </div>
                             <div class="media-body">
                                 <div class="form-group col-sm-11">
@@ -74,18 +74,18 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-sm-7" style="border-left: 1px solid">
+                <div class="col-sm-7 bordered-col">
                     <h4>{{translateModel.label.history}}: </h4>
                     <table class="table table-hover">
                         <thead>
                         <tr>
-                            <th>{{translateModel.label.action}}</th>
-                            <th>{{translateModel.label.description}}</th>
+                            <th ng-click="changeSort('type')" id="actionSort">{{translateModel.label.action}}</th>
+                            <th ng-click="changeSort('')" id="noSort">{{translateModel.label.description}}</th>
                             <th>{{translateModel.label.amount}}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="x in history">
+                        <tr ng-repeat="x in history | orderBy : sortParam">
                             <td ng-if="x.type=='make'" class="info">{{translateModel.label.historyTable.make}}</td>
                             <td ng-if="x.type=='make'" class="info">{{x.descr}}</td>
                             <td ng-if="x.type=='make'" class="info">{{x.result}}</td>
@@ -123,16 +123,16 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-4 col-xs-4">
-                        <img ng-src="assets/img/game/{{cube.first}}.png" alt="1" style="width:100%">
+                        <img ng-src="assets/img/game/{{cube.first}}.png" alt="1">
                     </div>
                     <div class="col-sm-4 col-xs-4">
-                        <img ng-src="assets/img/game/{{cube.second}}.png" alt="5" style="width:100%">
+                        <img ng-src="assets/img/game/{{cube.second}}.png" alt="5">
                     </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12" style="border-left: 1px solid">
+                    <div class="col-md-4 col-sm-4 col-xs-12 bordered-col">
                         <div class="form-group">
                             <h4>{{translateModel.label.youGet}} - <span class="label label-info">{{cube.first + cube.second}}</span></h4>
                         </div>
-                        <hr style="margin-top: 2%; margin-bottom: 2%">
+                        <hr>
                         <div class="form-group">
                             <label class="control-label">{{translateModel.label.result}}:</label>
                             <div class="list-group">

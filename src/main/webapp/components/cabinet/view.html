@@ -4,12 +4,12 @@
         <div class="panel-heading">
             <div ng-include="'components/cabinet/menuView.html'"></div>
         </div>
-        <div class="panel-body" ng-show="!userInfo.admin">
+        <div class="panel-body" id="userPanel" ng-show="!userInfo.admin">
             <div class="row">
-                <div class="col-sm-6 col-xs-12" style="border-right: 1px solid">
+                <div class="col-sm-6 col-xs-12 bordered-col">
                     <div class="media">
                         <div class="media-left">
-                            <img ng-src="{{userInfo.avatar}}" class="media-object" style="width:100px">
+                            <img ng-src="{{userInfo.avatar}}" class="media-object">
                         </div>
                         <div class="media-body">
                             <h4 class="media-heading">{{userInfo.name}} {{userInfo.surname}}</h4>
@@ -32,10 +32,9 @@
                     </div>
                 </div>
             </div>
-
-            <hr style="margin-top: 2%; margin-bottom: 2%">
-            <div class="row" style="margin-left: 2%">
-                <h3 style="text-align: center">{{translateModel.label.general}}</h3>
+            <hr>
+            <div id="userGeneral" class="row">
+                <h3 >{{translateModel.label.general}}</h3>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <tbody>

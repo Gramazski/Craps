@@ -58,17 +58,15 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
 
     $routeProvider.otherwise({redirectTo: '/'});
 }).run(function($rootScope, $location, userService, translateService) {
-    $rootScope.loggedInUser = true;
+    $rootScope.loggedInUser = false;
     var promiseObj=userService.getUser();
     promiseObj.then(function(value) {
         if (value == null){
-            console.dir(value);
             $rootScope.loggedInUser = false;
         }
         else {
             $rootScope.loggedInUser = true;
             $rootScope.userInfo = value;
-            console.dir($rootScope.userInfo);
         }
     });
 
@@ -86,7 +84,7 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
             }
         }
         else {
-            if ($rootScope.userInfo.banned && (next.templateUrl == "components/games/view.html")
+            if ($rootScope.userInfo !== undefined && $rootScope.userInfo.banned && (next.templateUrl == "components/games/view.html")
                     && (next.templateUrl =="components/game/view.html")){
                 $location.path("/");
             }
@@ -95,7 +93,5 @@ angular.module('crapsApp', ["ngRoute", 'commonApp']).config(function ($routeProv
                 $location.path("/");
             }
         }
-
-
     });
 });

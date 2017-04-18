@@ -1,0 +1,148 @@
+body{
+    background-image: url("../img/craps_backf.jpg");
+}
+#game .row{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+#game .row .bordered-col{
+    border-right: 1px solid;
+}
+hr{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+#messagesPage .list-group{
+    text-align: center;
+}
+#messagesPage .col-sm-9 .row{
+    text-align: center;
+}
+#messagesPage .message{
+    text-align: center;
+    margin-bottom: 2%;
+}
+#message .modal-body .row{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+#userPanel .bordered-col{
+    border-right: 1px solid;
+}
+#userPanel .bordered-col .media-object{
+    width:100px;
+}
+#userGeneral .row{
+    margin-left: 2%;
+}
+#userGeneral h3{
+    text-align: center;
+}
+#imgField{
+    width: 100%;
+}
+#gifField{
+    width: 100%;
+    visibility: hidden;
+}
+#imgTable area{
+    cursor: pointer;
+}
+#gamePlace .bordered-col{
+    border-left: 1px solid;
+}
+#gamePlace .media-object{
+    width:60px;
+    height: 60px;
+}
+#gamePlace .media-footer .btn-group-justified{
+    margin-top: 2%;
+}
+#throwingResult img{
+    width: 100%;
+}
+#throwingResult .bordered-col{
+    border-left: 1px solid;
+}
+#chatPanel{
+    position: fixed;
+    z-index: 999;
+    bottom: 0;
+    word-wrap: break-word;
+    width: 30%;
+}
+#chatPanel .text-info{
+    text-align: right;
+}
+#chatPanel .panel-body{
+    overflow: hidden;
+    overflow-y: scroll;
+    height: 250px;
+}
+#homePanel .col-sm-7{
+    margin-top: -10px;
+    padding-bottom: 20px;
+}
+#homePanel .col-xs-12{
+    margin-top: -10px;
+    margin-bottom: -10px;
+}
+#loginContainer h2{
+    text-align: center;
+}
+#loginContainer .col-sm-4 a{
+    width: 100%;
+}
+#loginForm{
+    background-color: white;
+    width: 60%;
+    margin: auto;
+    margin-top: 2%;
+    border-radius: 30px;
+    padding-bottom: 15px;
+    padding-top: 1px;
+}
+#loginForm h2{
+    text-align: center;
+    margin-top: 10%;
+}
+#error{
+    color: red;
+}
+#loginForm h3{
+    text-align: center;
+    margin-top: 2%;
+}
+#registerForm .help-block{
+    color: red;
+}
+.page_footer .container{
+    /*position: fixed;
+    margin-left: 8%;*/
+    margin-bottom: 3%;
+}
+.page_footer .row{
+    margin-top: 1%;
+}
+#menuNav .media-object{
+    width:50%;
+    margin-top: -10px;
+}
+#brandName{
+    margin-left: -50px;
+}
+
+@media screen and (max-width: 480px){
+    #chatPanel{
+        position: fixed;
+        z-index: 999;
+        bottom: 0;
+        word-wrap: break-word;
+        width: 50%;
+    }
+    #chatPanel .panel-body{
+        overflow: hidden;
+        overflow-y: scroll;
+        height: 150px;
+    }
+}

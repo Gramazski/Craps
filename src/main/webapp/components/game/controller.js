@@ -38,6 +38,10 @@ function control($scope, $routeParams, $rootScope, gameService) {
         gameService.sendLeaveToServer($scope.game.id);
     });
 
+    $scope.changeSort = function (newParam) {
+        $rootScope.sortParam = newParam;
+    };
+
     var updateGame = function (newGame) {
         $scope.game = newGame;
         commonModule.updateGame();

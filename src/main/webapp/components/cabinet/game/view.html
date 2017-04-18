@@ -48,13 +48,13 @@
                 <h4 class="modal-title">{{translateModel.label.game}}</h4>
             </div>
             <div class="modal-body">
-                <div class="row" style="margin-left: 2%; margin-right: 2%">
-                    <div class="col-sm-6" style="border-right: 1px solid">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-6 bordered-col">
                         <p><span class="label label-info">{{translateModel.games.lobby}} - {{game.lobby}}</span></p>
                         <p><span class="label label-info">{{translateModel.games.date}} - {{game.time}}</span></p>
                         <p><span class="label label-info">{{translateModel.games.type}} - {{game.type}}</span></p>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 col-xs-6">
                         <p><span class="label label-primary">{{translateModel.games.bet}} - {{game.bet}}</span></p>
                         <p><span class="label label-primary">{{translateModel.games.betType}} - {{game.betType}}</span> </p>
                         <p ng-show="game.amount>0"><span class="label label-success">{{translateModel.label.amount}} - {{game.amount}}</span></p>

@@ -4,10 +4,10 @@
         <div class="panel-heading">
             <div ng-include="'components/cabinet/menuView.html'"></div>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" id="messagesPage">
             <div class="row">
                 <div class="col-sm-3">
-                    <ul class="list-group" style="text-align: center">
+                    <ul class="list-group">
                         <li class="list-group-item active" id="inMessages" ng-click="showInMessages()">{{translateModel.menu.incoming}}</li>
                         <li class="list-group-item" id="outMessages" ng-click="showOutMessages()">{{translateModel.menu.outgoing}}</li>
                         <li class="list-group-item"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#newMessage" style="width: 100%">{{translateModel.button.send}}</button></li>
@@ -24,7 +24,7 @@
                     </ul>
                 </div>
                 <div class="col-sm-9">
-                    <div class="row" style="text-align: center">
+                    <div class="row">
                         <div class="col-sm-4 col-xs-4" ng-click="changeSort('sender')" ng-show="showing.sender==''">
                             {{translateModel.label.sender}}
                         </div>
@@ -38,9 +38,9 @@
                             {{translateModel.label.date}}
                         </div>
                     </div>
-                    <hr style="margin-top: 2%; margin-bottom: 2%">
+                    <hr>
                     <div ng-repeat="x in userInfo.messages | filter : showing : strict | orderBy : sortParam | filter : searchMessage">
-                        <div class="row" style="text-align: center; margin-bottom: 2%" data-toggle="modal" data-target="#message" ng-click="showMessage(x)">
+                        <div class="row message" data-toggle="modal" data-target="#message" ng-click="showMessage(x)">
                             <div class="col-sm-4 col-xs-4" ng-show="showing.sender==''">
                                 {{x.sender}}
                             </div>
@@ -79,7 +79,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                <div class="row" style="margin-left: 2%; margin-right: 2%">
+                <div class="row">
                     <pre>{{message.body}}</pre>
                     <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#contactData" ng-show="showing.sender!=userInfo.userName;">{{translateModel.button.answer}}</button>
                 </div>
