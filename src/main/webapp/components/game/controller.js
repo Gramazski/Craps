@@ -38,10 +38,6 @@ function control($scope, $routeParams, $rootScope, gameService) {
         gameService.sendLeaveToServer($scope.game.id);
     });
 
-    $scope.$on('$destroy', function () {
-        gameService.sendLeaveToServer($scope.game.id);
-    });
-
     $scope.closeWindow = function () {
         gameService.sendLeaveToServer($scope.game.id);
     };
