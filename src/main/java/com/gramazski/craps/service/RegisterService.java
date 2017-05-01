@@ -3,6 +3,7 @@ package com.gramazski.craps.service;
 import com.gramazski.craps.dao.impl.UserDAO;
 import com.gramazski.craps.entity.impl.User;
 import com.gramazski.craps.exception.DAOException;
+import com.gramazski.craps.util.CipherHandler;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,7 +22,9 @@ public class RegisterService {
         try(UserDAO userDAO = new UserDAO()) {
             if (!(userDAO.isUserNameExists(user.getUserName()) && userDAO.isEmailExists(user.getEmail()))){
                 UserService userService = new UserService();
+                user.setPassword(CipherHandler.encryptString(user.getPassword()));
                 userService.createUser(user);
+                user.setPassword("");
 
                 return true;
             }

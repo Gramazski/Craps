@@ -26,7 +26,8 @@
       "games" : "Games",
       "transfers" : "Transfers",
       "incoming" : "Incoming",
-      "outgoing" : "Outgoing"
+      "outgoing" : "Outgoing",
+      "music" : "Music"
     },
     "button" : {
       "login" : "Login",
@@ -178,7 +179,9 @@
       },
       "maxPlayersCount" : "Max players count",
       "count" : "Count",
-      "time" : "time"
+      "time" : "time",
+      "uploadMusic" : "Upload music",
+      "musicName" : "Music name"
     },
     "message" : {
       "error" : {

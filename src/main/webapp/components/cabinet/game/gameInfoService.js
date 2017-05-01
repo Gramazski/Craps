@@ -8,7 +8,7 @@ function service() {
 
     return{
         getMaxWin : function (playedBets) {
-            if (playedBets == null && playedBets.length == 0){
+            if (playedBets == null || playedBets.length == 0){
                 return 0;
             }
 
@@ -22,7 +22,7 @@ function service() {
             return max;
         },
         getMaxLose : function (playedBets) {
-            if (playedBets == null && playedBets.length == 0){
+            if (playedBets == null || playedBets.length == 0){
                 return 0;
             }
 

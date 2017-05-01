@@ -24,7 +24,6 @@ import java.util.concurrent.locks.ReentrantLock;
 @ServerEndpoint(value="/games/{gameId}", configurator=GameEndPointConfigurator.class)
 public class GameServerEndPoint {
     private static Map<String, List<Session>> gameSessions = new ConcurrentHashMap<>();
-    private static Map<Session, Boolean> throwingMap = new ConcurrentHashMap<>();
     private final static Logger logger = LogManager.getLogger(MessageServerEndPoint.class);
     private final static ReentrantLock lock = new ReentrantLock();
 
@@ -63,10 +62,6 @@ public class GameServerEndPoint {
             gameSessions.get(gameId).remove(userSession);
         }
 
-        if (throwingMap.containsKey(userSession)){
-            throwingMap.remove(userSession);
-        }
-
         lock.unlock();
     }
 
@@ -102,11 +97,6 @@ public class GameServerEndPoint {
     public static void notifyUsersInGameForThrowing(int gameId){
         if (gameSessions.containsKey(String.valueOf(gameId))){
             for (Session session : gameSessions.get(String.valueOf(gameId))){
-                if (throwingMap.containsKey(session)){
-                    throwingMap.remove(session);
-                    throwingMap.put(session, true);
-                }
-
                 session.getAsyncRemote().sendText("{\"throw\":\"true\"}");
             }
         }
@@ -124,7 +114,5 @@ public class GameServerEndPoint {
             game.setPlayersCount(game.getPlayersCount() + 1);
             GamesServerEndPoint.notifyAllUsers();
         }
-
-        throwingMap.put(userSession, false);
     }
 }

@@ -32,6 +32,7 @@ public class UpdateUserService {
             user.setSurname(paramMap.get("surname"));
             user.setBirthday(paramMap.get("birthday"));
             userService.updateUser(user);
+            user.setPassword("");
 
             return user;
         }

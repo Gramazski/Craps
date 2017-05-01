@@ -102,6 +102,12 @@
             <version>RELEASE</version>
             <scope>test</scope>
         </dependency>
+        <!--Cipher-->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.9</version>
+        </dependency>
 
     </dependencies>
 

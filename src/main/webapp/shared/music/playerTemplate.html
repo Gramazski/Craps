@@ -11,7 +11,7 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-sm-8 col-xs-12">
+            <div class="col-sm-6 col-xs-12">
                 <div class="btn-group btn-group-justified">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="button" name="play" ng-disabled="currentMusicIndex==0" ng-click="playPrev()">
@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-4 col-xs-11" style="padding-top: 9px; padding-left: 0">
+            <div class="col-sm-6 col-xs-11" style="padding-top: 9px; padding-left: 0">
                 <div class="btn-group btn-group-justified">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit" name="volume" ng-click="muteVolume(currentMusic)">
@@ -50,7 +50,7 @@
                         </button>
                     </div>
 
-                    <div style="margin-left: 95px; padding-top: 15px">
+                    <div style="margin-left: 131px; padding-top: 15px">
                         <input type="range" ng-model="currentMusic.sound.volume" ng-change="changeVolume(currentMusic)" min="0" max="1" step="0.01">
                     </div>
                 </div>
@@ -103,11 +103,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" ng-click="closeAddMusicModal()">&times;</button>
-                    <h4 class="modal-title">Upload music</h4>
+                    <h4 class="modal-title">{{translateModel.label.uploadMusic}}</h4>
                 </div>
                 <div class="modal-body">
                     <form name="fileForm">
-                        <label>File name</label>
+                        <label>{{translateModel.label.musicName}}</label>
                         <input type="text" name="userName" ng-model="fileName" size="31" required>
                         <input type="file" onchange="angular.element(this).scope().setNewFile(this.files[0])" name="file" accept="audio/*">
                     </form>

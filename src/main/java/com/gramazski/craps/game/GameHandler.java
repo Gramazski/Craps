@@ -3,20 +3,18 @@ package com.gramazski.craps.game;
 import com.gramazski.craps.entity.impl.Bet;
 import com.gramazski.craps.entity.impl.BetType;
 import com.gramazski.craps.entity.impl.Cube;
+import com.gramazski.craps.util.RandomHandler;
 
 import java.util.List;
-import java.util.Random;
 
 public class GameHandler {
-    private final static Random random = new Random();
-
     /**
      * @return
      */
     public Cube throwCube(){
         Cube cube = new Cube();
-        cube.setFirst(random.nextInt(6) + 1);
-        cube.setSecond(random.nextInt(6) + 1);
+        cube.setFirst(RandomHandler.getNexInt(6) + 1);
+        cube.setSecond(RandomHandler.getNexInt(6) + 1);
 
         return cube;
     }

@@ -26,7 +26,8 @@
       "games" : "Игры",
       "transfers" : "Переводы",
       "incoming" : "Входящие",
-      "outgoing" : "Исходящие"
+      "outgoing" : "Исходящие",
+      "music" : "Музыка"
     },
     "button" : {
       "login" : "Войти",
@@ -178,7 +179,9 @@
       },
       "maxPlayersCount" : "Максимальное число игроков",
       "count" : "Количество",
-      "time" : "Время"
+      "time" : "Время",
+      "uploadMusic" : "Загрузка музыки",
+      "musicName" : "Название трека"
     },
     "message" : {
       "error" : {
