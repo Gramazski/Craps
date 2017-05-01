@@ -23,6 +23,9 @@ var commonModule = (function () {
         closeMessageModal : function () {
             $('.close').click();
         },
+        hideAddMusicModal: function () {
+            $('#musicUploadModal').modal('hide');
+        },
         clearMessageModal : function () {
             var target = document.getElementById('title');
             target.value = "";

@@ -43,7 +43,7 @@ public class FileUploaderService {
         while (iterator.hasNext()) {
             FileItem item = iterator.next();
             if (!item.isFormField()) {
-                if ("file_to_upload".equals(item.getFieldName())) {
+                if ("file".equals(item.getFieldName())) {
                     fileToUpload = item;
                     fileName = item.getName();
                 }
@@ -54,7 +54,7 @@ public class FileUploaderService {
         }
 
         if (fileToUpload != null && fileName != null) {
-            paramMap.put("avatar", saveFile(fileToUpload, fileName, rootPath));
+            paramMap.put("file", saveFile(fileToUpload, fileName, rootPath));
         }
 
         return paramMap;

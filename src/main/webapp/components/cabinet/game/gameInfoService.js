@@ -8,6 +8,10 @@ function service() {
 
     return{
         getMaxWin : function (playedBets) {
+            if (playedBets == null && playedBets.length == 0){
+                return 0;
+            }
+
             var max = playedBets[0].amount;
             for (var i = 1; i < playedBets.length; i++){
                 if (max < playedBets[i].amount){
@@ -18,6 +22,10 @@ function service() {
             return max;
         },
         getMaxLose : function (playedBets) {
+            if (playedBets == null && playedBets.length == 0){
+                return 0;
+            }
+
             var min = playedBets[0].amount;
             for (var i = 1; i < playedBets.length; i++){
                 if (min > playedBets[i].amount){

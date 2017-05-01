@@ -3,7 +3,7 @@
  */
 angular.module('commonApp', []);
 
-angular.module('crapsApp', ["ngRoute", 'ngCookies', 'commonApp']).config(function ($routeProvider) {
+angular.module('crapsApp', ["ngRoute", "ngAudio", 'ngCookies', "ngFileUpload", 'commonApp']).config(function ($routeProvider) {
     $routeProvider.when('/',
         {
             templateUrl: 'components/home/view.html',

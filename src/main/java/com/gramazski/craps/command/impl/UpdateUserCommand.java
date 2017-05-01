@@ -2,6 +2,7 @@ package com.gramazski.craps.command.impl;
 
 import com.gramazski.craps.command.ICommand;
 import com.gramazski.craps.entity.impl.User;
+import com.gramazski.craps.mapper.ObjectMapperWrapper;
 import com.gramazski.craps.service.UpdateUserService;
 import org.apache.logging.log4j.Level;
 
@@ -27,7 +28,8 @@ public class UpdateUserCommand implements ICommand {
 
             session.setAttribute("user", user);
 
-            response.sendRedirect("/#/cabinet");
+            response.setContentType("application/json");
+            ObjectMapperWrapper.writeValue(response.getOutputStream(), user);
         } catch (IOException e) {
             logger.log(Level.ERROR, e.getMessage());
         }

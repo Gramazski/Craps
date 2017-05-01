@@ -45,8 +45,10 @@ public class UserService {
      */
     public User getUserByUserName(String userName){
         User user = null;
-        try(UserDAO userDAO = new UserDAO(); MessageDAO messageDAO = new MessageDAO();
-            TransferDAO transferDAO = new TransferDAO(); GameDAO gameDAO = new GameDAO()) {
+        try(UserDAO userDAO = new UserDAO();
+            MessageDAO messageDAO = new MessageDAO();
+            TransferDAO transferDAO = new TransferDAO();
+            GameDAO gameDAO = new GameDAO()) {
             user = userDAO.findEntityByName(userName);
             user.setMessages(messageDAO.getAllMessagesForUser(user.getId()));
             user.setTransfers(transferDAO.getAllTransfersForUser(user.getId()));
@@ -54,7 +56,6 @@ public class UserService {
         } catch (DAOException e) {
             logger.log(Level.ERROR, e.getMessage());
         }
-
         return user;
     }
 

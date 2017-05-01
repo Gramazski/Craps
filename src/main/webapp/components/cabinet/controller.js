@@ -2,9 +2,9 @@
  * Created by gs on 10.03.2017.
  */
 var crapsApp = angular.module("crapsApp");
-crapsApp.controller("cabinetController",['$scope', '$rootScope', 'messagesService', 'transferService', 'adminService', 'gameInfoService', control]);
+crapsApp.controller("cabinetController",['$scope', '$rootScope', '$filter', 'messagesService', 'transferService', 'adminService', 'gameInfoService', 'userUploadService', control]);
 
-function control($scope, $rootScope, messagesService, transferService, adminService, gameInfoService) {
+function control($scope, $rootScope, $filter, messagesService, transferService, adminService, gameInfoService, userUploadService) {
     $rootScope.title = $rootScope.translateModel.title.cabinet;
     $scope.showing = {};
     $scope.showing.receiver = $rootScope.userInfo.userName;
@@ -115,5 +115,17 @@ function control($scope, $rootScope, messagesService, transferService, adminServ
     $scope.showNewMessageTo = function (receiver) {
         $scope.username = receiver;
         commonModule.showNewMessageModal();
-    }
+    };
+
+    $scope.setNewFile = function (newFile) {
+        $scope.file = newFile;
+    };
+
+    $scope.updateUserInfo = function () {
+        var promiseObj=userUploadService.uploadFile($scope.file, $scope.newName, $scope.newSurname, $filter('date')($scope.newBirthday, "yyyy-MM-dd"));
+        promiseObj.then(function(value) {
+            $rootScope.userInfo = value;
+            commonModule.closeMessageModal();
+        });
+    };
 }

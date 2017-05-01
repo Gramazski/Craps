@@ -27,7 +27,7 @@ public class UpdateUserService {
         FileUploaderService uploaderService = new FileUploaderService();
         try {
             Map<String, String> paramMap = uploaderService.uploadFileFromRequest(request, session.getServletContext().getRealPath("/"));
-            user.setAvatar(paramMap.get("avatar"));
+            user.setAvatar(paramMap.get("file"));
             user.setName(paramMap.get("name"));
             user.setSurname(paramMap.get("surname"));
             user.setBirthday(paramMap.get("birthday"));

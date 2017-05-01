@@ -12,7 +12,7 @@ function register($http, $q, $filter) {
                 method: 'POST',
                 url: '/controller?command=REGISTER',
                 headers: {
-                    'Content-Type': 'json'
+                    'Content-Type': 'json; charset: utf-8'
                 },
                 data: regInf
             }).
@@ -42,7 +42,7 @@ function register($http, $q, $filter) {
             $scope.password = "";
             $scope.repeatPassword = "";
             $scope.name = value.name;
-            $scope.surname = value.name;
+            $scope.surname = value.surname;
             $scope.email = value.email;
         }
     }

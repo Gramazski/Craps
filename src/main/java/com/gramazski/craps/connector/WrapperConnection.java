@@ -70,7 +70,7 @@ public class WrapperConnection {
             try {
                 statement.close();
             } catch (SQLException e) {
-                throw new DAOException("Can't close statement. Course: " + e.getMessage(), e);
+                throw new DAOException("Can't close statement. Course: " + e.getMessage(), e);//log
             }
         }
     }
