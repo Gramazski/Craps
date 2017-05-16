@@ -8,7 +8,7 @@ function translate($http, $q) {
     return{
         getTranslate: function (path) {
             var deferred = $q.defer();
-            $http({method: 'GET', url: path, params: {noCache: (new Date().getTime()) + Math.random()}}).
+            $http({method: 'GET', url: path}).
             then(function(response) {
                     deferred.resolve(response.data.translateModel);
                 },

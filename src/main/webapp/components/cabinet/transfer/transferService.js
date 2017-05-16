@@ -28,7 +28,7 @@ function transfer($q, $http) {
         },
         getCurrencies: function () {
             var deferred = $q.defer();
-            $http({method: 'GET', url: 'currencies.json', params: {}}).
+            $http({method: 'GET', url: 'assets/json/currencies.json', params: {}}).
             then(function(response) {
                     deferred.resolve(response.data.currencies);
                 },

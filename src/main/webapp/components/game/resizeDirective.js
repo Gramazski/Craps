@@ -2,7 +2,7 @@
  * Created by gs on 09.04.2017.
  */
 var crapsApp = angular.module("crapsApp");
-crapsApp.directive('resize', function ($window) {
+crapsApp.directive('resize', function ($window, $location) {
     function link(scope, element) {
         var w = angular.element($window);
         scope.getWindowDimensions = function () {

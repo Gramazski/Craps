@@ -10,7 +10,7 @@ function control($scope, $location, $rootScope, $cookies, translateService, logo
             exp = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
         $cookies.put('lang', lang, {'expires' : exp});
         $rootScope.lang = lang;
-        var promiseObj=translateService.getTranslate(path, lang);
+        var promiseObj=translateService.getTranslate('assets/i18n/' + path, lang);
         promiseObj.then(function(value) {
             $rootScope.translateModel=value;
         });

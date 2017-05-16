@@ -81,7 +81,7 @@ function service($http, $q) {
         },
         getTypes: function () {
             var deferred = $q.defer();
-            $http({method: 'GET', url: 'betTypes.json', params: {}}).
+            $http({method: 'GET', url: 'assets/json/betTypes.json', params: {}}).
             then(function(response) {
                     deferred.resolve(response.data.types);
                 },

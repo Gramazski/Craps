@@ -86,7 +86,7 @@ function service($http, $q) {
         },
         loadBetsPos: function (type) {
             var deferred = $q.defer();
-            $http({method: 'GET', url: type + '.json', params: {noCache: (new Date().getTime()) + Math.random()}}).
+            $http({method: 'GET', url: 'assets/json/' + type + '.json', params: {noCache: (new Date().getTime()) + Math.random()}}).
             then(function(response) {
                     deferred.resolve(response.data);
                 },

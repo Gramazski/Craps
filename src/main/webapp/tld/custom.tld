@@ -10,17 +10,12 @@
 <uri>customtags</uri>
 
 <tag>
-    <name>table-revenue</name>
+    <name>color-field</name>
     <tag-class>com.gramazski.craps.tag.ChooseTag</tag-class>
     <body-content>scriptless</body-content>
     <attribute>
-        <name>rows</name>
-        <required>false</required>
-        <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-        <name>head</name>
-        <required>false</required>
+        <name>decisionValue</name>
+        <required>true</required>
         <rtexprvalue>true</rtexprvalue>
     </attribute>
 </tag>

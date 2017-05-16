@@ -61,7 +61,6 @@ angular.module('crapsApp', ["ngRoute", "ngAudio", 'ngCookies', "ngFileUpload", '
     $rootScope.lang = $cookies.getObject('lang');
     if ($rootScope.lang === undefined){
         var now = new Date(),
-            // this will set the expiration to 12 months
             exp = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
         $cookies.putObject('lang', 'en', {'expires' : exp});
         $rootScope.lang = "en";
@@ -79,7 +78,7 @@ angular.module('crapsApp', ["ngRoute", "ngAudio", 'ngCookies', "ngFileUpload", '
         }
     });
 
-    var promiseObjTranslate=translateService.getTranslate('lang_' + $rootScope.lang + '.json');
+    var promiseObjTranslate=translateService.getTranslate('assets/i18n/lang_' + $rootScope.lang + '.json');
     promiseObjTranslate.then(function(value) {
         $rootScope.translateModel=value;
         $rootScope.title = $rootScope.translateModel.title.main;

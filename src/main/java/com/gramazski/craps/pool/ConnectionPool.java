@@ -65,7 +65,7 @@ public class ConnectionPool {
         if (instanceFlag.intValue() == 0){
             lock.lock();
             try {
-                if (instance == null){
+                if (instanceFlag.intValue() == 0){
                     instance = new ConnectionPool();
                     instanceFlag.incrementAndGet();
                 }

@@ -23,7 +23,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 @ServerEndpoint(value="/games/{gameId}", configurator=GameEndPointConfigurator.class)
 public class GameServerEndPoint {
-    private static Map<String, List<Session>> gameSessions = new ConcurrentHashMap<>();
+    private static Map<Integer, List<Session>> gameSessions = new ConcurrentHashMap<>();
     private final static Logger logger = LogManager.getLogger(MessageServerEndPoint.class);
     private final static ReentrantLock lock = new ReentrantLock();
 
@@ -33,7 +33,7 @@ public class GameServerEndPoint {
      * @param userSession the userSession which is opened.
      */
     @OnOpen
-    public void onOpen(@PathParam("gameId") String gameId, Session userSession) {
+    public void onOpen(@PathParam("gameId") Integer gameId, Session userSession) {
         logger.log(Level.INFO, "+1 : " + gameId);
         lock.lock();
 
@@ -54,7 +54,7 @@ public class GameServerEndPoint {
      * @param userSession the userSession which is opened.
      */
     @OnClose
-    public void onClose(@PathParam("gameId") String gameId, Session userSession) {
+    public void onClose(@PathParam("gameId") Integer gameId, Session userSession) {
         logger.log(Level.INFO, "-1 : " + gameId);
         lock.lock();
 
@@ -80,8 +80,8 @@ public class GameServerEndPoint {
      * @param gameId
      */
     public static void notifyAllUsersInGame(int gameId){
-        if (gameSessions.containsKey(String.valueOf(gameId))){
-            for (Session session : gameSessions.get(String.valueOf(gameId))){
+        if (gameSessions.containsKey(gameId)){
+            for (Session session : gameSessions.get(gameId)){
                 try {
                     session.getAsyncRemote().sendText(ObjectMapperWrapper.writeValueAsString(GamesSharedList.getInstance().getGameById(gameId)));
                 } catch (JsonProcessingException e) {
@@ -95,8 +95,8 @@ public class GameServerEndPoint {
      * @param gameId
      */
     public static void notifyUsersInGameForThrowing(int gameId){
-        if (gameSessions.containsKey(String.valueOf(gameId))){
-            for (Session session : gameSessions.get(String.valueOf(gameId))){
+        if (gameSessions.containsKey(gameId)){
+            for (Session session : gameSessions.get(gameId)){
                 session.getAsyncRemote().sendText("{\"throw\":\"true\"}");
             }
         }
@@ -106,8 +106,8 @@ public class GameServerEndPoint {
      * @param gameId
      * @param userSession
      */
-    private void addNewPlayer(String gameId, Session userSession){
-        Game game = GamesSharedList.getInstance().getGameById(Integer.valueOf(gameId));
+    private void addNewPlayer(Integer gameId, Session userSession){
+        Game game = GamesSharedList.getInstance().getGameById(gameId);
 
         if (gameSessions.get(gameId).size() + 1 <= game.getMaxPlayersCount()){
             gameSessions.get(gameId).add(userSession);

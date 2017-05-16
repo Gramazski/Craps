@@ -25,7 +25,7 @@ public class UserDAO extends AbstractDAO<User> {
     private static final String SQL_SELECT_USER_BY_NAME = "SELECT id, username, email, password, create_time," +
             "amount, win_amount, avatar, is_admin, name, surname, is_banned, sex, birthday FROM user " +
             "WHERE username = ?";
-    private static final String SQL_UPDATE_USER = "UPDATE user SET id=?, username=?, email=?, password=?," +
+    private static final String SQL_UPDATE_USER = "UPDATE user SET id=?, username=?, email=?, " +
             "create_time=?, amount=?, win_amount=?, avatar=?, is_admin=?, name=?, surname=?, is_banned=?," +
             "sex=?, birthday=? WHERE id=?";
     private static final String SQL_GET_ID_BY_USERNAME = "SELECT id FROM user WHERE username=?";
@@ -158,18 +158,18 @@ public class UserDAO extends AbstractDAO<User> {
             st.setInt(1, entity.getId());
             st.setString(2, entity.getUserName());
             st.setString(3, entity.getEmail());
-            st.setString(4, entity.getPassword());
-            st.setString(5, entity.getCreateTime());
-            st.setInt(6, entity.getAmount());
-            st.setInt(7, entity.getWinAmount());
-            st.setString(8, entity.getAvatar());
-            st.setBoolean(9, entity.isAdmin());
-            st.setString(10, entity.getName());
-            st.setString(11, entity.getSurname());
-            st.setBoolean(12, entity.isBanned());
-            st.setString(13, entity.getSex().toString());
-            st.setString(14, entity.getBirthday());
-            st.setInt(15, entity.getId());
+            //st.setString(4, entity.getPassword());
+            st.setString(4, entity.getCreateTime());
+            st.setInt(5, entity.getAmount());
+            st.setInt(6, entity.getWinAmount());
+            st.setString(7, entity.getAvatar());
+            st.setBoolean(8, entity.isAdmin());
+            st.setString(9, entity.getName());
+            st.setString(10, entity.getSurname());
+            st.setBoolean(11, entity.isBanned());
+            st.setString(12, entity.getSex().toString());
+            st.setString(13, entity.getBirthday());
+            st.setInt(14, entity.getId());
             st.executeUpdate();
         }catch (SQLException e) {
             throw new DAOException("SQL exception (request or table failed): " + e.getMessage(), e);
