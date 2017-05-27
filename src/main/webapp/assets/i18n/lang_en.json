@@ -49,7 +49,8 @@
       "releaseBets" : "Release bets",
       "makeBet" : "Make bet",
       "disableBet" : "Disable bet",
-      "becomeThrower" : "Become thrower"
+      "becomeThrower" : "Become thrower",
+      "print" : "Print"
     },
     "input" : {
       "username" : "Enter username",
@@ -181,7 +182,9 @@
       "count" : "Count",
       "time" : "time",
       "uploadMusic" : "Upload music",
-      "musicName" : "Music name"
+      "musicName" : "Music name",
+      "report" : "Report",
+      "click" : "Click to load"
     },
     "message" : {
       "error" : {

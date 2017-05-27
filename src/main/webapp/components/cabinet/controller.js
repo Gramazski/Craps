@@ -10,6 +10,7 @@ function control($scope, $rootScope, $filter, messagesService, transferService, 
     $scope.showing.receiver = $rootScope.userInfo.userName;
     $scope.showing.sender = "";
     $scope.title = "";
+    $scope.printPath = "";
     var promiseObj=transferService.getCurrencies();
     promiseObj.then(function(value) {
         $scope.currencies=value;
@@ -126,6 +127,14 @@ function control($scope, $rootScope, $filter, messagesService, transferService, 
         promiseObj.then(function(value) {
             $rootScope.userInfo = value;
             commonModule.closeMessageModal();
+        });
+    };
+
+    $scope.printReport = function () {
+        var promiseObj=gameInfoService.printReport();
+        promiseObj.then(function(value) {
+            $scope.printPath = value;
+            commonModule.showPrintModal();
         });
     };
 }

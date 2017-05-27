@@ -59,7 +59,7 @@ angular.module('ngCookies', ['ng']).
       //creates a poller fn that copies all cookies from the $browser to service & inits the service
       $browser.addPollFn(function() {
         var currentCookies = $browser.cookies();
-        if (lastBrowserCookies != currentCookies) { //relies on browser.cookies() impl
+        if (lastBrowserCookies != currentCookies) { //relies on browser.cookies() entity
           lastBrowserCookies = currentCookies;
           copy(currentCookies, lastCookies);
           copy(currentCookies, cookies);

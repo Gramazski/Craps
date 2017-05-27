@@ -3,14 +3,8 @@
  */
 var commonModule = (function () {
     return {
-        attachFooter : function () {
-            var target = document.getElementsByName('view');
-            var footer = document.getElementsByName('footer');
-            var menu = document.getElementsByName('menu');
-
-            if (target.height + footer.height + menu.height < $(window).height){
-                footer.addClass()
-            }
+        showPrintModal : function () {
+            $('#reportGame').modal('show');
         },
         showAnimate : function () {
             var target = document.getElementById('gifField');

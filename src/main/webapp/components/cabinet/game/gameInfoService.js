@@ -2,9 +2,9 @@
  * Created by gs on 11.04.2017.
  */
 var crapsApp = angular.module('crapsApp');
-crapsApp.factory('gameInfoService',[service]);
+crapsApp.factory('gameInfoService',['$http', '$q', service]);
 
-function service() {
+function service($http, $q) {
 
     return{
         getMaxWin : function (playedBets) {
@@ -34,6 +34,24 @@ function service() {
             }
 
             return min;
+        },
+        printReport: function () {
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                url: '/controller?command=CREATEREPORT',
+                headers: {
+                    'Content-Type': 'json'
+                }
+            }).
+            then(function(response) {
+                    deferred.resolve(response.data);
+                },
+                function(response) {
+                    deferred.reject(response.status);
+                });
+
+            return deferred.promise;
         }
     }
 }

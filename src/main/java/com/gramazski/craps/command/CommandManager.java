@@ -37,6 +37,7 @@ public class CommandManager {
         commandMap.put("LEAVEGAME", new LeaveGameCommand());
         commandMap.put("UPLOADMUSIC", new UploadMusicCommand());
         commandMap.put("GETSOUNDS", new GetSoundsCommand());
+        commandMap.put("CREATEREPORT", new CreateReportCommand());
     }
 
     /**
