@@ -25,15 +25,18 @@ public class PlayGameCommand implements ICommand {
             String params = JSONReader.readJsonString(request);
             User user = ObjectMapperWrapper.readValue(params, User.class);
             int throwerId = Integer.valueOf(request.getParameter("throwerId"));
+            HttpSession session = request.getSession();
+            String gameKey = (String) session.getAttribute("gameKey");
             GameService gameService = new GameService();
             UserService userService = new UserService();
             GameResult gameResult = null;
 
-            if (gameService.checkUserBets(user.getAmount(), user.getBets())){
+            if (gameService.checkUserBets(user.getAmount(), user.getBets())
+                    && gameService.isNotPlayingYet(throwerId, gameKey)){
                 gameResult = gameService.playGame(user, throwerId);
 
-                HttpSession session = request.getSession();
                 session.setAttribute("user", user);
+                session.setAttribute("gameKey", gameService.getGameKey(throwerId));
                 userService.updateUser(user);
             }
 

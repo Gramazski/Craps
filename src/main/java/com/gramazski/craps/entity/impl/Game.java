@@ -14,6 +14,19 @@ public class Game extends Entity {
     private int maxBet;
     private AtomicInteger throwerId = new AtomicInteger(0);
     private Cube lastCube = new Cube();
+    private String playTime;
+
+    public void setThrowerId(AtomicInteger throwerId) {
+        this.throwerId = throwerId;
+    }
+
+    public String getPlayTime() {
+        return playTime;
+    }
+
+    public void setPlayTime(String playTime) {
+        this.playTime = playTime;
+    }
 
     public Cube getLastCube() {
         return lastCube;

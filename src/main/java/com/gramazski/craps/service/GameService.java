@@ -6,6 +6,8 @@ import com.gramazski.craps.entity.impl.*;
 import com.gramazski.craps.exception.DAOException;
 import com.gramazski.craps.game.GameHandler;
 import com.gramazski.craps.game.GamesSharedList;
+import com.gramazski.craps.util.CipherHandler;
+import com.gramazski.craps.util.DateHandler;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -62,6 +64,14 @@ public class GameService {
         return null;
     }
 
+    public boolean isNotPlayingYet(int throwerId, String key){
+        return !CipherHandler.encryptString(GamesSharedList.getInstance().getGameByThrowerId(throwerId).getPlayTime()).equals(key);
+    }
+
+    public String getGameKey(int throwerId){
+        return CipherHandler.encryptString(GamesSharedList.getInstance().getGameByThrowerId(throwerId).getPlayTime());
+    }
+
     /**
      * @param amount
      * @param bets
@@ -81,7 +91,9 @@ public class GameService {
      */
     public void removePlayer(int gameId, int playerId){
         Game game = GamesSharedList.getInstance().getGameById(gameId);
-        game.setPlayersCount(game.getPlayersCount() - 1);
+        if (game.getPlayersCount() > 0){
+            game.setPlayersCount(game.getPlayersCount() - 1);
+        }
 
         if (game.getThrowerId().get() == playerId){
             game.setThrowerId(0);
@@ -96,6 +108,7 @@ public class GameService {
 
         Cube cube = gameHandler.throwCube();
         GamesSharedList.getInstance().getGameById(gameId).setLastCube(cube);
+        GamesSharedList.getInstance().getGameById(gameId).setPlayTime(DateHandler.getCurrentDateTime());
         GameServerEndPoint.notifyUsersInGameForThrowing(gameId);
     }
 
