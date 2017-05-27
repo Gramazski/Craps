@@ -10,4 +10,9 @@
             <taglib-location>/tld/custom.tld</taglib-location>
         </taglib>
     </jsp-config>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/#/error</location>
+    </error-page>
 </web-app>

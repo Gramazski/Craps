@@ -55,6 +55,12 @@ angular.module('crapsApp', ["ngRoute", "ngAudio", 'ngCookies', "ngFileUpload", '
             controller: 'gameController'
         }
     );
+    $routeProvider.when('/error',
+        {
+            templateUrl: 'components/error/view.html',
+            controller: 'errorController'
+        }
+    );
 
     $routeProvider.otherwise({redirectTo: '/'});
 }).run(function($rootScope, $location, $cookies, userService, translateService) {

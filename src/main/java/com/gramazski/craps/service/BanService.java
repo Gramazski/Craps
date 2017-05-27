@@ -12,6 +12,7 @@ public class BanService {
 
     /**
      * @param user
+     * Make user ban
      * @param isBanning
      */
     public void makeBanUser(User user, boolean isBanning){

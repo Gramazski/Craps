@@ -20,7 +20,8 @@ public class FileUploaderService {
     /**
      * @param request
      * @param rootPath
-     * @return
+     * Parsing multipart data request
+     * @return parameter map from request
      * @throws HandlerException
      */
     public Map<String, String> uploadFileFromRequest(HttpServletRequest request, String rootPath) throws HandlerException{

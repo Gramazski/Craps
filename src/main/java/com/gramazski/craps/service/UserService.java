@@ -18,6 +18,7 @@ import java.util.List;
 
 public class UserService {
     private final static Logger logger = LogManager.getLogger(UserService.class);
+    private final static String DEFAULT_IMAGE = "assets/img/user/cube.jpg";
 
     /**
      * @param user
@@ -26,7 +27,7 @@ public class UserService {
     public User createUser(User user){
         try(UserDAO userDAO = new UserDAO()) {
             user.setCreateTime(DateHandler.getCurrentDate());
-            user.setAvatar("assets/img/user/cube.jpg");
+            user.setAvatar(DEFAULT_IMAGE);
             user.setMessages(new ArrayList<Message>());
             user.setTransfers(new ArrayList<Transfer>());
             user.setAdmin(false);
@@ -50,9 +51,11 @@ public class UserService {
             TransferDAO transferDAO = new TransferDAO();
             GameDAO gameDAO = new GameDAO()) {
             user = userDAO.findEntityByName(userName);
-            user.setMessages(messageDAO.getAllMessagesForUser(user.getId()));
-            user.setTransfers(transferDAO.getAllTransfersForUser(user.getId()));
-            user.setPlayedBets(gameDAO.getUserPlayedBets(user.getId()));
+            if (user != null){
+                user.setMessages(messageDAO.getAllMessagesForUser(user.getId()));
+                user.setTransfers(transferDAO.getAllTransfersForUser(user.getId()));
+                user.setPlayedBets(gameDAO.getUserPlayedBets(user.getId()));
+            }
         } catch (DAOException e) {
             logger.log(Level.ERROR, e.getMessage());
         }

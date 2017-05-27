@@ -16,6 +16,7 @@ public class JSONReader {
 
     /**
      * @param request
+     * Get json string from HttpRequest
      * @return
      */
     public static String readJsonString(HttpServletRequest request){
