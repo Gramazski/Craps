@@ -3,6 +3,15 @@
  */
 var commonModule = (function () {
     return {
+        attachFooter : function () {
+            var target = document.getElementsByName('view');
+            var footer = document.getElementsByName('footer');
+            var menu = document.getElementsByName('menu');
+
+            if (target.height + footer.height + menu.height < $(window).height){
+                footer.addClass()
+            }
+        },
         showAnimate : function () {
             var target = document.getElementById('gifField');
             var field = document.getElementById('imgField');

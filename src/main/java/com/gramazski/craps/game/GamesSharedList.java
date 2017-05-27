@@ -34,7 +34,7 @@ public class GamesSharedList {
         if (!instanceFlag.get()){
             lock.lock();
             try {
-                if (instance == null){
+                if (!instanceFlag.get()){
                     instance = new GamesSharedList();
                     instanceFlag.getAndSet(true);
                 }
