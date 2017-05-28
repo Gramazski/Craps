@@ -16,6 +16,7 @@ import java.util.Map;
  * Created by gs on 21.02.2017.
  */
 public class FileUploaderService {
+    private static final String RESOURCE_DIRECTORY = "assets/img/user/";
 
     /**
      * @param request
@@ -70,12 +71,12 @@ public class FileUploaderService {
      * @throws HandlerException
      */
     private String saveFile(FileItem fileItem, String fileName, String rootPath) throws HandlerException {
-        String filePath = "assets/img/user/" + fileName;
-        File uploadedFile = new File(rootPath + "assets/img/user/", fileName);
+        String filePath = RESOURCE_DIRECTORY + fileName;
+        File uploadedFile = new File(rootPath + RESOURCE_DIRECTORY, fileName);
         try {
             fileItem.write(uploadedFile);
         } catch (Exception e) {
-            throw new HandlerException("Can't write data to file: " + rootPath + "assets/img" + fileName, e);
+            throw new HandlerException("Can't write data to file: " + rootPath + RESOURCE_DIRECTORY + fileName, e);
         }
 
         return filePath;
